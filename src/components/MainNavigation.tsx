@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 
 export default function MainNavigation() {
   return (
-    <footer className="mt-auto flex justify-around bg-button">
+    <footer className="mt-auto flex justify-around bg-button py-5">
       <Link to="/drivers">Drivers</Link>
       <Link to="/vehicles">Trucks</Link>
       <Link to="/clients">Clients</Link>
