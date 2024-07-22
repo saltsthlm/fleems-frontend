@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 
 type FormButtonProps = {
-  onClick: () => unknown;
+  onClick?: () => unknown;
 };
 export default function FormButton({
   children,
