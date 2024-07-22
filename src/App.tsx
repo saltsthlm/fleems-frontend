@@ -1,10 +1,16 @@
+import { createRouter, RouterProvider } from "@tanstack/react-router";
+import { routeTree } from "./routeTree.gen";
+
+const router = createRouter({ routeTree });
+
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router;
+  }
+}
+
 function App() {
-  return (
-    <div>
-      <button className="text-red-500">Test button</button>
-      <button className="btn btn-primary">Test button</button>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
