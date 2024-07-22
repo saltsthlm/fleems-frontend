@@ -1,13 +1,9 @@
-import React from "react";
-import MainNavigation from "../components/MainNavigation";
+import PageWithNavigation from "../components/PageWithNavigation";
 
 export default function HomePage() {
   return (
-    <React.Fragment>
-      <div>
-        <h1>Home</h1>
-      </div>
-      <MainNavigation />
-    </React.Fragment>
+    <PageWithNavigation>
+      <h1>Home</h1>
+    </PageWithNavigation>
   );
 }
