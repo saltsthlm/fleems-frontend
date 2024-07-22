@@ -1,9 +1,10 @@
 import LoginForm from "../components/LoginForm";
+import PageWithNavigation from "../components/PageWithNavigation";
 
 export default function LoginPage() {
   return (
-    <div>
+    <PageWithNavigation showNav={false}>
       <LoginForm />
-    </div>
+    </PageWithNavigation>
   );
 }

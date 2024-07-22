@@ -1,7 +1,9 @@
+import PageWithNavigation from "../components/PageWithNavigation";
+
 export default function RegisterPage() {
   return (
-    <div>
+    <PageWithNavigation showNav={false}>
       <h1>Register</h1>
-    </div>
+    </PageWithNavigation>
   );
 }
