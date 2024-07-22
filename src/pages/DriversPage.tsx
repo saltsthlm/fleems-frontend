@@ -1,7 +1,9 @@
+import PageWithNavigation from "../components/PageWithNavigation";
+
 export default function DriversPage() {
   return (
-    <div>
+    <PageWithNavigation>
       <h1>Drivers</h1>
-    </div>
+    </PageWithNavigation>
   );
 }

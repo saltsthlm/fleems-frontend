@@ -1,7 +1,9 @@
+import PageWithNavigation from "../components/PageWithNavigation";
+
 export default function ClientsPage() {
   return (
-    <div>
+    <PageWithNavigation>
       <h1>Clients</h1>
-    </div>
+    </PageWithNavigation>
   );
 }

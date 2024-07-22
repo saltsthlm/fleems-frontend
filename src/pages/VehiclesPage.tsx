@@ -1,7 +1,9 @@
+import PageWithNavigation from "../components/PageWithNavigation";
+
 export default function VehiclesPage() {
   return (
-    <div>
+    <PageWithNavigation>
       <h1>Vehicles</h1>
-    </div>
+    </PageWithNavigation>
   );
 }

@@ -1,7 +1,9 @@
+import PageWithNavigation from "../components/PageWithNavigation";
+
 export default function TasksPage() {
   return (
-    <div>
+    <PageWithNavigation>
       <h1>Tasks</h1>
-    </div>
+    </PageWithNavigation>
   );
 }
