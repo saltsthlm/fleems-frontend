@@ -1,11 +1,17 @@
 import React, { PropsWithChildren } from "react";
 import MainNavigation from "./MainNavigation";
 
-export default function PageWithNavigation({ children }: PropsWithChildren) {
+type PageWithNavigationProps = {
+  showNav?: boolean;
+};
+export default function PageWithNavigation({
+  children,
+  showNav = true,
+}: PropsWithChildren<PageWithNavigationProps>) {
   return (
     <React.Fragment>
-      {children}
-      <MainNavigation />
+      <div className="p-5 px-10">{children}</div>
+      {showNav && <MainNavigation />}
     </React.Fragment>
   );
 }
