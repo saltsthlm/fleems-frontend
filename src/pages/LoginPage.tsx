@@ -1,12 +1,12 @@
+import CenteredContent from "../components/CenteredContent";
 import LoginForm from "../components/LoginForm";
 import Logo from "../components/Logo";
-import PageWithNavigation from "../components/PageWithNavigation";
 
 export default function LoginPage() {
   return (
-    <PageWithNavigation showNav={false}>
+    <CenteredContent>
       <Logo />
       <LoginForm />
-    </PageWithNavigation>
+    </CenteredContent>
   );
 }
