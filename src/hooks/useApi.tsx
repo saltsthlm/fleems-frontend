@@ -13,10 +13,10 @@ export default function useApi(endpoint: ApiEndpoints) {
     } catch (error) {
       if (error instanceof AxiosError != true) {
         console.log("An unknown error ocurred when fetching api:", error);
-        return;
+        return null;
       }
       console.log("An error ocurred when fetching api:", error.message);
-      return error;
+      return null;
     }
   };
 
