@@ -10,7 +10,7 @@ export default function PageWithNavigation({
 }: PropsWithChildren<PageWithNavigationProps>) {
   return (
     <React.Fragment>
-      <div className="p-5 px-10">{children}</div>
+      <div className="p-5">{children}</div>
       {showNav && <MainNavigation />}
     </React.Fragment>
   );
