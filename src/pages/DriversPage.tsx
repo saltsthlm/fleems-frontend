@@ -4,6 +4,7 @@ import GapList from "../components/GapList";
 import PageHeading from "../components/PageHeading";
 import PageWithNavigation from "../components/PageWithNavigation";
 import CreateDriverForm from "../components/CreateDriverForm";
+import DriversList from "../components/DriversList";
 
 export default function DriversPage() {
   const [creatingDriver, setCreatingDriver] = useState<boolean>(false);
@@ -51,9 +52,7 @@ export default function DriversPage() {
           <PageHeading>
             <button onClick={resetPage}>&lt; Driver information</button>
           </PageHeading>
-          <GapList>
-            <h1>Driver</h1>
-          </GapList>
+          <DriversList />
         </>
       )}
     </PageWithNavigation>
