@@ -13,7 +13,7 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={submitForm} className="flex flex-col gap-10 items-center">
-      <div className="card bg-background text-black p-10 w-full drop-shadow-lg gap-3">
+      <div className="card bg-background text-black p-5 w-full drop-shadow-lg gap-3">
         <label htmlFor="email">Email address</label>
         <input
           name="email"
