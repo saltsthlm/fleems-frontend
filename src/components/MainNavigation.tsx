@@ -16,11 +16,11 @@ export default function MainNavigation() {
         Trucks
       </Link>
       <Link to="/clients">
-        <img src={building} className="py-1"/>
+        <img src={building} className="py-1" />
         Clients
       </Link>
       <Link to="/tasks">
-        <img src={checklist} className="py-1"/>
+        <img src={checklist} className="py-1" />
         Tasks
       </Link>
     </footer>
