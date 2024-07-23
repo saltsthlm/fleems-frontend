@@ -1,12 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { Driver } from "../types/ApiResponses";
+import { BASE_API_URL } from "../util/config";
 
 type ApiEndpoints = "drivers" | "dwaddwa";
 
 export default function useApi(endpoint: ApiEndpoints) {
-  const BASE_API_URL = import.meta.env.VITE_BASE_API_URL;
-
   const fetchDrivers = async () => {
     try {
       const data = await axios.get<Driver[]>(BASE_API_URL + endpoint);
