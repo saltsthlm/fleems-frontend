@@ -47,14 +47,7 @@ export default function DriversPage() {
           </GapList>
         </>
       )}
-      {showingDrivers && (
-        <>
-          <PageHeading>
-            <button onClick={resetPage}>&lt; Driver information</button>
-          </PageHeading>
-          <DriversList />
-        </>
-      )}
+      {showingDrivers && <DriversList callback={resetPage} />}
     </PageWithNavigation>
   );
 }
