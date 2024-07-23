@@ -10,7 +10,7 @@ export default function DriversList() {
         <p>Loading...</p>
       ) : (
         <div>
-          {data.map((driver, index) => (
+          {data?.map((driver, index) => (
             <div key={index}>
               <p>{driver.name}</p>
             </div>
