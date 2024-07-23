@@ -1,11 +1,12 @@
-import CenteredContent from "../components/CenteredContent";
 import Logo from "../components/Logo";
+import PageWithNavigation from "../components/PageWithNavigation";
+import RegisterForm from "../components/RegisterForm";
 
 export default function RegisterPage() {
   return (
-    <CenteredContent>
+    <PageWithNavigation showNav={false}>
       <Logo />
-      <h1>Register</h1>
-    </CenteredContent>
+      <RegisterForm />
+    </PageWithNavigation>
   );
 }
