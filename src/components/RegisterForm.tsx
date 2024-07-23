@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { SyntheticEvent, useState } from "react";
 import FormButton from "./FormButton";
+import Card from "./Card";
 
 export default function RegisterForm() {
   const [name, setName] = useState<string>();
@@ -14,7 +15,7 @@ export default function RegisterForm() {
 
   return (
     <form onSubmit={submitForm} className="flex flex-col gap-10 items-center">
-      <div className="card bg-background text-black p-5 w-full drop-shadow-lg gap-3">
+      <Card>
         <label htmlFor="name">Name</label>
         <input
           name="name"
@@ -39,7 +40,7 @@ export default function RegisterForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-      </div>
+      </Card>
       <div className="w-full flex flex-col items-center gap-3">
         <FormButton className="w-3/5">
           <strong>REGISTER</strong>
