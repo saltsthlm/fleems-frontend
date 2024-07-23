@@ -1,9 +1,10 @@
+import PageHeading from "../components/PageHeading";
 import PageWithNavigation from "../components/PageWithNavigation";
 
 export default function VehiclesPage() {
   return (
     <PageWithNavigation>
-      <h1>Vehicles</h1>
+      <PageHeading>Vehicles</PageHeading>
     </PageWithNavigation>
   );
 }
