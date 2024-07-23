@@ -7,7 +7,7 @@ import PageWithNavigation from "../components/PageWithNavigation";
 export default function VehiclesPage() {
   const createTruck = () => {
     console.log("Adding truck...");
-  }
+  };
 
   return (
     <PageWithNavigation>
