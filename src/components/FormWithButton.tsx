@@ -14,7 +14,7 @@ export default function FormWithButton({
   return (
     <form
       onSubmit={callback}
-      className="flex flex-col gap-10 items-center [&>div>input]:rounded-xl [&>div>input]:p-3"
+      className="flex flex-col gap-3 items-center [&>div>input]:rounded-xl [&>div>input]:p-2"
     >
       <Card>{children}</Card>
       <div className="w-full flex flex-col items-center gap-3">

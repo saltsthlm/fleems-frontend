@@ -12,7 +12,7 @@ export default function FormButton({
   return (
     <button
       onClick={callback}
-      className={`btn text-font bg-button border-0 ${className}`}
+      className={`btn text-font bg-button border-0 px-8 ${className}`}
     >
       {children}
     </button>
