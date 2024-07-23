@@ -7,7 +7,7 @@ import speedometer from "../assets/icons/speedometer.svg";
 
 export default function MainNavigation() {
   return (
-    <footer className="mt-auto flex justify-around bg-button py-2 text-sm text-center items-end [&>a>img]:mx-auto [&>a>img]:h-7">
+    <footer className="mt-auto flex justify-around bg-button p-2 text-sm text-center items-end [&>a>img]:mx-auto [&>a>img]:h-7 sticky bottom-0">
       <Link to="/">
         <img src={speedometer} className="py-1" />
         Home
