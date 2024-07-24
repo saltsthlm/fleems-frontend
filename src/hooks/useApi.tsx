@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 import { Client, Driver, Task, Vehicle } from "../types/ApiResponses";
 import { BASE_API_URL } from "../util/config";
 
-type ApiEndpoints = "drivers" | "clients" | "tasks" | "vehicles" | "dwaddwa";
+type ApiEndpoints = "drivers" | "clients" | "tasks" | "vehicles";
 
 export default function useApi(endpoint: ApiEndpoints) {
   const fetchData = async () => {
