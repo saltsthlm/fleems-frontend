@@ -75,7 +75,7 @@ export default function DriversList({ callback }: DriversListProps) {
           </Popup>
         )}
         <Card className="text-center">
-          <img src={selectedDriver.photo} />
+          <img src={selectedDriver.photo} className="rounded-lg" />
           <h1 className="text-xl">{selectedDriver.name}</h1>
           <h2>License: {selectedDriver.licenseNumber}</h2>
           <h2>Mobile: {selectedDriver.phoneNumber}</h2>
@@ -117,7 +117,7 @@ export default function DriversList({ callback }: DriversListProps) {
               isCentered={false}
               onClick={() => viewDriver(driver)}
             >
-              <img src={driver.photo} className="w-24" />
+              <img src={driver.photo} className="w-24 rounded-lg" />
               <div>
                 <h1 className="text-xl">{driver.name}</h1>
                 <p>License: {driver.licenseNumber}</p>
