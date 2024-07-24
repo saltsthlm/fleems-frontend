@@ -9,6 +9,7 @@ export default {
         button: "#E7E8EC",
         background: "#F5F5F5",
         secondary: "#FFFFFF",
+        danger: "#FF0808",
         font: "#000000",
       },
     },
