@@ -7,6 +7,7 @@ import { Driver } from "../types/ApiResponses";
 import Card from "./Card";
 import FormButton from "./FormButton";
 import Popup from "./Popup";
+import EditDriverForm from "./EditDriverForm";
 
 type DriversListProps = {
   callback: () => void;
@@ -15,8 +16,14 @@ export default function DriversList({ callback }: DriversListProps) {
   const [isViewingDriver, setIsViewingDriver] = useState<boolean>(false);
   const [selectedDriver, setSelectedDriver] = useState<Driver>();
   const [isShowingPopup, setIsShowingPopup] = useState<boolean>(false);
+  const [isEditingDriver, setIsEditingDriver] = useState<boolean>(false);
 
   const { data, loading } = useApi("drivers");
+
+  const editDriver = (driver: Driver) => {
+    setIsEditingDriver(true);
+    setIsShowingPopup(false);
+  };
 
   const viewDriver = (driver: Driver) => {
     setSelectedDriver(driver);
@@ -26,6 +33,19 @@ export default function DriversList({ callback }: DriversListProps) {
   const viewList = () => {
     setIsViewingDriver(false);
   };
+
+  if (isEditingDriver) {
+    return (
+      <>
+        <PageHeading>
+          <button onClick={() => setIsEditingDriver(false)}>
+            &lt; Edit driver information
+          </button>
+        </PageHeading>
+        <EditDriverForm />
+      </>
+    );
+  }
 
   if (isViewingDriver && !!selectedDriver) {
     return (
@@ -63,7 +83,12 @@ export default function DriversList({ callback }: DriversListProps) {
           <h2>Email: {selectedDriver.emailAddress}</h2>
         </Card>
         <div className="flex flex-col py-7 gap-4 items-center">
-          <FormButton className="w-3/5">EDIT</FormButton>
+          <FormButton
+            onClick={() => editDriver(selectedDriver)}
+            className="w-3/5"
+          >
+            EDIT
+          </FormButton>
           <FormButton
             onClick={() => setIsShowingPopup(true)}
             className="w-3/5 text-danger"
@@ -92,7 +117,7 @@ export default function DriversList({ callback }: DriversListProps) {
               isCentered={false}
               onClick={() => viewDriver(driver)}
             >
-              <img src={driver.photo} />
+              <img src={driver.photo} className="w-24" />
               <div>
                 <h1 className="text-xl">{driver.name}</h1>
                 <p>License: {driver.licenseNumber}</p>
