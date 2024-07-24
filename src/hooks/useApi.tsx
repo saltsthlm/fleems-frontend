@@ -6,51 +6,25 @@ import { BASE_API_URL } from "../util/config";
 type ApiEndpoints = "drivers" | "clients" | "tasks" | "vehicles" | "dwaddwa";
 
 export default function useApi(endpoint: ApiEndpoints) {
-  const fetchDrivers = async () => {
+  const fetchData = async () => {
     try {
-      const data = await axios.get<Driver[]>(BASE_API_URL + endpoint);
-      return data.data;
-    } catch (error) {
-      if (error instanceof AxiosError != true) {
-        console.log("An unknown error ocurred when fetching api:", error);
-        return null;
+      let data;
+      switch (endpoint) {
+        case "drivers":
+          data = await axios.get<Driver[]>(BASE_API_URL + endpoint);
+          break;
+        case "clients":
+          data = await axios.get<Client[]>(BASE_API_URL + endpoint);
+          break;
+        case "tasks":
+          data = await axios.get<Task[]>(BASE_API_URL + endpoint);
+          break;
+        case "vehicles":
+          data = await axios.get<Vehicle[]>(BASE_API_URL + endpoint);
+          break;
+        default:
+          return null;
       }
-      console.log("An error ocurred when fetching api:", error.message);
-      return null;
-    }
-  };
-
-  const fetchClients = async () => {
-    try {
-      const data = await axios.get<Client[]>(BASE_API_URL + endpoint);
-      return data.data;
-    } catch (error) {
-      if (error instanceof AxiosError != true) {
-        console.log("An unknown error ocurred when fetching api:", error);
-        return null;
-      }
-      console.log("An error ocurred when fetching api:", error.message);
-      return null;
-    }
-  };
-
-  const fetchTasks = async () => {
-    try {
-      const data = await axios.get<Task[]>(BASE_API_URL + endpoint);
-      return data.data;
-    } catch (error) {
-      if (error instanceof AxiosError != true) {
-        console.log("An unknown error ocurred when fetching api:", error);
-        return null;
-      }
-      console.log("An error ocurred when fetching api:", error.message);
-      return null;
-    }
-  };
-
-  const fetchVehicles = async () => {
-    try {
-      const data = await axios.get<Vehicle[]>(BASE_API_URL + endpoint);
       return data.data;
     } catch (error) {
       if (error instanceof AxiosError != true) {
@@ -69,18 +43,7 @@ export default function useApi(endpoint: ApiEndpoints) {
   } = useQuery({
     queryKey: [`api-${endpoint}`],
     queryFn: async () => {
-      switch (endpoint) {
-        case "drivers":
-          return fetchDrivers();
-        case "clients":
-          return fetchClients();
-        case "tasks":
-          return fetchTasks();
-        case "vehicles":
-          return fetchVehicles();
-        default:
-          return null;
-      }
+      return fetchData();
     },
   });
 
