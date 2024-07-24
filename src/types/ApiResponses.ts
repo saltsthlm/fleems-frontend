@@ -33,5 +33,6 @@ export type Vehicle = {
   height: number;
   weight: number;
   length: number;
+  distanceDriven: number;
   model: string;
 };
