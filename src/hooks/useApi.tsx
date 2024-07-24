@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
-import { Client, Driver, Task } from "../types/ApiResponses";
+import { Client, Driver, Task, Vehicle } from "../types/ApiResponses";
 import { BASE_API_URL } from "../util/config";
 
-type ApiEndpoints = "drivers" | "clients" | "tasks" | "dwaddwa";
+type ApiEndpoints = "drivers" | "clients" | "tasks" | "vehicles" | "dwaddwa";
 
 export default function useApi(endpoint: ApiEndpoints) {
   const fetchDrivers = async () => {
@@ -48,6 +48,20 @@ export default function useApi(endpoint: ApiEndpoints) {
     }
   };
 
+  const fetchVehicles = async () => {
+    try {
+      const data = await axios.get<Vehicle[]>(BASE_API_URL + endpoint);
+      return data.data;
+    } catch (error) {
+      if (error instanceof AxiosError != true) {
+        console.log("An unknown error ocurred when fetching api:", error);
+        return null;
+      }
+      console.log("An error ocurred when fetching api:", error.message);
+      return null;
+    }
+  };
+
   const {
     data,
     isPending: loading,
@@ -62,6 +76,8 @@ export default function useApi(endpoint: ApiEndpoints) {
           return fetchClients();
         case "tasks":
           return fetchTasks();
+        case "vehicles":
+          return fetchVehicles();
         default:
           return null;
       }

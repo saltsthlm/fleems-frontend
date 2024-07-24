@@ -25,3 +25,13 @@ export type Task = {
   quantity: number;
   legs: string; // TODO: LegInfoDto[];
 };
+
+export type Vehicle = {
+  id: string;
+  licenseNumber: string;
+  payload: number;
+  height: number;
+  weight: number;
+  length: number;
+  model: string;
+};
