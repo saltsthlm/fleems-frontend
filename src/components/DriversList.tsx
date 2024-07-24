@@ -36,14 +36,19 @@ export default function DriversList({ callback }: DriversListProps) {
         {isShowingPopup && (
           <Popup>
             <Card className="bg-tertiary w-full p-12">
-              <h1 className="text-center">Are you sure you would like to delete this driver?</h1>
+              <h1 className="text-center">
+                Are you sure you would like to delete this driver?
+              </h1>
               <div className="flex gap-4 justify-between [&>button]:grow">
-              <FormButton onClick={() => setIsShowingPopup(false)} className="text-danger">
-                YES
-              </FormButton>
-              <FormButton onClick={() => setIsShowingPopup(false)}>
-                NO
-              </FormButton>
+                <FormButton
+                  onClick={() => setIsShowingPopup(false)}
+                  className="text-danger"
+                >
+                  YES
+                </FormButton>
+                <FormButton onClick={() => setIsShowingPopup(false)}>
+                  NO
+                </FormButton>
               </div>
             </Card>
           </Popup>
