@@ -43,6 +43,7 @@ export default function DriversList({ callback }: DriversListProps) {
                 <FormButton
                   onClick={() => setIsShowingPopup(false)}
                   className="text-danger"
+                  overrideColor
                 >
                   YES
                 </FormButton>
@@ -66,6 +67,7 @@ export default function DriversList({ callback }: DriversListProps) {
           <FormButton
             onClick={() => setIsShowingPopup(true)}
             className="w-3/5 text-danger"
+            overrideColor
           >
             DELETE
           </FormButton>
