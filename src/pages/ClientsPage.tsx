@@ -15,7 +15,7 @@ export default function ClientsPage() {
   return (
     <PageWithNavigation>
       <PageHeading>Clients</PageHeading>
-      <div className="py-2 flex justify-end">
+      <div className="pb-3 flex justify-end">
         <div className="bg-button rounded-full py-1 px-3 flex">
           <span className="pr-2">
             <Icon
