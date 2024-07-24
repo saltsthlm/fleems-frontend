@@ -23,6 +23,7 @@ export default function DriversList({ callback }: DriversListProps) {
   const editDriver = (driver: Driver) => {
     setIsEditingDriver(true);
     setIsShowingPopup(false);
+    console.log(driver);
   };
 
   const viewDriver = (driver: Driver) => {

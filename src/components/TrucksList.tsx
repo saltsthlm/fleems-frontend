@@ -7,7 +7,6 @@ import { Vehicle } from "../types/ApiResponses";
 import Card from "./Card";
 import FormButton from "./FormButton";
 import Popup from "./Popup";
-import EditDriverForm from "./EditDriverForm";
 import EditTruckForm from "./EditTruckForm";
 
 type TrucksListProps = {
@@ -24,6 +23,7 @@ export default function TrucksList({ callback }: TrucksListProps) {
   const editTruck = (vehicle: Vehicle) => {
     setIsEditingTruck(true);
     setIsShowingPopup(false);
+    console.log(vehicle);
   };
 
   const viewTruck = (vehicle: Vehicle) => {
