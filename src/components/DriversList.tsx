@@ -3,16 +3,21 @@ import useApi from "../hooks/useApi";
 import GapList from "./GapList";
 import PageHeading from "./PageHeading";
 import CardButton from "./CardButton";
+import { Driver } from "../types/ApiResponses";
+import Card from "./Card";
+import FormButton from "./FormButton";
 
 type DriversListProps = {
   callback: () => void;
 };
 export default function DriversList({ callback }: DriversListProps) {
   const [isViewingDriver, setIsViewingDriver] = useState<boolean>(false);
+  const [selectedDriver, setSelectedDriver] = useState<Driver>();
 
   const { data, loading } = useApi("drivers");
 
-  const viewDriver = () => {
+  const viewDriver = (driver: Driver) => {
+    setSelectedDriver(driver);
     setIsViewingDriver(true);
   };
 
@@ -20,14 +25,23 @@ export default function DriversList({ callback }: DriversListProps) {
     setIsViewingDriver(false);
   };
 
-  if (isViewingDriver) {
+  if (isViewingDriver && !!selectedDriver) {
     return (
       <>
         <PageHeading>
           <button onClick={viewList}>&lt; Driver information</button>
         </PageHeading>
-        <div>
-          <h1>Single driver info</h1>
+        <Card className="text-center">
+          <img src={selectedDriver.name}/>
+          <h1 className="text-xl">{selectedDriver.name}</h1>
+          <h2>License: {selectedDriver.licenseNumber}</h2>
+          <h2>Mobile: {selectedDriver.phoneNumber}</h2>
+          <h2>Address: {selectedDriver.emailAddress}</h2>
+          <h2>Email: {selectedDriver.emailAddress}</h2>
+        </Card>
+        <div className="flex flex-col py-7 gap-4 items-center">
+          <FormButton className="w-3/5">EDIT</FormButton>
+          <FormButton className="w-3/5 text-danger">DELETE</FormButton>
         </div>
       </>
     );
@@ -47,7 +61,7 @@ export default function DriversList({ callback }: DriversListProps) {
               key={driver.id}
               className="flex flex-row text-left"
               isCentered={false}
-              onClick={viewDriver}
+              onClick={() => viewDriver(driver)}
             >
               <img src={driver.name} />
               <div>
