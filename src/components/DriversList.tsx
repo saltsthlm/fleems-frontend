@@ -55,7 +55,7 @@ export default function DriversList({ callback }: DriversListProps) {
           </Popup>
         )}
         <Card className="text-center">
-          <img src={selectedDriver.name} />
+          <img src={selectedDriver.photo} />
           <h1 className="text-xl">{selectedDriver.name}</h1>
           <h2>License: {selectedDriver.licenseNumber}</h2>
           <h2>Mobile: {selectedDriver.phoneNumber}</h2>
