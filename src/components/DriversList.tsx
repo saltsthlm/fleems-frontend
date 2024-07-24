@@ -6,6 +6,7 @@ import CardButton from "./CardButton";
 import { Driver } from "../types/ApiResponses";
 import Card from "./Card";
 import FormButton from "./FormButton";
+import Popup from "./Popup";
 
 type DriversListProps = {
   callback: () => void;
@@ -13,6 +14,7 @@ type DriversListProps = {
 export default function DriversList({ callback }: DriversListProps) {
   const [isViewingDriver, setIsViewingDriver] = useState<boolean>(false);
   const [selectedDriver, setSelectedDriver] = useState<Driver>();
+  const [isShowingPopup, setIsShowingPopup] = useState<boolean>(false);
 
   const { data, loading } = useApi("drivers");
 
@@ -31,8 +33,23 @@ export default function DriversList({ callback }: DriversListProps) {
         <PageHeading>
           <button onClick={viewList}>&lt; Driver information</button>
         </PageHeading>
+        {isShowingPopup && (
+          <Popup>
+            <Card className="bg-tertiary w-full p-12">
+              <h1 className="text-center">Are you sure you would like to delete this driver?</h1>
+              <div className="flex gap-4 justify-between [&>button]:grow">
+              <FormButton onClick={() => setIsShowingPopup(false)} className="text-danger">
+                YES
+              </FormButton>
+              <FormButton onClick={() => setIsShowingPopup(false)}>
+                NO
+              </FormButton>
+              </div>
+            </Card>
+          </Popup>
+        )}
         <Card className="text-center">
-          <img src={selectedDriver.name}/>
+          <img src={selectedDriver.name} />
           <h1 className="text-xl">{selectedDriver.name}</h1>
           <h2>License: {selectedDriver.licenseNumber}</h2>
           <h2>Mobile: {selectedDriver.phoneNumber}</h2>
@@ -41,7 +58,12 @@ export default function DriversList({ callback }: DriversListProps) {
         </Card>
         <div className="flex flex-col py-7 gap-4 items-center">
           <FormButton className="w-3/5">EDIT</FormButton>
-          <FormButton className="w-3/5 text-danger">DELETE</FormButton>
+          <FormButton
+            onClick={() => setIsShowingPopup(true)}
+            className="w-3/5 text-danger"
+          >
+            DELETE
+          </FormButton>
         </div>
       </>
     );
