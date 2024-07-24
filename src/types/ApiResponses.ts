@@ -4,4 +4,5 @@ export type Driver = {
   licenseNumber: string;
   name: string;
   phoneNumber: string;
+  photo: string;
 };

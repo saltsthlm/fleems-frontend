@@ -49,7 +49,7 @@ export default function DriversList({ callback }: DriversListProps) {
               isCentered={false}
               onClick={viewDriver}
             >
-              <img src={driver.name} />
+              <img src={driver.photo} />
               <div>
                 <h1 className="text-xl">{driver.name}</h1>
                 <p>License: {driver.licenseNumber}</p>
