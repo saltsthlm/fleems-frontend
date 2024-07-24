@@ -6,3 +6,22 @@ export type Driver = {
   phoneNumber: string;
   photo: string;
 };
+
+export type Client = {
+  id: string;
+  name: string;
+  tasks: string; //TODO: should be TaskList wi
+};
+
+export type Task = {
+  id: string;
+  startDestination: string;
+  endDestination: string;
+  dateCreated: Date;
+  dateFinished: Date;
+  expectedDistance: number;
+  product: string;
+  payload: number;
+  quantity: number;
+  legs: string; // TODO: LegInfoDto[];
+};
