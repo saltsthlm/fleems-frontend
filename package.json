@@ -17,6 +17,7 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@iconify/react": "^5.0.1",
     "@tanstack/eslint-plugin-query": "^5.51.12",
     "@tanstack/router-vite-plugin": "^1.45.7",
     "@types/react": "^18.3.3",
