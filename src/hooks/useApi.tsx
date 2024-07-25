@@ -4,17 +4,19 @@ import { Client, Driver, Task, Vehicle } from "../types/ApiResponses";
 import { BASE_API_URL } from "../util/config";
 
 type ApiResponseMapping = {
-  drivers: Driver[],
-  clients: Client[],
-  tasks: Task[],
-  vehicles: Vehicle[]
+  drivers: Driver[];
+  clients: Client[];
+  tasks: Task[];
+  vehicles: Vehicle[];
 };
 type ApiEndpoints = keyof ApiResponseMapping;
 
 export default function useApi<T extends ApiEndpoints>(endpoint: T) {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get<ApiResponseMapping[T]>(BASE_API_URL + endpoint);
+      const { data } = await axios.get<ApiResponseMapping[T]>(
+        BASE_API_URL + endpoint,
+      );
       return data;
     } catch (error) {
       if (error instanceof AxiosError != true) {
