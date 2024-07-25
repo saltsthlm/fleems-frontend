@@ -30,7 +30,7 @@ export default function useApi<T extends ApiEndpoints>(endpoint: T) {
 
   const {
     data,
-    isPending: loading,
+    isPending: isLoading,
     error,
   } = useQuery({
     queryKey: [`api-${endpoint}`],
@@ -39,5 +39,5 @@ export default function useApi<T extends ApiEndpoints>(endpoint: T) {
     },
   });
 
-  return { data, loading, error };
+  return { data, isLoading, error };
 }

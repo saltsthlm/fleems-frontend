@@ -6,9 +6,9 @@ import useApi from "../../hooks/useApi";
 import Task from "./components/Task";
 
 export default function TasksPage() {
-  const { data, loading } = useApi("tasks");
+  const { data, isLoading } = useApi("tasks");
 
-  if (loading) {
+  if (isLoading) {
     return (
       <PageWithNavigation>
         <PageHeading>Tasks</PageHeading>

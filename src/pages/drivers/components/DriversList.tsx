@@ -19,7 +19,7 @@ export default function DriversList({ callback }: DriversListProps) {
   const [isShowingPopup, setIsShowingPopup] = useState<boolean>(false);
   const [isEditingDriver, setIsEditingDriver] = useState<boolean>(false);
 
-  const { data, loading } = useApi("drivers");
+  const { data, isLoading } = useApi("drivers");
 
   const editDriver = (driver: Driver) => {
     setIsEditingDriver(true);
@@ -109,7 +109,7 @@ export default function DriversList({ callback }: DriversListProps) {
         <button onClick={callback}>&lt; Driver information</button>
       </PageHeading>
       <GapList>
-        {loading ? (
+        {isLoading ? (
           <Throbber />
         ) : (
           data?.map((driver) => (

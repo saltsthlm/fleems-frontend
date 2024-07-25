@@ -19,7 +19,7 @@ export default function TrucksList({ callback }: TrucksListProps) {
   const [isShowingPopup, setIsShowingPopup] = useState<boolean>(false);
   const [isEditingTruck, setIsEditingTruck] = useState<boolean>(false);
 
-  const { data, loading } = useApi("vehicles");
+  const { data, isLoading } = useApi("vehicles");
 
   const editTruck = (vehicle: Vehicle) => {
     setIsEditingTruck(true);
@@ -109,7 +109,7 @@ export default function TrucksList({ callback }: TrucksListProps) {
         <button onClick={callback}>&lt; Truck information</button>
       </PageHeading>
       <GapList>
-        {loading ? (
+        {isLoading ? (
           <Throbber />
         ) : (
           data?.map((truck) => (
