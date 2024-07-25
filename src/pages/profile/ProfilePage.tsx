@@ -9,8 +9,8 @@ export default function ProfilePage() {
     <PageWithNavigation>
       <PageHeading>My Profile</PageHeading>
       <GapList>
-        <Card className="mb-10">
-          <h1>Supipi Algama</h1>
+        <Card className="mb-10 text-center py-10">
+          <h1 className="text-xl">Supipi Algama</h1>
           <h2>supipi.algama@gmail.com</h2>
         </Card>
         <FormButton className="w-3/5">LOGOUT</FormButton>
