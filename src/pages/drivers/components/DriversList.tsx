@@ -8,6 +8,7 @@ import Card from "../../../components/Card";
 import FormButton from "../../../components/FormButton";
 import Popup from "../../../components/Popup";
 import EditDriverForm from "./EditDriverForm";
+import Throbber from "../../../components/Throbber";
 
 type DriversListProps = {
   callback: () => void;
@@ -109,7 +110,7 @@ export default function DriversList({ callback }: DriversListProps) {
       </PageHeading>
       <GapList>
         {loading ? (
-          <p>Loading...</p>
+          <Throbber />
         ) : (
           data?.map((driver) => (
             <CardButton

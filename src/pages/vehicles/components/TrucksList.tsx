@@ -8,6 +8,7 @@ import Card from "../../../components/Card";
 import FormButton from "../../../components/FormButton";
 import Popup from "../../../components/Popup";
 import EditTruckForm from "../components/EditTruckForm";
+import Throbber from "../../../components/Throbber";
 
 type TrucksListProps = {
   callback: () => void;
@@ -109,7 +110,7 @@ export default function TrucksList({ callback }: TrucksListProps) {
       </PageHeading>
       <GapList>
         {loading ? (
-          <p>Loading...</p>
+          <Throbber />
         ) : (
           data?.map((truck) => (
             <CardButton
