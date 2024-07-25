@@ -6,6 +6,7 @@ import PageWithNavigation from "../../components/PageWithNavigation";
 import useApi from "../../hooks/useApi";
 import { Client } from "../../types/ApiResponses";
 import { Icon } from "@iconify/react";
+import Throbber from "../../components/Throbber";
 
 export default function ClientsPage() {
   const [searchFilter, setSearchFilter] = useState<string>();
@@ -32,7 +33,7 @@ export default function ClientsPage() {
           />
         </div>
       </div>
-      {loading && <h1>Loading...</h1>}
+      {loading && <Throbber />}
       <GapList>
         {data?.map((client: Client) => (
           <Card>

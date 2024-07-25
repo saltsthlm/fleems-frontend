@@ -1,6 +1,7 @@
 import GapList from "../../components/GapList";
 import PageHeading from "../../components/PageHeading";
 import PageWithNavigation from "../../components/PageWithNavigation";
+import Throbber from "../../components/Throbber";
 import useApi from "../../hooks/useApi";
 import Task from "./components/Task";
 
@@ -11,7 +12,7 @@ export default function TasksPage() {
     return (
       <PageWithNavigation>
         <PageHeading>Tasks</PageHeading>
-        <h1>Loading...</h1>
+        <Throbber />
       </PageWithNavigation>
     );
   }
