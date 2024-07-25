@@ -14,6 +14,7 @@ import { Route as rootRoute } from "./routes/__root";
 import { Route as VehiclesImport } from "./routes/vehicles";
 import { Route as TasksImport } from "./routes/tasks";
 import { Route as RegisterImport } from "./routes/register";
+import { Route as ProfileImport } from "./routes/profile";
 import { Route as LoginImport } from "./routes/login";
 import { Route as DriversImport } from "./routes/drivers";
 import { Route as ClientsImport } from "./routes/clients";
@@ -33,6 +34,11 @@ const TasksRoute = TasksImport.update({
 
 const RegisterRoute = RegisterImport.update({
   path: "/register",
+  getParentRoute: () => rootRoute,
+} as any);
+
+const ProfileRoute = ProfileImport.update({
+  path: "/profile",
   getParentRoute: () => rootRoute,
 } as any);
 
@@ -88,6 +94,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof LoginImport;
       parentRoute: typeof rootRoute;
     };
+    "/profile": {
+      id: "/profile";
+      path: "/profile";
+      fullPath: "/profile";
+      preLoaderRoute: typeof ProfileImport;
+      parentRoute: typeof rootRoute;
+    };
     "/register": {
       id: "/register";
       path: "/register";
@@ -119,6 +132,7 @@ export const routeTree = rootRoute.addChildren({
   ClientsRoute,
   DriversRoute,
   LoginRoute,
+  ProfileRoute,
   RegisterRoute,
   TasksRoute,
   VehiclesRoute,
@@ -136,6 +150,7 @@ export const routeTree = rootRoute.addChildren({
         "/clients",
         "/drivers",
         "/login",
+        "/profile",
         "/register",
         "/tasks",
         "/vehicles"
@@ -152,6 +167,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/login": {
       "filePath": "login.tsx"
+    },
+    "/profile": {
+      "filePath": "profile.tsx"
     },
     "/register": {
       "filePath": "register.tsx"
