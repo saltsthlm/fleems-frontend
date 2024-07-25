@@ -1,5 +1,5 @@
 import { SyntheticEvent, useState } from "react";
-import FormWithButton from "./FormWithButton";
+import FormWithButton from "../../../components/FormWithButton";
 
 type DriverFormProps = {
   onSubmit: (e: SyntheticEvent) => unknown;

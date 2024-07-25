@@ -1,10 +1,10 @@
 import { useState } from "react";
-import CardButton from "../components/CardButton";
-import GapList from "../components/GapList";
-import PageHeading from "../components/PageHeading";
-import PageWithNavigation from "../components/PageWithNavigation";
-import TrucksList from "../components/TrucksList";
-import CreateTruckForm from "../components/CreateTruckForm";
+import CardButton from "../../components/CardButton";
+import GapList from "../../components/GapList";
+import PageHeading from "../../components/PageHeading";
+import PageWithNavigation from "../../components/PageWithNavigation";
+import TrucksList from "./components/TrucksList";
+import CreateTruckForm from "./components/CreateTruckForm";
 
 export default function VehiclesPage() {
   const [creatingTruck, setCreatingTruck] = useState<boolean>(false);

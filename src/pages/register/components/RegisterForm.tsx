@@ -1,9 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { SyntheticEvent, useState } from "react";
-import FormButton from "./FormButton";
-import Card from "./Card";
+import FormButton from "../../../components/FormButton";
+import Card from "../../../components/Card";
 
-export default function LoginForm() {
+export default function RegisterForm() {
+  const [name, setName] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
 
@@ -15,6 +16,14 @@ export default function LoginForm() {
   return (
     <form onSubmit={submitForm} className="flex flex-col gap-10 items-center">
       <Card>
+        <label htmlFor="name">Name</label>
+        <input
+          name="name"
+          type="text"
+          className="p-3 rounded rounded-xl"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
         <label htmlFor="email">Email address</label>
         <input
           name="email"
@@ -34,12 +43,12 @@ export default function LoginForm() {
       </Card>
       <div className="w-full flex flex-col items-center gap-3">
         <FormButton className="w-3/5">
-          <strong>LOGIN</strong>
+          <strong>REGISTER</strong>
         </FormButton>
         <p>
-          Not a member?{" "}
+          Already a member?{" "}
           <strong>
-            <Link to="/register">Register here</Link>
+            <Link to="/login">Login</Link>
           </strong>
         </p>
       </div>

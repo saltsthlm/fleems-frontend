@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Card from "../components/Card";
-import GapList from "../components/GapList";
-import PageHeading from "../components/PageHeading";
-import PageWithNavigation from "../components/PageWithNavigation";
-import useApi from "../hooks/useApi";
-import { Client } from "../types/ApiResponses";
+import Card from "../../components/Card";
+import GapList from "../../components/GapList";
+import PageHeading from "../../components/PageHeading";
+import PageWithNavigation from "../../components/PageWithNavigation";
+import useApi from "../../hooks/useApi";
+import { Client } from "../../types/ApiResponses";
 import { Icon } from "@iconify/react";
 
 export default function ClientsPage() {

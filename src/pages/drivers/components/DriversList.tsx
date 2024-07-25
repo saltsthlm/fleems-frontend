@@ -1,12 +1,12 @@
 import { useState } from "react";
-import useApi from "../hooks/useApi";
-import GapList from "./GapList";
-import PageHeading from "./PageHeading";
-import CardButton from "./CardButton";
-import { Driver } from "../types/ApiResponses";
-import Card from "./Card";
-import FormButton from "./FormButton";
-import Popup from "./Popup";
+import useApi from "../../../hooks/useApi";
+import GapList from "../../../components/GapList";
+import PageHeading from "../../../components/PageHeading";
+import CardButton from "../../../components/CardButton";
+import { Driver } from "../../../types/ApiResponses";
+import Card from "../../../components/Card";
+import FormButton from "../../../components/FormButton";
+import Popup from "../../../components/Popup";
 import EditDriverForm from "./EditDriverForm";
 
 type DriversListProps = {

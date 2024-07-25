@@ -1,10 +1,10 @@
 import { useState } from "react";
-import CardButton from "../components/CardButton";
-import GapList from "../components/GapList";
-import PageHeading from "../components/PageHeading";
-import PageWithNavigation from "../components/PageWithNavigation";
-import CreateDriverForm from "../components/CreateDriverForm";
-import DriversList from "../components/DriversList";
+import CardButton from "../../components/CardButton";
+import GapList from "../../components/GapList";
+import PageHeading from "../../components/PageHeading";
+import PageWithNavigation from "../../components/PageWithNavigation";
+import CreateDriverForm from "./components/CreateDriverForm";
+import DriversList from "./components/DriversList";
 
 export default function DriversPage() {
   const [creatingDriver, setCreatingDriver] = useState<boolean>(false);

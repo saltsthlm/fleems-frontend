@@ -1,5 +1,5 @@
-import PageHeading from "../components/PageHeading";
-import PageWithNavigation from "../components/PageWithNavigation";
+import PageHeading from "../../components/PageHeading";
+import PageWithNavigation from "../../components/PageWithNavigation";
 
 export default function TasksPage() {
   return (
