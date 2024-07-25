@@ -19,7 +19,7 @@ export default function TrucksList({ callback }: TrucksListProps) {
   const [isShowingPopup, setIsShowingPopup] = useState<boolean>(false);
   const [isEditingTruck, setIsEditingTruck] = useState<boolean>(false);
 
-  const { data, isLoading } = useApi("vehicles");
+  const { data, isLoading, error } = useApi("vehicles");
 
   const editTruck = (vehicle: Vehicle) => {
     setIsEditingTruck(true);
@@ -103,30 +103,40 @@ export default function TrucksList({ callback }: TrucksListProps) {
     );
   }
 
+  if (isLoading || error) {
+    return (
+      <>
+        <PageHeading>
+          <button onClick={callback}>&lt; Truck information</button>
+        </PageHeading>
+        <GapList>
+          {isLoading && <Throbber />}
+          {error && <h1>An error ocurred: {error.message}</h1>}
+        </GapList>
+      </>
+    );
+  }
+
   return (
     <>
       <PageHeading>
         <button onClick={callback}>&lt; Truck information</button>
       </PageHeading>
       <GapList>
-        {isLoading ? (
-          <Throbber />
-        ) : (
-          data?.map((truck) => (
-            <CardButton
-              key={truck.id}
-              className="flex flex-row text-left"
-              isCentered={false}
-              onClick={() => viewTruck(truck)}
-            >
-              <div>
-                <h1 className="text-xl">{truck.licenseNumber}</h1>
-                <p>Model: {truck.model}</p>
-                <p>Payload: {truck.payload}</p>
-              </div>
-            </CardButton>
-          ))
-        )}
+        {data?.map((truck) => (
+          <CardButton
+            key={truck.id}
+            className="flex flex-row text-left"
+            isCentered={false}
+            onClick={() => viewTruck(truck)}
+          >
+            <div>
+              <h1 className="text-xl">{truck.licenseNumber}</h1>
+              <p>Model: {truck.model}</p>
+              <p>Payload: {truck.payload}</p>
+            </div>
+          </CardButton>
+        ))}
       </GapList>
     </>
   );

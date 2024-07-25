@@ -11,7 +11,19 @@ import Throbber from "../../components/Throbber";
 export default function ClientsPage() {
   const [searchFilter, setSearchFilter] = useState<string>();
 
-  const { data, isLoading } = useApi("clients");
+  const { data, isLoading, error } = useApi("clients");
+
+  if (isLoading || error) {
+    return (
+      <PageWithNavigation>
+        <PageHeading>Clients</PageHeading>
+        <GapList>
+          {isLoading && <Throbber />}
+          {error && <h1>An error ocurred: {error.message}</h1>}
+        </GapList>
+      </PageWithNavigation>
+    );
+  }
 
   return (
     <PageWithNavigation>
@@ -36,7 +48,7 @@ export default function ClientsPage() {
       {isLoading && <Throbber />}
       <GapList>
         {data?.map((client: Client) => (
-          <Card>
+          <Card key={client.id}>
             <h1 className="text-xl">{client.name}</h1>
             <h2>Num of tasks: {client.tasks.length}</h2>
             <h2>Completed: {client.tasks.length}</h2>

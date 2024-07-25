@@ -19,7 +19,7 @@ export default function DriversList({ callback }: DriversListProps) {
   const [isShowingPopup, setIsShowingPopup] = useState<boolean>(false);
   const [isEditingDriver, setIsEditingDriver] = useState<boolean>(false);
 
-  const { data, isLoading } = useApi("drivers");
+  const { data, isLoading, error } = useApi("drivers");
 
   const editDriver = (driver: Driver) => {
     setIsEditingDriver(true);
@@ -99,6 +99,20 @@ export default function DriversList({ callback }: DriversListProps) {
             DELETE
           </FormButton>
         </div>
+      </>
+    );
+  }
+
+  if (isLoading || error) {
+    return (
+      <>
+        <PageHeading>
+          <button onClick={callback}>&lt; Driver information</button>
+        </PageHeading>
+        <GapList>
+          {isLoading && <Throbber />}
+          {error && <h1>An error ocurred: {error.message}</h1>}
+        </GapList>
       </>
     );
   }

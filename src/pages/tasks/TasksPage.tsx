@@ -6,13 +6,16 @@ import useApi from "../../hooks/useApi";
 import Task from "./components/Task";
 
 export default function TasksPage() {
-  const { data, isLoading } = useApi("tasks");
+  const { data, isLoading, error } = useApi("testing");
 
-  if (isLoading) {
+  if (isLoading || error) {
     return (
       <PageWithNavigation>
         <PageHeading>Tasks</PageHeading>
-        <Throbber />
+        <GapList>
+          {isLoading && <Throbber />}
+          {error && <h1>An error ocurred: {error.message}</h1>}
+        </GapList>
       </PageWithNavigation>
     );
   }
