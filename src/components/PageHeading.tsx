@@ -3,15 +3,17 @@ import ProfileButton from "./ProfileButton";
 
 type PageHeadingProps = {
   noProfileButton?: boolean;
-  sticky?: boolean
+  sticky?: boolean;
 };
 export default function PageHeading({
   children,
   noProfileButton = false,
-  sticky = true
+  sticky = true,
 }: PropsWithChildren<PageHeadingProps>) {
   return (
-    <h1 className={`py-5 text-xl flex justify-between ${sticky && "sticky top-0 z-10 bg-secondary -mx-6 px-6"}`}>
+    <h1
+      className={`py-5 text-xl flex justify-between ${sticky && "sticky top-0 z-10 bg-secondary -mx-6 px-6"}`}
+    >
       {children}
       {!noProfileButton && <ProfileButton />}
     </h1>

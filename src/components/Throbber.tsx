@@ -5,5 +5,5 @@ export default function Throbber() {
     <div>
       <Icon icon="gg:spinner" className="animate-spin text-4xl" />
     </div>
-  )
+  );
 }
