@@ -22,7 +22,7 @@ export default function ProfilePage() {
 
   return (
     <PageWithNavigation>
-      <PageHeading>My Profile</PageHeading>
+      <PageHeading noProfileButton>My Profile</PageHeading>
       {isLoggingOut && (
         <Popup>
           <Card className="bg-tertiary w-full p-12">
