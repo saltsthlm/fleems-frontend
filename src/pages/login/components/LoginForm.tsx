@@ -18,7 +18,9 @@ export default function LoginForm() {
         <label htmlFor="email">Email address</label>
         <input
           name="email"
-          type="text"
+          type="email"
+          required
+          autoComplete="email"
           className="p-3 rounded rounded-xl"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -27,6 +29,8 @@ export default function LoginForm() {
         <input
           name="password"
           type="password"
+          required
+          autoComplete="current-password"
           className="p-3 rounded rounded-xl"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
