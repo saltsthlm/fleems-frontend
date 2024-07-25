@@ -4,6 +4,7 @@ import GapList from "../../components/GapList";
 import PageHeading from "../../components/PageHeading";
 import PageWithNavigation from "../../components/PageWithNavigation";
 import TopDriversStats from "./components/TopDriversStats";
+import Map from "../../components/Map";
 
 export default function HomePage() {
   return (
@@ -14,6 +15,7 @@ export default function HomePage() {
         <TopDriversStats />
         <FleetDataStats />
       </GapList>
+      <Map />
     </PageWithNavigation>
   );
 }
