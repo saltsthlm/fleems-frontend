@@ -19,7 +19,9 @@ export default function TasksPage() {
   return (
     <PageWithNavigation>
       <PageHeading>Tasks</PageHeading>
-      <GapList>{data?.map((task) => <Task task={task} />)}</GapList>
+      <GapList>
+        {data?.map((task) => <Task task={task} key={task.id} />)}
+      </GapList>
     </PageWithNavigation>
   );
 }
