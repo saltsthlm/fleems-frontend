@@ -1,42 +1,24 @@
 import FormButton from "../../../components/FormButton";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
-import { redirect, useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import Throbber from "../../../components/Throbber";
+import { useAuth } from "../../../AuthProvider";
 
 export default function LoginFormGoogle() {
-  const [user, setUser] = useState([]);
-  const [profile, setProfile] = useState([]);
   const navigate = useNavigate({ from: "/login" });
   const [loading, setLoading] = useState<boolean>(false);
+  const { setUser, isLoggedIn } = useAuth();
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
+      setUser(null);
       setUser(codeResponse);
+      console.log("codeResponse; " + codeResponse);
       navigate({ to: "/" });
     },
     onError: (error) => alert("Login Failed:" + error),
   });
-
-  useEffect(() => {
-    if (user) {
-      axios
-        .get(
-          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
-          {
-            headers: {
-              Authorization: `Bearer ${user.access_token}`,
-              Accept: "application/json",
-            },
-          }
-        )
-        .then((res) => {
-          setProfile(res.data);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [user]);
 
   return (
     <>
