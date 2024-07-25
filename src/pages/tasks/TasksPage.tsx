@@ -6,7 +6,7 @@ import useApi from "../../hooks/useApi";
 import Task from "./components/Task";
 
 export default function TasksPage() {
-  const { data, isLoading, error } = useApi("testing");
+  const { data, isLoading, error } = useApi("tasks");
 
   if (isLoading || error) {
     return (
