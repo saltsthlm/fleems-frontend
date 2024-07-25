@@ -5,10 +5,13 @@ import GapList from "../../components/GapList";
 import PageHeading from "../../components/PageHeading";
 import PageWithNavigation from "../../components/PageWithNavigation";
 import Popup from "../../components/Popup";
+import { useAuth } from "../../AuthProvider";
+import LoginFormGoogle from "../login/components/LoginFormGoogle";
 
 export default function ProfilePage() {
   const [isLoggingOut, setIsLoggingOut] = useState<boolean>(false);
   const [isDeletingAccount, setIsDeletingAccount] = useState<boolean>(false);
+  const { isLoggedIn, user, profile } = useAuth();
 
   const logout = () => {
     console.log("Logging out...");
@@ -61,22 +64,26 @@ export default function ProfilePage() {
           </Card>
         </Popup>
       )}
-      <GapList>
-        <Card className="mb-10 text-center py-10">
-          <h1 className="text-xl">Supipi Algama</h1>
-          <h2>supipi.algama@gmail.com</h2>
-        </Card>
-        <FormButton onClick={() => setIsLoggingOut(true)} className="w-3/5">
-          LOGOUT
-        </FormButton>
-        <FormButton
-          onClick={() => setIsDeletingAccount(true)}
-          overrideColor
-          className="text-danger w-3/5"
-        >
-          DELETE ACCOUNT
-        </FormButton>
-      </GapList>
+      {isLoggedIn && (
+        <GapList>
+          <Card className="mb-10 text-center py-10">
+            <img src={profile.picture} alt="user image" />
+            <h1 className="text-xl">{profile.name}</h1>
+            <h2>{profile.email}</h2>
+          </Card>
+          <FormButton onClick={() => setIsLoggingOut(true)} className="w-3/5">
+            LOGOUT
+          </FormButton>
+          <FormButton
+            onClick={() => setIsDeletingAccount(true)}
+            overrideColor
+            className="text-danger w-3/5"
+          >
+            DELETE ACCOUNT
+          </FormButton>
+        </GapList>
+      )}
+      {!isLoggedIn && <LoginFormGoogle />}
     </PageWithNavigation>
   );
 }

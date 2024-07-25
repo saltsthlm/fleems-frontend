@@ -1,6 +1,6 @@
 import FormButton from "../../../components/FormButton";
 import { useState } from "react";
-import { useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "@tanstack/react-router";
 import Throbber from "../../../components/Throbber";
 import { useAuth } from "../../../AuthProvider";
@@ -8,7 +8,7 @@ import { useAuth } from "../../../AuthProvider";
 export default function LoginFormGoogle() {
   const navigate = useNavigate({ from: "/login" });
   const [loading, setLoading] = useState<boolean>(false);
-  const { setUser, isLoggedIn } = useAuth();
+  const { setUser, isLoggedIn, saveUser } = useAuth();
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
@@ -25,15 +25,18 @@ export default function LoginFormGoogle() {
       {loading ? (
         <Throbber />
       ) : (
-        <FormButton
-          className="w-3/5"
-          onClick={() => {
-            setLoading(true);
-            login();
-          }}
-        >
-          <strong>LOGIN</strong>
-        </FormButton>
+        <>
+          <GoogleLogin onSuccess={(e) => saveUser(e.credential)} />
+          <FormButton
+            className="w-3/5"
+            onClick={() => {
+              setLoading(true);
+              login();
+            }}
+          >
+            <strong>LOGIN</strong>
+          </FormButton>
+        </>
       )}
     </>
   );

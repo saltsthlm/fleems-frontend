@@ -1,6 +1,7 @@
 import { googleLogout } from "@react-oauth/google";
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext({
   isLoggedIn: false,
@@ -20,6 +21,17 @@ export default function AuthProvider({ children }) {
   const [user, setUser] = useState();
   const [profile, setProfile] = useState(null);
   const [credential, setCredential] = useState(null);
+
+  const saveUser = (jwt?: string) => {
+    if (jwt == null) {
+      return null;
+    }
+    setIsLoggedIn(true);
+    setCredential(jwt);
+    const userData = jwtDecode(jwt);
+    setProfile(userData);
+    return userData;
+  };
 
   useEffect(() => {
     console.log("in auth provider" + profile);
@@ -56,6 +68,7 @@ export default function AuthProvider({ children }) {
         logout,
         user,
         setUser,
+        saveUser,
         profile,
         credential,
       }}
