@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "route": "/*",
+      "serve": "/index.html"
+    }
+  ],
+  "mimeTypes": {
+    ".tsx": "application/javascript",
+    ".ts": "application/javascript"
+  }
+}
