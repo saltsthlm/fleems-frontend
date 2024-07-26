@@ -7,7 +7,7 @@ type LogoProps = {
 export default function Logo({ size, className }: LogoProps) {
   const sizeClasses: { [key: string]: string } = {
     small: "h-12",
-    medium: "w-46",
+    medium: "w-56",
     large: "w-128",
   };
 
