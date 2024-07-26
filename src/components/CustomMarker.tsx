@@ -2,19 +2,17 @@ import React from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import MakrerUrl from "../assets/mapMarker.svg";
-import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import { Marker } from "react-leaflet";
 
 interface CustomMarkerProps {
   position: L.LatLngExpression;
-  children: React.ReactNode; // Content to display inside the marker
+  children: React.ReactNode;
 }
 
 export default function CustomMarker({
   position,
   children,
 }: CustomMarkerProps) {
-  const map = useMap();
-
   const customIcon = L.icon({
     iconUrl: MakrerUrl,
     iconSize: [30, 30],

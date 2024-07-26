@@ -13,7 +13,7 @@ type ApiResponseMapping = {
 type ApiEndpoints = keyof ApiResponseMapping;
 
 export default function useApi<T extends ApiEndpoints>(endpoint: T) {
-  const { user, credential } = useAuth();
+  const { credential } = useAuth();
 
   const fetchData = async () => {
     console.log(credential);
