@@ -15,7 +15,7 @@ export default function MainNavigation() {
 
   if (!isMobile) {
     return (
-      <header className="order-first sticky top-0 bg-button grid grid-flow-col grid-cols-center3 justify-between z-50 p-4 px-12">
+      <header className="order-first sticky top-0 bg-button grid grid-flow-col grid-cols-center3 justify-between z-50 p-4 px-12 drop-shadow-lg">
         <Logo className="p-0" size="medium" />
         <nav className="text-2xl flex gap-10 items-center justify-self-center font-light">
           <Link to="/" activeProps={{ className: activeLinkClassName }}>
