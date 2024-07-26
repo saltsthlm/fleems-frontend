@@ -12,7 +12,7 @@ export default function PageHeading({
 }: PropsWithChildren<PageHeadingProps>) {
   return (
     <h1
-      className={`py-5 text-xl flex justify-between ${sticky && "sticky top-0 z-10 bg-secondary -mx-6 px-6"}`}
+      className={`py-5 text-xl flex justify-between align-center drop-shadow mb-4 ${sticky && "sticky top-0 z-10 bg-secondary -mx-6 px-6"}`}
     >
       {children}
       {!noProfileButton && <ProfileButton />}
