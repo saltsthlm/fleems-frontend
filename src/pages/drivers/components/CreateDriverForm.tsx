@@ -1,6 +1,6 @@
 import { SyntheticEvent } from "react";
 import DriverForm from "./DriverForm";
-
+/*
 import usePostApi from "../../../hooks/usePostApi";
 import { CreateDriver } from "../../../types/createTypes";
 
@@ -11,9 +11,9 @@ const nelsonTest: CreateDriver = {
   phoneNumber: "+46708342069",
   photo: "testpfp",
 };
-
+*/
 export default function CreateDriverForm() {
-  usePostApi("drivers", nelsonTest);
+  //usePostApi("drivers", nelsonTest);
   const createDriver = (e: SyntheticEvent) => {
     e.preventDefault();
   };
