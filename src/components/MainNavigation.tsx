@@ -11,29 +11,31 @@ import ProfileButton from "./ProfileButton";
 export default function MainNavigation() {
   const { isMobile } = useScreenType();
 
+  const activeLinkClassName = "underline text-font font-normal";
+
   if (!isMobile) {
     return (
-      <header className="order-first sticky top-0 bg-button flex z-50 p-4">
-        <Logo className="w-1/3 p-0" />
-        <nav className="text-2xl flex mx-auto gap-10 items-center">
-          <Link to="/" activeProps={{ className: "underline" }}>
+      <header className="order-first sticky top-0 bg-button grid grid-flow-col grid-cols-center3 justify-between z-50 p-4 px-12">
+        <Logo className="p-0" size="medium" />
+        <nav className="text-2xl flex gap-10 items-center justify-self-center font-light">
+          <Link to="/" activeProps={{ className: activeLinkClassName }}>
             Home
           </Link>
-          <Link to="/drivers" activeProps={{ className: "underline" }}>
+          <Link to="/drivers" activeProps={{ className: activeLinkClassName }}>
             Drivers
           </Link>
-          <Link to="/vehicles" activeProps={{ className: "underline" }}>
+          <Link to="/vehicles" activeProps={{ className: activeLinkClassName }}>
             Trucks
           </Link>
-          <Link to="/clients" activeProps={{ className: "underline" }}>
+          <Link to="/clients" activeProps={{ className: activeLinkClassName }}>
             Clients
           </Link>
-          <Link to="/tasks" activeProps={{ className: "underline" }}>
+          <Link to="/tasks" activeProps={{ className: activeLinkClassName }}>
             Tasks
           </Link>
         </nav>
-        <div className="w-1/3 flex justify-center items-center">
-          <ProfileButton className="h-full" />
+        <div className="flex justify-center items-center justify-self-end">
+          <ProfileButton className="h-full text-3xl" />
         </div>
       </header>
     );
