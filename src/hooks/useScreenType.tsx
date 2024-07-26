@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useScreenSize from "./useScreenSize";
 
 export default function useScreenType() {
-  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(true);
   const [isDesktop, setIsDesktop] = useState<boolean>(false);
 
   const screenSize = useScreenSize();
