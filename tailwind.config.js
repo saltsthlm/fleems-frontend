@@ -13,6 +13,9 @@ export default {
         danger: "#FF0808",
         font: "#000000",
       },
+      gridTemplateColumns: {
+        center3: "1fr auto 1fr",
+      },
     },
   },
   plugins: [daisyui],
