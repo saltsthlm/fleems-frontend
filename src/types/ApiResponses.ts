@@ -47,10 +47,10 @@ export type Task = {
 
 export type LegInfoDto = {
   id: string;
-  driver: Driver;
-  vehicle: Vehicle;
-  startTime: Date;
-  endTime: Date;
+  driver: Driver | null;
+  vehicle: Vehicle | null;
+  startTime: Date | null;
+  endTime: Date | null;
   startLocation: string;
   endLocation: string;
   distanceDriven: number;
