@@ -9,8 +9,25 @@ export type Driver = {
 
 export type Client = {
   id: string;
+  contactPrson: string;
+  contactEmail: string;
+  contactPhoneNumber: string;
   name: string;
-  tasks: string; //TODO: should be TaskList wi
+  tasks: TaskInfoDto[];
+};
+export type TaskInfoDto = {
+  id: string;
+  startDestination: string;
+  endDestination: string;
+  dateCreated: Date;
+  dateFinished: Date;
+  expectedDistance: number;
+  expectedTime: number;
+  startDate: Date;
+  product: string;
+  payload: number;
+  quantity: number;
+  legs: LegInfoDto[];
 };
 
 export type Task = {
@@ -25,7 +42,7 @@ export type Task = {
   product: string;
   payload: number;
   quantity: number;
-  legs: LegInfoDto[]; // TODO: LegInfoDto[];
+  legs: LegInfoDto[];
 };
 
 export type LegInfoDto = {
