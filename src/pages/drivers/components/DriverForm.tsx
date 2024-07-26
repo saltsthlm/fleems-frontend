@@ -5,6 +5,7 @@ type DriverFormProps = {
   onSubmit: (e: SyntheticEvent) => unknown;
   buttonText: string;
 };
+
 export default function DriverForm({
   onSubmit: callback,
   buttonText,

@@ -20,10 +20,23 @@ export type Task = {
   dateCreated: Date;
   dateFinished: Date;
   expectedDistance: number;
+  expectedTime: number;
+  startDate: Date;
   product: string;
   payload: number;
   quantity: number;
-  legs: string; // TODO: LegInfoDto[];
+  legs: LegInfoDto[]; // TODO: LegInfoDto[];
+};
+
+export type LegInfoDto = {
+  id: string;
+  driver: Driver;
+  vehicle: Vehicle;
+  startTime: Date;
+  endTime: Date;
+  startLocation: string;
+  endLocation: string;
+  distanceDriven: number;
 };
 
 export type Vehicle = {
