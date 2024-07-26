@@ -5,7 +5,7 @@ import LoginFormGoogle from "./components/LoginFormGoogle";
 export default function LoginPage() {
   return (
     <PageWithNavigation showNav={false}>
-      <Logo />
+      <Logo className="p-10 mx-auto"/>
       <LoginFormGoogle />
     </PageWithNavigation>
   );

@@ -5,7 +5,7 @@ import RegisterForm from "./components/RegisterForm";
 export default function RegisterPage() {
   return (
     <PageWithNavigation showNav={false}>
-      <Logo />
+      <Logo className="p-10 mx-auto" />
       <RegisterForm />
     </PageWithNavigation>
   );
