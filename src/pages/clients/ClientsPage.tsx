@@ -50,9 +50,18 @@ export default function ClientsPage() {
         {data?.map((client: Client) => (
           <Card key={client.id}>
             <h1 className="text-xl">{client.name}</h1>
-            <h2>Num of tasks: {client.tasks.length}</h2>
-            <h2>Completed: {client.tasks.length}</h2>
-            <h2>Ongoing: {client.tasks.length}</h2>
+            <div className="flex justify-between">
+              <div>
+                <h2>Num of tasks : {client.tasks.length}</h2>
+                <h2>Completed : {client.tasks.length}</h2>
+                <h2>Ongoing : {client.tasks.length}</h2>
+              </div>
+              <div>
+                <h2>Contact : {client.contactPrson == null ? "Anders Petterson" : client.contactPrson}</h2>
+                <h2>Email : {client.contactEmail == null ? "12/06/2024" : client.contactEmail}</h2>
+                <h2>Phone : {client.contactPhoneNumber == null ? "0763262839" : client.contactPhoneNumber}</h2>
+              </div>
+            </div>
           </Card>
         ))}
       </GapList>
