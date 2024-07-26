@@ -9,6 +9,7 @@ import FormButton from "../../../components/FormButton";
 import Popup from "../../../components/Popup";
 import EditTruckForm from "../components/EditTruckForm";
 import Throbber from "../../../components/Throbber";
+import Table from "../../../components/Table";
 
 type TrucksListProps = {
   callback: () => void;
@@ -138,6 +139,7 @@ export default function TrucksList({ callback }: TrucksListProps) {
           </CardButton>
         ))}
       </GapList>
+      <Table data={data} />
     </>
   );
 }

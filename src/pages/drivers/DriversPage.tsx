@@ -5,6 +5,7 @@ import PageHeading from "../../components/PageHeading";
 import PageWithNavigation from "../../components/PageWithNavigation";
 import CreateDriverForm from "./components/CreateDriverForm";
 import DriversList from "./components/DriversList";
+import Table from "../../components/Table";
 
 export default function DriversPage() {
   const [creatingDriver, setCreatingDriver] = useState<boolean>(false);
