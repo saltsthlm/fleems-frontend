@@ -16,7 +16,7 @@ export default function ProfileButton({ className }: PropsWithClassName) {
   return (
     <Link to="/profile" className={`${className}`}>
       {isLoggedIn ? (
-        <img src={profilePic} alt="user image" className="h-full rounded-full h-8" />
+        <img src={profilePic} alt="user image" className="rounded-full h-8" />
       ) : (
         <Icon icon="gg:profile" className="h-full [&>g]: text-red" />
       )}
