@@ -6,7 +6,7 @@ import {
   CreateAssignment,
   CreateDriver,
   CreateVehicle,
-} from "../types/createTypes";
+} from "../types/CreateTypes";
 
 type ApiResponseMapping = {
   drivers: CreateDriver;
