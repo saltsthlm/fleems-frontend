@@ -10,118 +10,118 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as VehiclesImport } from './routes/vehicles'
-import { Route as TasksImport } from './routes/tasks'
-import { Route as RegisterImport } from './routes/register'
-import { Route as ProfileImport } from './routes/profile'
-import { Route as LoginImport } from './routes/login'
-import { Route as DriversImport } from './routes/drivers'
-import { Route as ClientsImport } from './routes/clients'
-import { Route as IndexImport } from './routes/index'
+import { Route as rootRoute } from "./routes/__root";
+import { Route as VehiclesImport } from "./routes/vehicles";
+import { Route as TasksImport } from "./routes/tasks";
+import { Route as RegisterImport } from "./routes/register";
+import { Route as ProfileImport } from "./routes/profile";
+import { Route as LoginImport } from "./routes/login";
+import { Route as DriversImport } from "./routes/drivers";
+import { Route as ClientsImport } from "./routes/clients";
+import { Route as IndexImport } from "./routes/index";
 
 // Create/Update Routes
 
 const VehiclesRoute = VehiclesImport.update({
-  path: '/vehicles',
+  path: "/vehicles",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const TasksRoute = TasksImport.update({
-  path: '/tasks',
+  path: "/tasks",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const RegisterRoute = RegisterImport.update({
-  path: '/register',
+  path: "/register",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const ProfileRoute = ProfileImport.update({
-  path: '/profile',
+  path: "/profile",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const LoginRoute = LoginImport.update({
-  path: '/login',
+  path: "/login",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const DriversRoute = DriversImport.update({
-  path: '/drivers',
+  path: "/drivers",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const ClientsRoute = ClientsImport.update({
-  path: '/clients',
+  path: "/clients",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const IndexRoute = IndexImport.update({
-  path: '/',
+  path: "/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/clients': {
-      id: '/clients'
-      path: '/clients'
-      fullPath: '/clients'
-      preLoaderRoute: typeof ClientsImport
-      parentRoute: typeof rootRoute
-    }
-    '/drivers': {
-      id: '/drivers'
-      path: '/drivers'
-      fullPath: '/drivers'
-      preLoaderRoute: typeof DriversImport
-      parentRoute: typeof rootRoute
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginImport
-      parentRoute: typeof rootRoute
-    }
-    '/profile': {
-      id: '/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof ProfileImport
-      parentRoute: typeof rootRoute
-    }
-    '/register': {
-      id: '/register'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof RegisterImport
-      parentRoute: typeof rootRoute
-    }
-    '/tasks': {
-      id: '/tasks'
-      path: '/tasks'
-      fullPath: '/tasks'
-      preLoaderRoute: typeof TasksImport
-      parentRoute: typeof rootRoute
-    }
-    '/vehicles': {
-      id: '/vehicles'
-      path: '/vehicles'
-      fullPath: '/vehicles'
-      preLoaderRoute: typeof VehiclesImport
-      parentRoute: typeof rootRoute
-    }
+    "/": {
+      id: "/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/clients": {
+      id: "/clients";
+      path: "/clients";
+      fullPath: "/clients";
+      preLoaderRoute: typeof ClientsImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/drivers": {
+      id: "/drivers";
+      path: "/drivers";
+      fullPath: "/drivers";
+      preLoaderRoute: typeof DriversImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/login": {
+      id: "/login";
+      path: "/login";
+      fullPath: "/login";
+      preLoaderRoute: typeof LoginImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/profile": {
+      id: "/profile";
+      path: "/profile";
+      fullPath: "/profile";
+      preLoaderRoute: typeof ProfileImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/register": {
+      id: "/register";
+      path: "/register";
+      fullPath: "/register";
+      preLoaderRoute: typeof RegisterImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/tasks": {
+      id: "/tasks";
+      path: "/tasks";
+      fullPath: "/tasks";
+      preLoaderRoute: typeof TasksImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/vehicles": {
+      id: "/vehicles";
+      path: "/vehicles";
+      fullPath: "/vehicles";
+      preLoaderRoute: typeof VehiclesImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
@@ -136,7 +136,7 @@ export const routeTree = rootRoute.addChildren({
   RegisterRoute,
   TasksRoute,
   VehiclesRoute,
-})
+});
 
 /* prettier-ignore-end */
 

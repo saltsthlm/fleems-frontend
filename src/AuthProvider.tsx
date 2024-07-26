@@ -44,7 +44,7 @@ export default function AuthProvider({ children }) {
               Authorization: `Bearer ${user.access_token}`,
               Accept: "application/json",
             },
-          }
+          },
         )
         .then((res) => {
           setProfile(res.data);

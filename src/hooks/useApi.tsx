@@ -24,7 +24,7 @@ export default function useApi<T extends ApiEndpoints>(endpoint: T) {
           "Content-Type": "application/json",
           authorization: `Bearer ${credential}`,
         },
-      }
+      },
     );
     return data;
   };
