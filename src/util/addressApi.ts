@@ -1,8 +1,8 @@
 import { Address } from "../types/ApiResponses";
 import { Coordinate } from "../types/ComponentTypes";
 
-export function coordinatesToAddres(coord: Coordinate): Address {
-  fetch(
+export function coordinatesToAddres(coord: Coordinate): Promise<Address> {
+  return fetch(
     `https://nominatim.openstreetmap.org/reverse?lat=${coord["x"]}&lon=${coord["y"]}&format=json`,
     {
       headers: {
@@ -12,9 +12,11 @@ export function coordinatesToAddres(coord: Coordinate): Address {
   )
     .then((res) => res.json())
     .then((res) => {
-      //console.log(res);
-      //console.log(res.display_name);
-      console.log(res.address);
       return res.address;
     });
+}
+
+export function coordinateStringToCoordinate(coord: string): Coordinate {
+  const parts = coord.split(",");
+  return { x: Number(parts[0]), y: Number(parts[1]) };
 }
