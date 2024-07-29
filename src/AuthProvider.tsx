@@ -1,7 +1,8 @@
 import { googleLogout } from "@react-oauth/google";
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
-import { jwtDecode } from "jwt-decode";
+import { JwtPayload } from "jwt-decode";
+import { ReactNode } from "@tanstack/react-router";
 
 const AuthContext = createContext({
   isLoggedIn: false,
@@ -16,11 +17,36 @@ const AuthContext = createContext({
 
 export const useAuth = () => useContext(AuthContext);
 
-export default function AuthProvider({ children }) {
+type AuthProviderProps = {
+  children: ReactNode;
+};
+
+export default function AuthProvider({ children }: AuthProviderProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("user"));
-  const [user, setUser] = useState();
-  const [profile, setProfile] = useState(null);
-  const [credential, setCredential] = useState(null);
+  const [user, setUser] = useState<User | null>();
+  const [profile, setProfile] = useState<JwtPayload | null>(null);
+  const [credential, setCredential] = useState<string | null>("");
+
+  type Profile = {
+    id: string;
+    email: string;
+    verified_email: boolean;
+    name: string;
+    given_name: string;
+    family_name: string;
+    picture: string;
+    hd: string;
+  };
+
+  type User = {
+    access_token: string;
+    token_type: string;
+    expires_in: number;
+    scope: string;
+    authuser: string;
+    hd: string;
+    prompt: string;
+  };
 
   const saveUser = (jwt?: string) => {
     if (jwt == null) {
@@ -28,9 +54,6 @@ export default function AuthProvider({ children }) {
     }
     setIsLoggedIn(true);
     setCredential(jwt);
-    const userData = jwtDecode(jwt);
-    setProfile(userData);
-    return userData;
   };
 
   useEffect(() => {

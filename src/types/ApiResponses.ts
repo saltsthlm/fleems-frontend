@@ -66,3 +66,24 @@ export type Vehicle = {
   distanceDriven: number;
   model: string;
 };
+
+export type Profile = {
+  id: string;
+  email: string;
+  verified_email: boolean;
+  name: string;
+  given_name: string;
+  family_name: string;
+  picture: string;
+  hd: string;
+};
+
+export type User = {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  scope: string;
+  authuser: string;
+  hd: string;
+  prompt: string;
+};
