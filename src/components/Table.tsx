@@ -29,13 +29,15 @@ export default function Table({ data }: TableProps) {
 
   const [sorting, setSorting] = useState<SortingState>([]);
 
-  const columns = Object.keys(data[0]).map((key) =>
-    columnHelper.accessor(key as keyof DataType, {
-      cell: (info) => info.getValue(),
-      header: () => <span>{key}</span>,
-      enableColumnFilter: true,
-    })
-  );
+  const columns = Object.keys(data[0])
+    .filter((k) => k != "id")
+    .map((key) =>
+      columnHelper.accessor(key as keyof DataType, {
+        cell: (info) => info.getValue(),
+        header: () => <span>{key}</span>,
+        enableColumnFilter: true,
+      })
+    );
   const table = useReactTable({
     columns,
     data,
