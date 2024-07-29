@@ -1,6 +1,5 @@
 import { useState } from "react";
 import useApi from "../hooks/useApi";
-import Card from "./Card";
 import CardTr from "./CardTr";
 import Throbber from "./Throbber";
 import { Task } from "../types/ApiResponses";
