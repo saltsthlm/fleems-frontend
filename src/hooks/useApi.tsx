@@ -16,7 +16,6 @@ export default function useApi<T extends ApiEndpoints>(endpoint: T) {
   const { credential } = useAuth();
 
   const fetchData = async () => {
-    console.log(credential);
     const { data } = await axios.get<ApiResponseMapping[T]>(
       BASE_API_URL + endpoint,
       {
@@ -24,7 +23,7 @@ export default function useApi<T extends ApiEndpoints>(endpoint: T) {
           "Content-Type": "application/json",
           authorization: `Bearer ${credential}`,
         },
-      },
+      }
     );
     return data;
   };

@@ -6,7 +6,7 @@ import {
   CreateAssignment,
   CreateDriver,
   CreateVehicle,
-} from "../types/CreateTypes";
+} from "../types/createTypes";
 
 type ApiResponseMapping = {
   drivers: CreateDriver;
@@ -22,7 +22,6 @@ export default function usePostApi<T extends ApiEndpoints>(
   const { credential } = useAuth();
 
   const fetchData = async () => {
-    console.log(credential);
     const { data } = await axios.post<ApiResponseMapping[T]>(
       BASE_API_URL + endpoint,
       body,
