@@ -43,10 +43,13 @@ export default function TripLogs() {
                 Transportation of {trip.payload} {trip.product}
               </td>
               <td>
-                {new Date(trip.startDate).toLocaleDateString()} to
+                {new Date(trip.startDate).toLocaleDateString()}{" "}
+                {new Date(trip.startDate).toLocaleTimeString()} to
                 <br />
                 {trip.dateFinished
-                  ? new Date(trip.dateFinished).toLocaleDateString()
+                  ? new Date(trip.startDate).toLocaleDateString() +
+                    " " +
+                    new Date(trip.startDate).toLocaleTimeString()
                   : "Present"}
               </td>
               <td>
@@ -59,13 +62,13 @@ export default function TripLogs() {
           ))}
         </tbody>
       </table>
-      <div className="grid gap-5">
+      <div className="flex flex-col gap-5">
         {currentlyViewedTask ? (
           <>
-            <CardHarsh>
+            <CardHarsh className="h-full">
               <h1>Map here</h1>
             </CardHarsh>
-            <CardHarsh>
+            <CardHarsh className="text-2xl h-min self-end">
               <p>Driver: dawdawdawdw</p>
               <p>Vehicle: dawdadaw</p>
               <p>
