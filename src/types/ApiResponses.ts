@@ -43,8 +43,17 @@ export type Task = {
   payload: number;
   quantity: number;
   legs: LegInfoDto[];
+  client: ClientResponseDto;
 };
 
+export type ClientResponseDto = {
+  id: string;
+  contactPerson: string;
+  contactEmail: string;
+  contactPhoneNumber: string;
+  name: string;
+  tasks: TaskInfoDto[];
+};
 export type LegInfoDto = {
   id: string;
   driver: Driver | null;
@@ -76,6 +85,12 @@ export type Profile = {
   family_name: string;
   picture: string;
   hd: string;
+};
+export type AssignmentInfoDto = {
+  id: string;
+  task: Task;
+  driver: Driver;
+  vehicle: Vehicle;
 };
 
 export type User = {

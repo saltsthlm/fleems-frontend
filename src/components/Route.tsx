@@ -22,7 +22,7 @@ const Route = ({
         waypoint.location[0],
       ]);
       console.log("coordinates", coordinates);
-      L.polyline(coordinates, { color: "blue" }).addTo(map);
+      L.polyline(coordinates, { color: "black" }).addTo(map);
     };
 
     fetchRoute();

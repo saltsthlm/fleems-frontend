@@ -1,6 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Client, Driver, Task, Vehicle } from "../types/ApiResponses";
+import {
+  AssignmentInfoDto,
+  Client,
+  Driver,
+  Task,
+  Vehicle,
+} from "../types/ApiResponses";
 import { BASE_API_URL } from "../util/config";
 import { useAuth } from "../AuthProvider";
 
@@ -9,6 +15,7 @@ type ApiResponseMapping = {
   clients: Client[];
   tasks: Task[];
   vehicles: Vehicle[];
+  assignments: AssignmentInfoDto[];
 };
 type ApiEndpoints = keyof ApiResponseMapping;
 
