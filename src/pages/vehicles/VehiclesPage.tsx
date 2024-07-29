@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import useApi from "../../hooks/useApi";
 import GapList from "../../components/GapList";
 import PageHeading from "../../components/PageHeading";
@@ -27,6 +27,15 @@ export default function TrucksList() {
   const { isMobile } = useScreenType();
 
   const { data, isLoading, error } = useApi("vehicles");
+
+  const filteredData = useMemo(() => {
+    if (!searchFilter) return data;
+    return data?.filter(truck =>
+      truck.licenseNumber.toLowerCase().includes(searchFilter.toLowerCase()) ||
+      truck.model.toLowerCase().includes(searchFilter.toLowerCase()) ||
+      truck.payload.toString().includes(searchFilter.toLowerCase())
+    );
+  }, [data, searchFilter]);
 
   const editTruck = (vehicle: Vehicle) => {
     setIsEditingTruck(true);
@@ -141,7 +150,7 @@ export default function TrucksList() {
             />
             <SearchBar value={searchFilter} callback={setSearchFilter} />
             <GapList>
-              {data?.map((truck) => (
+              {filteredData?.map((truck) => (
                 <CardButton
                   key={truck.id}
                   className="flex flex-row text-left"
