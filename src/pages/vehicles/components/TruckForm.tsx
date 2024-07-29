@@ -25,7 +25,7 @@ export default function TruckForm({
         value={model}
         onChange={(e) => setModel(e.target.value)}
       />
-      <label htmlFor="license-plate">Lincense plate</label>
+      <label htmlFor="license-plate">Licence plate</label>
       <input
         name="license-plate"
         type="text"
