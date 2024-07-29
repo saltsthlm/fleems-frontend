@@ -11,7 +11,7 @@ import LoginFormGoogle from "../login/components/LoginFormGoogle";
 export default function ProfilePage() {
   const [isLoggingOut, setIsLoggingOut] = useState<boolean>(false);
   const [isDeletingAccount, setIsDeletingAccount] = useState<boolean>(false);
-  const { isLoggedIn, user, profile } = useAuth();
+  const { isLoggedIn, profile } = useAuth();
 
   const logout = () => {
     console.log("Logging out...");
@@ -64,14 +64,14 @@ export default function ProfilePage() {
           </Card>
         </Popup>
       )}
-      {isLoggedIn && (
+      {isLoggedIn && profile && (
         <GapList>
           <Card className="mb-10 text-center py-10">
             <img src={profile.picture} alt="user image" />
             <h1 className="text-xl">{profile.name}</h1>
             <h2>{profile.email}</h2>
           </Card>
-          <FormButton onClick={() => setIsLoggingOut(true)} className="w-3/5">
+          <FormButton onClick={() => logout()} className="w-3/5">
             LOGOUT
           </FormButton>
           <FormButton
