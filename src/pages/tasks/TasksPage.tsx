@@ -91,7 +91,7 @@ export default function TasksPage({ callback }: TaskPageProps) {
         <Card className="text-center">
           <h1 className="text-xl">ABC company</h1>
           <h2>Route : {selectedTask.startDestination} - {selectedTask.endDestination}</h2>
-          <h2>Task : {selectedTask.payload}</h2>
+          <h2>Task : Transportation of {selectedTask.payload} {selectedTask.product}</h2>
           <h2>Status : On going</h2>
           <h2>No. of legs : {selectedTask.legs?.length}</h2>
           <h2>Start date : {selectedTask.startDate?.toString()}</h2>
@@ -140,7 +140,7 @@ export default function TasksPage({ callback }: TaskPageProps) {
             <div className="flex justify-between w-full text-left">
               <div> 
           <h2>Route : {task?.startDestination} - {task?.endDestination}</h2>
-          <h2>Task : {task?.payload}</h2>
+          <h2>Task : Transportation of {task?.payload} {task?.product}</h2>
           <h2>Status : On going</h2>
           <h2>No. of legs : {task?.legs.length}</h2>
           <h2>Start date : {task?.startDate?.toString()}</h2>
