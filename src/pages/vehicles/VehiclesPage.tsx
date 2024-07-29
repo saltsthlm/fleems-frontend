@@ -13,6 +13,7 @@ import Table from "../../components/Table";
 import EditTruckForm from "./components/EditTruckForm";
 import PageWithNavigation from "../../components/PageWithNavigation";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
+import SearchBar from "../../components/SearchBar";
 
 type TrucksListProps = {
   callback: () => void;
@@ -23,6 +24,7 @@ export default function TrucksList({ callback }: TrucksListProps) {
   const [isShowingPopup, setIsShowingPopup] = useState<boolean>(false);
   const [isEditingTruck, setIsEditingTruck] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string>('information');
+  const [searchFilter, setSearchFilter] = useState<string>();
 
   const { data, isLoading, error } = useApi("vehicles");
 
@@ -138,7 +140,11 @@ export default function TrucksList({ callback }: TrucksListProps) {
         <button onClick={callback}>&lt; Truck information</button>
       </PageHeading>
       <SecondaryNavigation onTabChange={setActiveTab} activeTab={activeTab} />
-
+      <SearchBar
+          value={searchFilter}
+          onChange={(e) => setSearchFilter(e.target.value)}
+          placeholder="Search trucks"
+        />
       <GapList>
         {data?.map((truck) => (
           <CardButton

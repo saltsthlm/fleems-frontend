@@ -67,6 +67,7 @@ import Throbber from "../../components/Throbber";
 import EditDriverForm from "./components/EditDriverForm";
 import PageWithNavigation from "../../components/PageWithNavigation";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
+import SearchBar from "../../components/SearchBar";
 
 type DriversListProps = {
   callback: () => void;
@@ -77,7 +78,8 @@ export default function DriversList({ callback }: DriversListProps) {
   const [isShowingPopup, setIsShowingPopup] = useState<boolean>(false);
   const [isEditingDriver, setIsEditingDriver] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string>('information');
-
+  const [searchFilter, setSearchFilter] = useState<string>();
+  
   const { data, isLoading, error } = useApi("drivers");
 
   const editDriver = (driver: Driver) => {
@@ -190,7 +192,11 @@ export default function DriversList({ callback }: DriversListProps) {
         <button onClick={callback}>&lt; Driver information</button>
       </PageHeading>
       <SecondaryNavigation onTabChange={setActiveTab} activeTab={activeTab} />
-
+      <SearchBar
+          value={searchFilter}
+          onChange={(e) => setSearchFilter(e.target.value)}
+          placeholder="Search drivers"
+        />
       <GapList>
         {isLoading ? (
           <Throbber />
