@@ -24,7 +24,7 @@ type AuthProviderProps = {
 export default function AuthProvider({ children }: AuthProviderProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("user"));
   const [user, setUser] = useState<User | null>();
-  const [profile, setProfile] = useState<JwtPayload | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
   const [credential, setCredential] = useState<string | null>("");
 
   type Profile = {
