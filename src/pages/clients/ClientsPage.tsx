@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import GapList from "../../components/GapList";
 import PageHeading from "../../components/PageHeading";
 import PageWithNavigation from "../../components/PageWithNavigation";
@@ -10,13 +10,26 @@ import Card from "../../components/Card";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
 import SearchBar from "../../components/SearchBar";
 
-export default function ClientsList() {
+type ClientsListProps = {
+  callback: () => void;
+};
+export default function ClientsList({ callback }: ClientsListProps) {
   const [searchFilter, setSearchFilter] = useState<string>();
   const [isViewingClient, setIsViewingClient] = useState<boolean>(false);
   const [selectedClient, setSelectedClient] = useState<Client>();
   const [activeTab, setActiveTab] = useState<string>("information");
 
   const { data, isLoading, error } = useApi("clients");
+
+  const filteredData = useMemo(() => {
+    if (!searchFilter) return data;
+    return data?.filter(client =>
+      client.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
+      client.contactPerson?.toLowerCase().includes(searchFilter.toLowerCase()) ||
+      client.contactEmail?.toLowerCase().includes(searchFilter.toLowerCase()) ||
+      client.contactPhoneNumber?.includes(searchFilter)
+    );
+  }, [data, searchFilter]);
 
   const viewClient = (client: Client) => {
     setSelectedClient(client);
@@ -33,6 +46,7 @@ export default function ClientsList() {
         <PageHeading>
           <button onClick={viewList}>&lt; Client information</button>
         </PageHeading>
+
         <Card className="text-center">
           <h1 className="text-xl">{selectedClient.name}</h1>
           <h2>Num of tasks : {selectedClient.tasks.length}</h2>
@@ -50,7 +64,9 @@ export default function ClientsList() {
   if (isLoading || error) {
     return (
       <PageWithNavigation>
-        <PageHeading>Clients</PageHeading>
+        <PageHeading>
+          <button onClick={callback}>&lt; Client information</button>
+        </PageHeading>
         <GapList>
           {isLoading && <Throbber />}
           {error && <h1>An error ocurred: {error.message}</h1>}
@@ -66,7 +82,7 @@ export default function ClientsList() {
       <SearchBar value={searchFilter} callback={setSearchFilter} />
       {isLoading && <Throbber />}
       <GapList>
-        {data?.map((client: Client) => (
+        {filteredData?.map((client: Client) => (
           <CardButtonWithNoStyles
             key={client.id}
             onClick={() => viewClient(client)}
