@@ -16,10 +16,7 @@ import SecondaryNavigation from "../../components/SecondaryNavigation";
 import SearchBar from "../../components/SearchBar";
 import useScreenType from "../../hooks/useScreenType";
 
-type TrucksListProps = {
-  callback: () => void;
-};
-export default function TrucksList({ callback }: TrucksListProps) {
+export default function TrucksList() {
   const [isViewingTruck, setIsViewingTruck] = useState<boolean>(false);
   const [selectedTruck, setSelectedTruck] = useState<Vehicle>();
   const [isShowingPopup, setIsShowingPopup] = useState<boolean>(false);
@@ -142,11 +139,7 @@ export default function TrucksList({ callback }: TrucksListProps) {
               onTabChange={setActiveTab}
               activeTab={activeTab}
             />
-            <SearchBar
-              value={searchFilter}
-              onChange={(e) => setSearchFilter(e.target.value)}
-              placeholder="Search trucks"
-            />
+            <SearchBar value={searchFilter} callback={setSearchFilter} />
             <GapList>
               {data?.map((truck) => (
                 <CardButton
