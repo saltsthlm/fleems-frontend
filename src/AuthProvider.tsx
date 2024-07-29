@@ -34,7 +34,6 @@ export default function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-    console.log("in auth provider" + profile);
     if (user) {
       axios
         .get(
@@ -44,7 +43,7 @@ export default function AuthProvider({ children }) {
               Authorization: `Bearer ${user.access_token}`,
               Accept: "application/json",
             },
-          },
+          }
         )
         .then((res) => {
           setProfile(res.data);
