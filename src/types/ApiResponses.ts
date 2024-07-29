@@ -9,7 +9,7 @@ export type Driver = {
 
 export type Client = {
   id: string;
-  contactPrson: string;
+  contactPerson: string;
   contactEmail: string;
   contactPhoneNumber: string;
   name: string;

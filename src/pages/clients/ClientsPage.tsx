@@ -57,7 +57,7 @@ export default function ClientsPage() {
                 <h2>Ongoing : {client.tasks.length}</h2>
               </div>
               <div>
-                <h2>Contact : {client.contactPrson == null ? "Anders Petterson" : client.contactPrson}</h2>
+                <h2>Contact : {client.contactPerson == null ? "Anders Petterson" : client.contactPerson}</h2>
                 <h2>Email : {client.contactEmail == null ? "12/06/2024" : client.contactEmail}</h2>
                 <h2>Phone : {client.contactPhoneNumber == null ? "0763262839" : client.contactPhoneNumber}</h2>
               </div>
