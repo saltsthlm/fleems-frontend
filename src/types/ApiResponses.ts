@@ -54,6 +54,7 @@ export type ClientResponseDto = {
   name: string;
   tasks: TaskInfoDto[];
 };
+
 export type LegInfoDto = {
   id: string;
   driver: Driver | null;

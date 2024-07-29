@@ -16,16 +16,19 @@ export default function Map() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          {data?.map((assignment: AssignmentInfoDto) => (
-            <CustomMarker
-              position={[
-                Number(assignment.task.legs.pop()?.startLocation.split(",")[0]),
-                Number(assignment.task.legs.pop()?.startLocation.split(",")[1]),
-              ]}
-            >
-              <Popup>Vehicle ABC123</Popup>
-            </CustomMarker>
-          ))}
+          {data
+            ?.map((assignment: AssignmentInfoDto) => assignment.task.legs.pop())
+            .filter((e) => e != undefined)
+            .map((e) => (
+              <CustomMarker
+                position={[
+                  Number(e.startLocation.split(",")[0]),
+                  Number(e.startLocation.split(",")[1]),
+                ]}
+              >
+                <Popup>Vehicle ABC123</Popup>
+              </CustomMarker>
+            ))}
         </MapContainer>
       )}
     </>
