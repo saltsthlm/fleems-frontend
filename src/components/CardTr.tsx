@@ -1,13 +1,18 @@
 import { PropsWithChildren } from "react";
 import { PropsWithClassName } from "../types/ComponentTypes";
 
+type CardTrProps = {
+  onClick: () => unknown;
+} & PropsWithClassName;
 export default function CardTr({
   children,
   className,
-}: PropsWithChildren<PropsWithClassName>) {
+  onClick: callback,
+}: PropsWithChildren<CardTrProps>) {
   return (
     <tr
-      className={`bg-background text-black p-5 drop-shadow-lg gap-3 ${className}`}
+      onClick={callback}
+      className={`bg-background text-black p-5 drop-shadow-strong gap-3 grid text-center ${className}`}
     >
       {children}
     </tr>
