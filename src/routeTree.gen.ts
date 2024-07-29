@@ -15,7 +15,9 @@ import { Route as VehiclesImport } from './routes/vehicles'
 import { Route as TasksImport } from './routes/tasks'
 import { Route as RegisterImport } from './routes/register'
 import { Route as ProfileImport } from './routes/profile'
+import { Route as LogsImport } from './routes/logs'
 import { Route as LoginImport } from './routes/login'
+import { Route as InformationImport } from './routes/information'
 import { Route as DriversImport } from './routes/drivers'
 import { Route as ClientsImport } from './routes/clients'
 import { Route as IndexImport } from './routes/index'
@@ -42,8 +44,18 @@ const ProfileRoute = ProfileImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const LogsRoute = LogsImport.update({
+  path: '/logs',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const LoginRoute = LoginImport.update({
   path: '/login',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const InformationRoute = InformationImport.update({
+  path: '/information',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -87,11 +99,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DriversImport
       parentRoute: typeof rootRoute
     }
+    '/information': {
+      id: '/information'
+      path: '/information'
+      fullPath: '/information'
+      preLoaderRoute: typeof InformationImport
+      parentRoute: typeof rootRoute
+    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/logs': {
+      id: '/logs'
+      path: '/logs'
+      fullPath: '/logs'
+      preLoaderRoute: typeof LogsImport
       parentRoute: typeof rootRoute
     }
     '/profile': {
@@ -131,7 +157,9 @@ export const routeTree = rootRoute.addChildren({
   IndexRoute,
   ClientsRoute,
   DriversRoute,
+  InformationRoute,
   LoginRoute,
+  LogsRoute,
   ProfileRoute,
   RegisterRoute,
   TasksRoute,
@@ -149,7 +177,9 @@ export const routeTree = rootRoute.addChildren({
         "/",
         "/clients",
         "/drivers",
+        "/information",
         "/login",
+        "/logs",
         "/profile",
         "/register",
         "/tasks",
@@ -165,8 +195,14 @@ export const routeTree = rootRoute.addChildren({
     "/drivers": {
       "filePath": "drivers.tsx"
     },
+    "/information": {
+      "filePath": "information.tsx"
+    },
     "/login": {
       "filePath": "login.tsx"
+    },
+    "/logs": {
+      "filePath": "logs.tsx"
     },
     "/profile": {
       "filePath": "profile.tsx"
