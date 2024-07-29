@@ -36,14 +36,18 @@ export default function TripLogs() {
           {trips.data.map((trip, index) => (
             <CardTr
               key={index}
-              className="grid-cols-4 items-center"
+              className={`grid-cols-4 items-center ${currentlyViewedTask?.id == trip.id && "bg-button"}`}
               onClick={() => setCurrentlyViewedTask(trip)}
             >
-              <td>{trip.id}</td>
               <td>
-                {trip.startDate?.toString()}
+                Transportation of {trip.payload} {trip.product}
+              </td>
+              <td>
+                {new Date(trip.startDate).toLocaleDateString()} to
                 <br />
-                {trip.dateFinished?.toString()}
+                {trip.dateFinished
+                  ? new Date(trip.dateFinished).toLocaleDateString()
+                  : "Present"}
               </td>
               <td>
                 {trip.startDestination}
