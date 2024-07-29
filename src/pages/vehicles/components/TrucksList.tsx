@@ -139,7 +139,7 @@ export default function TrucksList({ callback }: TrucksListProps) {
           </CardButton>
         ))}
       </GapList>
-      <Table data={data} />
+      {data !== undefined && <Table data={data} />}
     </>
   );
 }
