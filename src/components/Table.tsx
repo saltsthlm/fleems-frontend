@@ -61,7 +61,6 @@ export default function Table({ data }: TableProps) {
   return (
     <div>
       <div className="table_container">
-        <h2 className="text-xl font-bold my-4">Vehicles</h2>
         <div className="flex justify-center">
           <table className="my-auto border">
             <thead>

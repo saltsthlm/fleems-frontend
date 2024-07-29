@@ -122,9 +122,7 @@ export default function TrucksList({ callback }: TrucksListProps) {
     return (
       <>
         <PageWithNavigation>
-          <PageHeading>
-            <button onClick={callback}>&lt; Truck information</button>
-          </PageHeading>
+          <PageHeading>Vehicles</PageHeading>
           <GapList>
             {isLoading && <Throbber />}
             {error && <h1>An error ocurred: {error.message}</h1>}
@@ -137,9 +135,7 @@ export default function TrucksList({ callback }: TrucksListProps) {
   return (
     <>
       <PageWithNavigation>
-        <PageHeading>
-          <button onClick={callback}>&lt; Truck information</button>
-        </PageHeading>
+        <PageHeading>Vehicles</PageHeading>
         {isMobile && (
           <>
             <SecondaryNavigation
