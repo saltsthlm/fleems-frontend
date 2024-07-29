@@ -27,7 +27,7 @@ export default function LoginFormGoogle() {
       ) : (
         <>
           <FormButton
-            className="w-3/5"
+            className="w-1/3 mx-auto flex"
             onClick={() => {
               setLoading(true);
               login();
