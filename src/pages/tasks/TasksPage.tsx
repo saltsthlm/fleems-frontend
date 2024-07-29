@@ -14,8 +14,6 @@
 //   const [searchFilter, setSearchFilter] = useState<string>();
 //   const [activeTab, setActiveTab] = useState<string>('information');
 
-
-
 //   if (isLoading || error) {
 //     return (
 //       <PageWithNavigation>
@@ -44,8 +42,6 @@
 //   );
 // }
 
-
-
 import { useState } from "react";
 import GapList from "../../components/GapList";
 import PageHeading from "../../components/PageHeading";
@@ -58,16 +54,12 @@ import Card from "../../components/Card";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
 import SearchBar from "../../components/SearchBar";
 
-
-type TaskPageProps = {
-  callback: () => void;
-};
-export default function TasksPage({ callback }: TaskPageProps) {
+export default function TasksPage() {
   const [searchFilter, setSearchFilter] = useState<string>();
   const [isViewingTask, setIsViewingTask] = useState<boolean>(false);
   const [selectedTask, setSelectedTask] = useState<Task>();
-  const [activeTab, setActiveTab] = useState<string>('information');
-  
+  const [activeTab, setActiveTab] = useState<string>("information");
+
   const { data, isLoading, error } = useApi("tasks");
 
   const viewTask = (task: Task) => {
@@ -79,7 +71,6 @@ export default function TasksPage({ callback }: TaskPageProps) {
     setIsViewingTask(false);
   };
 
- 
   if (isViewingTask && !!selectedTask) {
     return (
       <>
@@ -91,7 +82,7 @@ export default function TasksPage({ callback }: TaskPageProps) {
         <Card className="text-center">
           <h1 className="text-xl">ABC company</h1>
           <h2>Route : {selectedTask.startDestination} - {selectedTask.endDestination}</h2>
-          <h2>Task : Transportation of {selectedTask.payload} {selectedTask.product}</h2>
+          <h2>Task : {selectedTask.payload}</h2>
           <h2>Status : On going</h2>
           <h2>No. of legs : {selectedTask.legs?.length}</h2>
           <h2>Start date : {selectedTask.startDate?.toString()}</h2>
@@ -106,15 +97,12 @@ export default function TasksPage({ callback }: TaskPageProps) {
     return (
       <>
         <PageWithNavigation>
-        <PageHeading>
-          <button onClick={callback}>&lt; Task information</button>
-        </PageHeading>
-        <GapList>
-          {isLoading && <Throbber />}
-          {error && <h1>An error ocurred: {error.message}</h1>}
-        </GapList>
+          <PageHeading>Tasks</PageHeading>
+          <GapList>
+            {isLoading && <Throbber />}
+            {error && <h1>An error ocurred: {error.message}</h1>}
+          </GapList>
         </PageWithNavigation>
-        
       </>
     );
   }
@@ -140,7 +128,7 @@ export default function TasksPage({ callback }: TaskPageProps) {
             <div className="flex justify-between w-full text-left">
               <div> 
           <h2>Route : {task?.startDestination} - {task?.endDestination}</h2>
-          <h2>Task : Transportation of {task?.payload} {task?.product}</h2>
+          <h2>Task : {task?.payload}</h2>
           <h2>Status : On going</h2>
           <h2>No. of legs : {task?.legs.length}</h2>
           <h2>Start date : {task?.startDate?.toString()}</h2>
@@ -154,4 +142,3 @@ export default function TasksPage({ callback }: TaskPageProps) {
     </>
   );
 }
-

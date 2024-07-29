@@ -10,10 +10,7 @@ import Card from "../../components/Card";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
 import SearchBar from "../../components/SearchBar";
 
-type ClientsListProps = {
-  callback: () => void;
-};
-export default function ClientsList({ callback }: ClientsListProps) {
+export default function ClientsList() {
   const [searchFilter, setSearchFilter] = useState<string>();
   const [isViewingClient, setIsViewingClient] = useState<boolean>(false);
   const [selectedClient, setSelectedClient] = useState<Client>();
@@ -36,7 +33,6 @@ export default function ClientsList({ callback }: ClientsListProps) {
         <PageHeading>
           <button onClick={viewList}>&lt; Client information</button>
         </PageHeading>
-
         <Card className="text-center">
           <h1 className="text-xl">{selectedClient.name}</h1>
           <h2>Num of tasks : {selectedClient.tasks.length}</h2>
@@ -54,9 +50,7 @@ export default function ClientsList({ callback }: ClientsListProps) {
   if (isLoading || error) {
     return (
       <PageWithNavigation>
-        <PageHeading>
-          <button onClick={callback}>&lt; Client information</button>
-        </PageHeading>
+        <PageHeading>Clients</PageHeading>
         <GapList>
           {isLoading && <Throbber />}
           {error && <h1>An error ocurred: {error.message}</h1>}
