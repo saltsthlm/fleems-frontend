@@ -4,11 +4,11 @@ import PageHeading from "../../components/PageHeading";
 import PageWithNavigation from "../../components/PageWithNavigation";
 import useApi from "../../hooks/useApi";
 import { Client } from "../../types/ApiResponses";
-import { Icon } from "@iconify/react";
 import Throbber from "../../components/Throbber";
 import CardButtonWithNoStyles from "../../components/CardButtonWithNoStyles";
 import Card from "../../components/Card";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
+import SearchBar from "../../components/SearchBar";
 
 
 type ClientsListProps = {
@@ -74,23 +74,11 @@ export default function ClientsList({ callback }: ClientsListProps) {
      <PageWithNavigation>
       <PageHeading>Clients</PageHeading>
       <SecondaryNavigation onTabChange={setActiveTab} activeTab={activeTab} />
-      <div className="pb-3 flex justify-end">
-        <div className="bg-button rounded-full py-1 px-3 flex">
-          <span className="pr-2">
-            <Icon
-              icon="material-symbols-light:search"
-              className="h-full"
-            ></Icon>
-          </span>
-          <input
-            type="text"
-            value={searchFilter}
-            onChange={(e) => setSearchFilter(e.target.value)}
-            placeholder="Search"
-            className="bg-transparent"
-          />
-        </div>
-      </div>
+       <SearchBar
+          value={searchFilter}
+          onChange={(e) => setSearchFilter(e.target.value)}
+          placeholder="Search clients"
+        />
       {isLoading && <Throbber />}
       <GapList>
         {data?.map((client: Client) => (
