@@ -8,6 +8,7 @@ import { Icon } from "@iconify/react";
 import Throbber from "../../components/Throbber";
 import CardButtonWithNoStyles from "../../components/CardButtonWithNoStyles";
 import Card from "../../components/Card";
+import SecondaryNavigation from "../../components/SecondaryNavigation";
 
 
 type ClientsListProps = {
@@ -17,16 +18,9 @@ export default function ClientsList({ callback }: ClientsListProps) {
   const [searchFilter, setSearchFilter] = useState<string>();
   const [isViewingClient, setIsViewingClient] = useState<boolean>(false);
   const [selectedClient, setSelectedClient] = useState<Client>();
-  // const [isShowingPopup, setIsShowingPopup] = useState<boolean>(false);
-  // const [isEditingTruck, setIsEditingTruck] = useState<boolean>(false);
-
+  const [activeTab, setActiveTab] = useState<string>('information');
+  
   const { data, isLoading, error } = useApi("clients");
-
-  // const editTruck = (vehicle: Vehicle) => {
-  //   setIsEditingTruck(true);
-  //   setIsShowingPopup(false);
-  //   console.log(vehicle);
-  // };
 
   const viewClient = (client: Client) => {
     setSelectedClient(client);
@@ -79,6 +73,7 @@ export default function ClientsList({ callback }: ClientsListProps) {
     <>
      <PageWithNavigation>
       <PageHeading>Clients</PageHeading>
+      <SecondaryNavigation onTabChange={setActiveTab} activeTab={activeTab} />
       <div className="pb-3 flex justify-end">
         <div className="bg-button rounded-full py-1 px-3 flex">
           <span className="pr-2">
