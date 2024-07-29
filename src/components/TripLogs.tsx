@@ -23,7 +23,7 @@ export default function TripLogs() {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-5 h-full">
+    <div className="grid grid-cols-2 gap-5">
       <table>
         <thead>
           <tr className="grid w-full grid-cols-4">
@@ -33,7 +33,7 @@ export default function TripLogs() {
             <th>Trip details</th>
           </tr>
         </thead>
-        <tbody className="grid gap-2 h-96 overflow-y-scroll">
+        <tbody className="grid gap-2 h-[75svh] overflow-y-scroll">
           {trips.data.map((trip, index) => (
             <CardTr
               key={index}
