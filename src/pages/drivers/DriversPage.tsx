@@ -66,6 +66,7 @@ import Popup from "../../components/Popup";
 import Throbber from "../../components/Throbber";
 import EditDriverForm from "./components/EditDriverForm";
 import PageWithNavigation from "../../components/PageWithNavigation";
+import SecondaryNavigation from "../../components/SecondaryNavigation";
 
 type DriversListProps = {
   callback: () => void;
@@ -75,6 +76,7 @@ export default function DriversList({ callback }: DriversListProps) {
   const [selectedDriver, setSelectedDriver] = useState<Driver>();
   const [isShowingPopup, setIsShowingPopup] = useState<boolean>(false);
   const [isEditingDriver, setIsEditingDriver] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<string>('information');
 
   const { data, isLoading, error } = useApi("drivers");
 
@@ -187,6 +189,8 @@ export default function DriversList({ callback }: DriversListProps) {
       <PageHeading>
         <button onClick={callback}>&lt; Driver information</button>
       </PageHeading>
+      <SecondaryNavigation onTabChange={setActiveTab} activeTab={activeTab} />
+
       <GapList>
         {isLoading ? (
           <Throbber />
