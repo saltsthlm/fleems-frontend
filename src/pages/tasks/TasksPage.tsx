@@ -80,7 +80,7 @@ export default function TasksPage() {
         </PageHeading>
         
         <Card className="text-center">
-          <h1 className="text-xl">ABC company</h1>
+          <h1 className="text-xl">{selectedTask.client.name}</h1>
           <h2>Route : {selectedTask.startDestination} - {selectedTask.endDestination}</h2>
           <h2>Task : {selectedTask.payload}</h2>
           <h2>Status : On going</h2>
@@ -124,7 +124,7 @@ export default function TasksPage() {
           key={task.id}
           onClick={() => viewTask(task)}
            >
-            <h1 className="text-xl">ABC Company</h1>
+            <h1 className="text-xl">{task?.client.name}</h1>
             <div className="flex justify-between w-full text-left">
               <div> 
           <h2>Route : {task?.startDestination} - {task?.endDestination}</h2>
