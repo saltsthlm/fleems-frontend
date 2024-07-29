@@ -16,6 +16,9 @@ export default {
       gridTemplateColumns: {
         center3: "1fr auto 1fr",
       },
+      dropShadow: {
+        strong: "0 4px 4px #0006",
+      },
     },
   },
   plugins: [daisyui],
