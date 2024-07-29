@@ -4,6 +4,7 @@ import Card from "./Card";
 import CardTr from "./CardTr";
 import Throbber from "./Throbber";
 import { Task } from "../types/ApiResponses";
+import CardHarsh from "./CardHarsh";
 
 export default function TripLogs() {
   const [currentlyViewedTask, setCurrentlyViewedTask] = useState<Task>();
@@ -22,7 +23,7 @@ export default function TripLogs() {
   }
 
   return (
-    <div className="grid grid-cols-2">
+    <div className="grid grid-cols-2 gap-5 h-full">
       <table>
         <thead>
           <tr className="grid w-full grid-cols-4">
@@ -32,7 +33,7 @@ export default function TripLogs() {
             <th>Trip details</th>
           </tr>
         </thead>
-        <tbody className="grid gap-2">
+        <tbody className="grid gap-2 h-96 overflow-y-scroll">
           {trips.data.map((trip, index) => (
             <CardTr
               key={index}
@@ -55,13 +56,13 @@ export default function TripLogs() {
           ))}
         </tbody>
       </table>
-      <div>
+      <div className="grid gap-5">
         {currentlyViewedTask ? (
           <>
-            <Card>
+            <CardHarsh>
               <h1>Map here</h1>
-            </Card>
-            <Card>
+            </CardHarsh>
+            <CardHarsh>
               <p>Driver: dawdawdawdw</p>
               <p>Vehicle: dawdadaw</p>
               <p>
@@ -74,7 +75,7 @@ export default function TripLogs() {
                 {currentlyViewedTask.endDestination}
               </p>
               <p>Total distance: {currentlyViewedTask.expectedDistance} km</p>
-            </Card>
+            </CardHarsh>
           </>
         ) : (
           <h1>Select a trip to display details</h1>
