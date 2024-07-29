@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import useScreenSize from "./useScreenSize";
 
 export default function useScreenType() {
-  const [isMobile, setIsMobile] = useState<boolean>(false);
-  const [isDesktop, setIsDesktop] = useState<boolean>(false);
-
   const screenSize = useScreenSize();
+  const [isMobile, setIsMobile] = useState<boolean>(screenSize.width < 768);
+  const [isDesktop, setIsDesktop] = useState<boolean>(false);
 
   useEffect(() => {
     if (screenSize.width >= 768) {
