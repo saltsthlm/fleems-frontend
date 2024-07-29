@@ -23,10 +23,6 @@ export default function ClientsList() {
     setIsViewingClient(true);
   };
 
-  const viewList = () => {
-    setIsViewingClient(false);
-  };
-
   if (isViewingClient && !!selectedClient) {
     return (
       <PageWithNavigation>
