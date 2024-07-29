@@ -3,10 +3,13 @@ import useApi from "../hooks/useApi";
 import CardTr from "./CardTr";
 import Throbber from "./Throbber";
 import { Task } from "../types/ApiResponses";
-import CardHarsh from "./CardHarsh";
+import useScreenType from "../hooks/useScreenType";
+import TaskView from "./TaskView";
+import FormButton from "./FormButton";
 
 export default function TripLogs() {
   const [currentlyViewedTask, setCurrentlyViewedTask] = useState<Task>();
+  const { isMobile } = useScreenType();
   const trips = useApi("tasks");
 
   if (trips.isLoading) {
@@ -21,9 +24,20 @@ export default function TripLogs() {
     return <h1>There's no data to display here.</h1>;
   }
 
+  if (isMobile && currentlyViewedTask != null) {
+    return (
+      <>
+        <FormButton onClick={() => setCurrentlyViewedTask(undefined)}>
+          &lt; Back to list
+        </FormButton>
+        <TaskView task={currentlyViewedTask} />
+      </>
+    );
+  }
+
   return (
-    <div className="grid grid-cols-2 gap-5">
-      <table>
+    <div className={`${!isMobile && "grid grid-cols-2 gap-5"}`}>
+      <table className={isMobile ? "text-xs" : ""}>
         <thead>
           <tr className="grid w-full grid-cols-4">
             <th>Task</th>
@@ -62,31 +76,7 @@ export default function TripLogs() {
           ))}
         </tbody>
       </table>
-      <div className="flex flex-col gap-5">
-        {currentlyViewedTask ? (
-          <>
-            <CardHarsh className="h-full">
-              <h1>Map here</h1>
-            </CardHarsh>
-            <CardHarsh className="text-2xl h-min self-end">
-              <p>Driver: dawdawdawdw</p>
-              <p>Vehicle: dawdadaw</p>
-              <p>
-                Task: Transportation of {currentlyViewedTask.payload}{" "}
-                {currentlyViewedTask.product}
-              </p>
-              <p>Duration: {currentlyViewedTask.expectedTime / 24} Days</p>
-              <p>
-                Route: {currentlyViewedTask.startDestination} -{" "}
-                {currentlyViewedTask.endDestination}
-              </p>
-              <p>Total distance: {currentlyViewedTask.expectedDistance} km</p>
-            </CardHarsh>
-          </>
-        ) : (
-          <h1>Select a trip to display details</h1>
-        )}
-      </div>
+      {!isMobile && <TaskView task={currentlyViewedTask} />}
     </div>
   );
 }
