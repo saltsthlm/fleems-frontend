@@ -1,5 +1,6 @@
 import { SyntheticEvent, useState } from "react";
 import FormWithButton from "../../../components/FormWithButton";
+import PageWithNavigation from "../../../components/PageWithNavigation";
 
 type TruckFormProps = {
   onSubmit: (e: SyntheticEvent) => unknown;
@@ -17,6 +18,7 @@ export default function TruckForm({
   const [length, setLength] = useState<number>();
 
   return (
+ 
     <FormWithButton buttonText={buttonText} onSubmit={callback}>
       <label htmlFor="model">Model</label>
       <input
@@ -61,5 +63,6 @@ export default function TruckForm({
         onChange={(e) => setLength(Number(e.target.value))}
       />
     </FormWithButton>
+   
   );
 }
