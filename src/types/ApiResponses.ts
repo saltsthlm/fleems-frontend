@@ -28,6 +28,7 @@ export type TaskInfoDto = {
   payload: number;
   quantity: number;
   legs: LegInfoDto[];
+  state: string;
 };
 
 export type Task = {
@@ -44,6 +45,7 @@ export type Task = {
   quantity: number;
   legs: LegInfoDto[];
   client: ClientResponseDto;
+  state: string;
 };
 
 export type ClientResponseDto = {
