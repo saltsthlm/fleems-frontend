@@ -23,14 +23,16 @@ export default function ClientsList() {
     setIsViewingClient(true);
   };
 
-  // const viewList = () => {
-  //   setIsViewingClient(false);
-  // };
+  const viewList = () => {
+    setIsViewingClient(false);
+  };
 
   if (isViewingClient && !!selectedClient) {
     return (
       <PageWithNavigation>
-        <PageHeading>Clients</PageHeading>
+        <PageHeading>
+          <button onClick={viewList}>&lt; Client information</button>
+        </PageHeading>
         <Card className="text-center">
           <h1 className="text-xl">{selectedClient.name}</h1>
           <h2>Num of tasks : {selectedClient.tasks.length}</h2>
