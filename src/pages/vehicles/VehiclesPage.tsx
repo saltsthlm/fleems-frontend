@@ -1,57 +1,3 @@
-// import { useState } from "react";
-// import CardButton from "../../components/CardButton";
-// import GapList from "../../components/GapList";
-// import PageHeading from "../../components/PageHeading";
-// import PageWithNavigation from "../../components/PageWithNavigation";
-// import TrucksList from "./components/TrucksList";
-// import CreateTruckForm from "./components/CreateTruckForm";
-
-// export default function VehiclesPage() {
-//   const [creatingTruck, setCreatingTruck] = useState<boolean>(false);
-//   const [showingTruck, setShowingTruck] = useState<boolean>(false);
-
-//   const resetPage = () => {
-//     setShowingTruck(false);
-//     setCreatingTruck(false);
-//   };
-
-//   const createTruck = () => {
-//     setShowingTruck(false);
-//     setCreatingTruck(true);
-//     console.log("Creating driver...");
-//   };
-
-//   const showTruck = () => {
-//     setCreatingTruck(false);
-//     setShowingTruck(true);
-//   };
-
-//   return (
-//     <PageWithNavigation>
-//       {!creatingTruck && !showingTruck && (
-//         <>
-//           <PageHeading>Vehicles</PageHeading>
-//           <GapList>
-//             <CardButton onClick={createTruck}>+ Add new truck</CardButton>
-//             <CardButton onClick={showTruck}>Fleet information</CardButton>
-//           </GapList>
-//         </>
-//       )}
-//       {creatingTruck && (
-//         <>
-//           <PageHeading>
-//             <button onClick={resetPage}>&lt; Add a new Truck</button>
-//           </PageHeading>
-//           <GapList>
-//             <CreateTruckForm />
-//           </GapList>
-//         </>
-//       )}
-//       {showingTruck && <TrucksList callback={resetPage} />}
-//     </PageWithNavigation>
-//   );
-// }
-
 import { useState } from "react";
 import useApi from "../../hooks/useApi";
 import GapList from "../../components/GapList";
@@ -66,6 +12,7 @@ import Throbber from "../../components/Throbber";
 import Table from "../../components/Table";
 import EditTruckForm from "./components/EditTruckForm";
 import PageWithNavigation from "../../components/PageWithNavigation";
+import SecondaryNavigation from "../../components/SecondaryNavigation";
 
 type TrucksListProps = {
   callback: () => void;
@@ -75,6 +22,7 @@ export default function TrucksList({ callback }: TrucksListProps) {
   const [selectedTruck, setSelectedTruck] = useState<Vehicle>();
   const [isShowingPopup, setIsShowingPopup] = useState<boolean>(false);
   const [isEditingTruck, setIsEditingTruck] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<string>('information');
 
   const { data, isLoading, error } = useApi("vehicles");
 
@@ -116,6 +64,7 @@ export default function TrucksList({ callback }: TrucksListProps) {
         <PageHeading>
           <button onClick={viewList}>&lt; Truck information</button>
         </PageHeading>
+
         {isShowingPopup && (
           <Popup>
             <Card className="bg-tertiary w-full p-12">
@@ -188,6 +137,8 @@ export default function TrucksList({ callback }: TrucksListProps) {
       <PageHeading>
         <button onClick={callback}>&lt; Truck information</button>
       </PageHeading>
+      <SecondaryNavigation onTabChange={setActiveTab} activeTab={activeTab} />
+
       <GapList>
         {data?.map((truck) => (
           <CardButton
