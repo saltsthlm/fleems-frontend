@@ -54,10 +54,7 @@ import Card from "../../components/Card";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
 import SearchBar from "../../components/SearchBar";
 
-type TaskPageProps = {
-  callback: () => void;
-};
-export default function TasksPage({ callback }: TaskPageProps) {
+export default function TasksPage() {
   const [searchFilter, setSearchFilter] = useState<string>();
   const [isViewingTask, setIsViewingTask] = useState<boolean>(false);
   const [selectedTask, setSelectedTask] = useState<Task>();
@@ -103,9 +100,7 @@ export default function TasksPage({ callback }: TaskPageProps) {
     return (
       <>
         <PageWithNavigation>
-          <PageHeading>
-            <button onClick={callback}>&lt; Task information</button>
-          </PageHeading>
+          <PageHeading>Tasks</PageHeading>
           <GapList>
             {isLoading && <Throbber />}
             {error && <h1>An error ocurred: {error.message}</h1>}
@@ -120,11 +115,7 @@ export default function TasksPage({ callback }: TaskPageProps) {
       <PageWithNavigation>
         <PageHeading>Tasks</PageHeading>
         <SecondaryNavigation onTabChange={setActiveTab} activeTab={activeTab} />
-        <SearchBar
-          value={searchFilter}
-          onChange={(e) => setSearchFilter(e.target.value)}
-          placeholder="Search tasks"
-        />
+        <SearchBar value={searchFilter} callback={setSearchFilter} />
         {isLoading && <Throbber />}
         <GapList>
           {data?.map((task: Task) => (
