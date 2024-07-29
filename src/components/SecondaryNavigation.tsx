@@ -4,7 +4,7 @@ export default function SecondaryNavigation({ onTabChange, activeTab }) {
   const activeLinkClassName = "underline text-font font-normal";
 
   return (
-    <div className="flex gap-4 p-4 text-lg">
+    <div className="flex gap-4 px-4 text-lg">
       <button
         className={activeTab === 'information' ? activeLinkClassName : ''}
         onClick={() => onTabChange('information')}
