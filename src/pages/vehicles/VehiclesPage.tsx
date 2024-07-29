@@ -14,6 +14,7 @@ import EditTruckForm from "./components/EditTruckForm";
 import PageWithNavigation from "../../components/PageWithNavigation";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
 import SearchBar from "../../components/SearchBar";
+import useScreenType from "../../hooks/useScreenType";
 
 type TrucksListProps = {
   callback: () => void;
@@ -25,6 +26,8 @@ export default function TrucksList({ callback }: TrucksListProps) {
   const [isEditingTruck, setIsEditingTruck] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string>("information");
   const [searchFilter, setSearchFilter] = useState<string>();
+
+  const { isMobile } = useScreenType();
 
   const { data, isLoading, error } = useApi("vehicles");
 
@@ -137,29 +140,36 @@ export default function TrucksList({ callback }: TrucksListProps) {
         <PageHeading>
           <button onClick={callback}>&lt; Truck information</button>
         </PageHeading>
-        <SecondaryNavigation onTabChange={setActiveTab} activeTab={activeTab} />
-        <SearchBar
-          value={searchFilter}
-          onChange={(e) => setSearchFilter(e.target.value)}
-          placeholder="Search trucks"
-        />
-        <GapList>
-          {data?.map((truck) => (
-            <CardButton
-              key={truck.id}
-              className="flex flex-row text-left"
-              isCentered={false}
-              onClick={() => viewTruck(truck)}
-            >
-              <div>
-                <h1 className="text-xl">{truck.licenseNumber}</h1>
-                <p>Model: {truck.model}</p>
-                <p>Payload: {truck.payload}</p>
-              </div>
-            </CardButton>
-          ))}
-        </GapList>
-        {data !== undefined && <Table data={data} />}
+        {isMobile && (
+          <>
+            <SecondaryNavigation
+              onTabChange={setActiveTab}
+              activeTab={activeTab}
+            />
+            <SearchBar
+              value={searchFilter}
+              onChange={(e) => setSearchFilter(e.target.value)}
+              placeholder="Search trucks"
+            />
+            <GapList>
+              {data?.map((truck) => (
+                <CardButton
+                  key={truck.id}
+                  className="flex flex-row text-left"
+                  isCentered={false}
+                  onClick={() => viewTruck(truck)}
+                >
+                  <div>
+                    <h1 className="text-xl">{truck.licenseNumber}</h1>
+                    <p>Model: {truck.model}</p>
+                    <p>Payload: {truck.payload}</p>
+                  </div>
+                </CardButton>
+              ))}
+            </GapList>
+          </>
+        )}
+        {!isMobile && data !== undefined && <Table data={data} />}
       </PageWithNavigation>
     </>
   );
