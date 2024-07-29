@@ -102,3 +102,18 @@ export type User = {
   hd: string;
   prompt: string;
 };
+
+export type Address = {
+  "ISO3166-2-lvl4": string;
+  city: string;
+  city_district: string;
+  country: string;
+  country_code: string;
+  county: string;
+  house_number: string;
+  municipality: string;
+  neighbourhood: string;
+  postcode: string;
+  road: string;
+  suburb: string;
+};
