@@ -46,6 +46,9 @@ export default function TripLogs() {
       return "Present";
     }
     const newDate = date instanceof Date ? date : new Date(date);
+    if (isMobile) {
+      return `${newDate.toLocaleDateString()}`;
+    }
     return `${newDate.toLocaleDateString()} ${zeroPad(newDate.getHours(), 2)}:${zeroPad(newDate.getMinutes(), 2)}`;
   };
 
@@ -84,7 +87,7 @@ export default function TripLogs() {
                     {formatDate(trip.dateFinished)}
                   </td>
                   <td className="flex">
-                    {!isMobile && <DestinationsMarker className="px-2" />}
+                    <DestinationsMarker className="px-2" />
                     <div className="h-full grid gap-1 text-left">
                       <p>{trip.startAddress.city}</p>
                       <p className="mt-auto">{trip.endAddress.city}</p>
