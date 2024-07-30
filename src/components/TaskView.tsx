@@ -1,17 +1,16 @@
 import { Task } from "../types/ApiResponses";
 import CardHarsh from "./CardHarsh";
+import RouteMap from "./RouteMap";
 
 type TaskViewProps = {
   task: Task | undefined;
 };
 export default function TaskView({ task }: TaskViewProps) {
   return (
-    <div className="flex flex-col gap-5">
+    <div className="grid grid-rows-[1fr_auto] gap-5">
       {task ? (
         <>
-          <CardHarsh className="h-full">
-            <h1>Map here</h1>
-          </CardHarsh>
+          <RouteMap legs={[]} className="w-50" />
           <CardHarsh className="text-2xl h-min self-end">
             <p>Driver: dawdawdawdw</p>
             <p>Vehicle: dawdadaw</p>
