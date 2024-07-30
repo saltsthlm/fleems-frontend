@@ -2,11 +2,14 @@ import PageHeading from "../../components/PageHeading";
 import PageWithNavigation from "../../components/PageWithNavigation";
 import TripLogs from "../../components/TripLogs";
 
-export default function LogPage() {
+type LogPageProps = {
+  parentRoute: string;
+};
+export default function LogPage({ parentRoute }: LogPageProps) {
   return (
     <PageWithNavigation>
       <PageHeading>Logs</PageHeading>
-      <TripLogs />
+      <TripLogs parentRoute={parentRoute} />
     </PageWithNavigation>
   );
 }

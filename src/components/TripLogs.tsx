@@ -8,8 +8,14 @@ import TaskView from "./TaskView";
 import FormButton from "./FormButton";
 import DestinationsMarker from "./DestinationsMarker";
 import SearchBar from "./SearchBar";
+import SecondaryNavigation from "./SecondaryNavigation";
+import { useNavigate } from "@tanstack/react-router";
 
-export default function TripLogs() {
+type TripLogsProps = {
+  parentRoute: string;
+};
+export default function TripLogs({ parentRoute }: TripLogsProps) {
+  const navigate = useNavigate({ from: parentRoute + "/logs" });
   const [currentlyViewedTask, setCurrentlyViewedTask] = useState<Task>();
   const [searchFilter, setSearchFilter] = useState<string>("");
   const { isMobile } = useScreenType();
@@ -53,53 +59,56 @@ export default function TripLogs() {
   };
 
   return (
-    <div className={`${!isMobile && "grid grid-cols-2 gap-5"}`}>
-      <div>
-        <SearchBar callback={setSearchFilter} />
-        <table className={isMobile ? "text-xs" : ""}>
-          <thead>
-            <tr className="grid w-full grid-cols-4 gap-3 px-3">
-              <th>Task</th>
-              <th>Duration</th>
-              <th>Location</th>
-              <th>Trip details</th>
-            </tr>
-          </thead>
-          <tbody className="grid gap-2 h-[70svh] overflow-y-scroll">
-            {trips.data
-              .filter((t) =>
-                t.product.toLowerCase().includes(searchFilter.toLowerCase())
-              )
-              .map((trip, index) => (
-                <CardTr
-                  key={index}
-                  className={`grid-cols-4 items-center hover:cursor-pointer ${currentlyViewedTask?.id == trip.id && "bg-button"} ${!isMobile && "p-3"}`}
-                  onClick={() => setCurrentlyViewedTask(trip)}
-                >
-                  <td>
-                    {isMobile
-                      ? trip.payload + " " + trip.product
-                      : `Transportation of ${trip.payload} ${trip.product}`}
-                  </td>
-                  <td>
-                    {formatDate(trip.startDate)}
-                    <br />
-                    {formatDate(trip.dateFinished)}
-                  </td>
-                  <td className="flex">
-                    <DestinationsMarker className="px-2" />
-                    <div className="h-full grid gap-1 text-left">
-                      <p>{trip.startAddress.city}</p>
-                      <p className="mt-auto">{trip.endAddress.city}</p>
-                    </div>
-                  </td>
-                  <td>{Math.floor(trip.expectedDistance)} km</td>
-                </CardTr>
-              ))}
-          </tbody>
-        </table>
+    <>
+      <SecondaryNavigation onTabChange={() => navigate({ to: parentRoute })} />
+      <div className={`${!isMobile && "grid grid-cols-2 gap-5"}`}>
+        <div>
+          <SearchBar callback={setSearchFilter} />
+          <table className={isMobile ? "text-xs" : ""}>
+            <thead>
+              <tr className="grid w-full grid-cols-4 gap-3 px-3">
+                <th>Task</th>
+                <th>Duration</th>
+                <th>Location</th>
+                <th>Trip details</th>
+              </tr>
+            </thead>
+            <tbody className="grid gap-2 h-[70svh] overflow-y-scroll">
+              {trips.data
+                .filter((t) =>
+                  t.product.toLowerCase().includes(searchFilter.toLowerCase())
+                )
+                .map((trip, index) => (
+                  <CardTr
+                    key={index}
+                    className={`grid-cols-4 items-center hover:cursor-pointer ${currentlyViewedTask?.id == trip.id && "bg-button"} ${!isMobile && "p-3"}`}
+                    onClick={() => setCurrentlyViewedTask(trip)}
+                  >
+                    <td>
+                      {isMobile
+                        ? trip.payload + " " + trip.product
+                        : `Transportation of ${trip.payload} ${trip.product}`}
+                    </td>
+                    <td>
+                      {formatDate(trip.startDate)}
+                      <br />
+                      {formatDate(trip.dateFinished)}
+                    </td>
+                    <td className="flex">
+                      <DestinationsMarker className="px-2" />
+                      <div className="h-full grid gap-1 text-left">
+                        <p>{trip.startAddress.city}</p>
+                        <p className="mt-auto">{trip.endAddress.city}</p>
+                      </div>
+                    </td>
+                    <td>{Math.floor(trip.expectedDistance)} km</td>
+                  </CardTr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+        {!isMobile && <TaskView task={currentlyViewedTask} />}
       </div>
-      {!isMobile && <TaskView task={currentlyViewedTask} />}
-    </div>
+    </>
   );
 }
