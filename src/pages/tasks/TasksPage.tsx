@@ -9,6 +9,7 @@ import CardButtonWithNoStyles from "../../components/CardButtonWithNoStyles";
 import Card from "../../components/Card";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
 import SearchBar from "../../components/SearchBar";
+import FormButton from "../../components/FormButton";
 
 
 const capitalizeFirstLetter = (str: string): string => {
@@ -79,6 +80,17 @@ export default function TasksPage() {
           <h2>Start date : {selectedTask.startDate?.toString() ?? 'N/A'}</h2>
           <h2>End date : {selectedTask.dateFinished?.toString() ?? 'N/A'}</h2>
         </Card>
+        
+        {selectedTask.state === 'Unassigned' && (
+  <div className="flex flex-col py-7 gap-4 items-center">
+    <FormButton
+      // onClick={() => editTruck(selectedTruck)}
+      className="w-3/5"
+    >
+      ASSIGN
+    </FormButton>
+  </div>
+)}
       </PageWithNavigation>
     );
   }
