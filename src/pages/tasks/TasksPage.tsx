@@ -32,6 +32,23 @@ const getStateColorClass = (state: string | undefined): string => {
   }
 };
 
+const formatDate = (dateInput: Date | string): string => {
+  let date: Date;
+
+  if (typeof dateInput === 'string') {
+    date = new Date(dateInput);
+  } else {
+    date = dateInput;
+  }
+
+  if (isNaN(date.getTime())) {
+    return 'N/A';
+  }
+
+  return date.toISOString().split('T')[0];
+};
+
+
 export default function TasksPage() {
   const [searchFilter, setSearchFilter] = useState<string>("");
   const [isViewingTask, setIsViewingTask] = useState<boolean>(false);
@@ -59,7 +76,7 @@ export default function TasksPage() {
 
   const viewList = () => {
     setIsViewingTask(false);
-    setIsShowingAssignForm(false); // Hide the form when going back to the list
+    setIsShowingAssignForm(false); 
   };
 
   const showAssignForm = () => {
@@ -78,37 +95,39 @@ export default function TasksPage() {
         {isShowingAssignForm ? (
           <TaskAssignForm
             onSubmit={(formData) => {
-              // Handle form submission here
               console.log(formData);
-              setIsShowingAssignForm(false); // Hide the form after submission
+              setIsShowingAssignForm(false); 
             }}
             buttonText="ASSIGN"
             initialTask={selectedTask}
-            drivers={["Driver 1", "Driver 2", "Driver 3"]} // Example driver list, replace with actual data
+            drivers={["Driver 1", "Driver 2", "Driver 3"]} 
           />
         ) : (
+          <>
           <Card className="text-center">
             <h1 className="text-xl">{selectedTask.client.name}</h1>
-            <h2>Route : {selectedTask.startDestination} - {selectedTask.endDestination}</h2>
+            <h2>Route : {selectedTask.startAddress.city} - {selectedTask.endAddress.city}</h2>
             <h2>Task : {selectedTask.payload}</h2>
             <h2>
               Status : <span className={taskStateClass}>{capitalizeFirstLetter(selectedTask.state ?? '')}</span>
             </h2>
             <h2>No. of legs : {selectedTask.legs?.length}</h2>
-            <h2>Start date : {selectedTask.startDate?.toString() ?? 'N/A'}</h2>
-            <h2>End date : {selectedTask.dateFinished?.toString() ?? 'N/A'}</h2>
+            <h2>Start date : {selectedTask.startDate ? formatDate(selectedTask?.startDate) : 'N/A'}</h2>
+            <h2>End date : {selectedTask.dateFinished ? formatDate(selectedTask.dateFinished) : 'N/A'}</h2>
           </Card>
+           <div className="flex flex-col py-7 gap-4 items-center">
+           {selectedTask.state === 'UNASSIGNED' && (
+             <FormButton
+               onClick={showAssignForm}
+               className="w-3/5"
+             >
+               ASSIGN
+             </FormButton>
+           )}
+         </div>
+         </>
         )}
-    <div className="flex flex-col py-7 gap-4 items-center">
-              {selectedTask.state === 'UNASSIGNED' && (
-                <FormButton
-                  onClick={showAssignForm}
-                  className="w-3/5"
-                >
-                  ASSIGN
-                </FormButton>
-              )}
-            </div>
+   
       </PageWithNavigation>
     );
   }
@@ -151,14 +170,14 @@ export default function TasksPage() {
                 <h1 className="text-xl">{task.client.name}</h1>
                 <div className="flex justify-between w-full text-left">
                   <div> 
-                    <h2>Route : {task.startDestination} - {task.endDestination}</h2>
+                    <h2>Route : {task.startAddress.city} - {task.endAddress.city}</h2>
                     <h2>Task : {task.payload}</h2>
                     <h2>
                       Status : <span className={taskStateClass}>{capitalizeFirstLetter(task.state ?? '')}</span>
                     </h2>
                     <h2>No. of legs : {task.legs.length}</h2>
-                    <h2>Start date : {task.startDate?.toString() ?? 'N/A'}</h2>
-                    <h2>End date : {task.dateFinished?.toString() ?? 'N/A'}</h2>
+                    <h2>Start date : {task.startDate ? formatDate(task.startDate) : 'N/A'}</h2>
+                    <h2>End date : {task.dateFinished ? formatDate(task.dateFinished) : 'N/A'}</h2>
                   </div>
                 </div>
               </CardButtonWithNoStyles>
