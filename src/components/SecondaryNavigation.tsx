@@ -1,13 +1,20 @@
 import { Link } from "@tanstack/react-router";
 
-export default function SecondaryNavigation({ onTabChange, activeTab }) {
-  const activeLinkClassName = "underline text-font font-normal";
+type SecondaryNavigationProps = {
+  onTabChange: (arg0: string) => unknown;
+  activeTab: string;
+};
+export default function SecondaryNavigation({
+  onTabChange,
+  activeTab,
+}: SecondaryNavigationProps) {
+  const activeLinkClassName = "underline text-font font-normal text-bold";
 
   return (
-    <div className="flex gap-4 px-4 text-lg">
+    <div className="flex gap-4 px-4 text-lg font-light">
       <button
-        className={activeTab === 'information' ? activeLinkClassName : ''}
-        onClick={() => onTabChange('information')}
+        className={activeTab === "information" ? activeLinkClassName : ""}
+        onClick={() => onTabChange("information")}
       >
         Info
       </button>
