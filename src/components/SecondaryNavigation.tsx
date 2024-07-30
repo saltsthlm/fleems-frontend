@@ -2,10 +2,12 @@ import { Link } from "@tanstack/react-router";
 
 type SecondaryNavigationProps = {
   onTabChange: (arg0: string) => unknown;
+  parentRoute: string;
   activeTab?: string;
 };
 export default function SecondaryNavigation({
   onTabChange,
+  parentRoute,
   activeTab,
 }: SecondaryNavigationProps) {
   const activeLinkClassName = "underline text-font font-normal text-bold";
@@ -18,7 +20,10 @@ export default function SecondaryNavigation({
       >
         Info
       </button>
-      <Link to="/logs" activeProps={{ className: activeLinkClassName }}>
+      <Link
+        to={"/logs" + parentRoute}
+        activeProps={{ className: activeLinkClassName }}
+      >
         Logs
       </Link>
       {/* <button
