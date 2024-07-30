@@ -30,7 +30,9 @@ export default function TaskView({ task }: TaskViewProps) {
           </CardHarsh>
         </>
       ) : (
-        <h1>Select a trip to display details</h1>
+        <h1 className="text-3xl text-center flex h-full items-center justify-center">
+          Select a trip to display details here
+        </h1>
       )}
     </div>
   );
