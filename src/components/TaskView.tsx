@@ -10,7 +10,7 @@ export default function TaskView({ task }: TaskViewProps) {
     <div className="grid grid-rows-[1fr_auto] gap-5">
       {task ? (
         <>
-          <RouteMap legs={[]} className="w-50" />
+          <RouteMap legs={task.legs} className="w-50" />
           <CardHarsh className="text-2xl h-min self-end">
             <p>Driver: dawdawdawdw</p>
             <p>Vehicle: dawdadaw</p>
