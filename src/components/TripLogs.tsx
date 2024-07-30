@@ -36,6 +36,17 @@ export default function TripLogs() {
     );
   }
 
+  const zeroPad = (num: number, places: number): string =>
+    String(num).padStart(places, "0");
+
+  const formatDate = (date: string | Date): string => {
+    if (!date) {
+      return "Present";
+    }
+    const newDate = date instanceof Date ? date : new Date(date);
+    return `${newDate.toLocaleDateString()} ${zeroPad(newDate.getHours(), 2)}:${zeroPad(newDate.getMinutes(), 2)}`;
+  };
+
   return (
     <div className={`${!isMobile && "grid grid-cols-2 gap-5"}`}>
       <table className={isMobile ? "text-xs" : ""}>
@@ -58,14 +69,9 @@ export default function TripLogs() {
                 Transportation of {trip.payload} {trip.product}
               </td>
               <td>
-                {new Date(trip.startDate).toLocaleDateString()}{" "}
-                {new Date(trip.startDate).toLocaleTimeString()} to
+                {formatDate(trip.startDate)}
                 <br />
-                {trip.dateFinished
-                  ? new Date(trip.startDate).toLocaleDateString() +
-                    " " +
-                    new Date(trip.startDate).toLocaleTimeString()
-                  : "Present"}
+                {formatDate(trip.dateFinished)}
               </td>
               <td className="flex">
                 <DestinationsMarker className="px-2" />
