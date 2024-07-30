@@ -17,7 +17,7 @@ export default function FormWithButton({
       className="flex flex-col gap-3 items-center [&>div>input]:rounded-xl [&>div>input]:p-2"
     >
       <Card>{children}</Card>
-      <div className="w-full flex flex-col items-center gap-3">
+      <div className="w-full flex flex-col items-center gap-3 max-w-48">
         <FormButton>{buttonText}</FormButton>
       </div>
     </form>

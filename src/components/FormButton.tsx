@@ -14,7 +14,7 @@ export default function FormButton({
   return (
     <button
       onClick={callback}
-      className={`btn bg-button border-0 px-8 ${className} ${!overrideColor && "text-font"}`}
+      className={`btn bg-button border-0 px-8 max-w-48  ${className} ${!overrideColor && "text-font"}`}
     >
       {children}
     </button>
