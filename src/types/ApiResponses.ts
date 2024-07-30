@@ -60,6 +60,13 @@ export type ClientResponseDto = {
   name: string;
   tasks: TaskInfoDto[];
 };
+export type ClientInfoDto = {
+  id: string;
+  contactPerson: string;
+  contactEmail: string;
+  contactPhoneNumber: string;
+  name: string;
+};
 
 export type LegInfoDto = {
   id: string;

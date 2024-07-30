@@ -10,9 +10,9 @@ import {
   PaginationState,
   SortingState,
 } from "@tanstack/react-table";
-import { Client, Task, Vehicle } from "../types/ApiResponses";
+import { ClientInfoDto, Task, Vehicle } from "../types/ApiResponses";
 
-type DataType = Vehicle | Client | Task;
+type DataType = Vehicle | ClientInfoDto | Task;
 
 interface TableProps {
   data: DataType[];

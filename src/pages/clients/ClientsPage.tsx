@@ -3,12 +3,14 @@ import GapList from "../../components/GapList";
 import PageHeading from "../../components/PageHeading";
 import PageWithNavigation from "../../components/PageWithNavigation";
 import useApi from "../../hooks/useApi";
-import { Client } from "../../types/ApiResponses";
+import { Client, ClientInfoDto } from "../../types/ApiResponses";
 import Throbber from "../../components/Throbber";
 import CardButtonWithNoStyles from "../../components/CardButtonWithNoStyles";
 import Card from "../../components/Card";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
 import SearchBar from "../../components/SearchBar";
+import useScreenType from "../../hooks/useScreenType";
+import Table from "../../components/Table";
 
 type ClientsListProps = {
   callback: () => void;
@@ -20,6 +22,8 @@ export default function ClientsList({ callback }: ClientsListProps) {
   const [activeTab, setActiveTab] = useState<string>("information");
 
   const { data, isLoading, error } = useApi("clients");
+
+  const { isMobile } = useScreenType();
 
   const filteredData = useMemo(() => {
     if (!searchFilter) return data;
@@ -79,50 +83,75 @@ export default function ClientsList({ callback }: ClientsListProps) {
       </PageWithNavigation>
     );
   }
+  if (isMobile) {
+    return (
+      <>
+        <PageWithNavigation>
+          <PageHeading>Clients</PageHeading>
+          <SecondaryNavigation
+            onTabChange={setActiveTab}
+            activeTab={activeTab}
+          />
+          <SearchBar value={searchFilter} callback={setSearchFilter} />
+          {isLoading && <Throbber />}
+          <GapList>
+            {filteredData?.map((client: Client) => (
+              <CardButtonWithNoStyles
+                key={client.id}
+                onClick={() => viewClient(client)}
+              >
+                <h1 className="text-xl">{client.name}</h1>
+                <div className="flex justify-between w-full text-left">
+                  <div>
+                    <h2>Num of tasks : {client.tasks.length}</h2>
+                    <h2>Completed : {client.tasks.length}</h2>
+                    <h2>Ongoing : {client.tasks.length}</h2>
+                  </div>
+                  <div>
+                    <h2>
+                      Contact :{" "}
+                      {client.contactPerson == null
+                        ? "Anders Petterson"
+                        : client.contactPerson}
+                    </h2>
+                    <h2>
+                      Email :{" "}
+                      {client.contactEmail == null
+                        ? "12/06/2024"
+                        : client.contactEmail}
+                    </h2>
+                    <h2>
+                      Phone :{" "}
+                      {client.contactPhoneNumber == null
+                        ? "0763262839"
+                        : client.contactPhoneNumber}
+                    </h2>
+                  </div>
+                </div>
+              </CardButtonWithNoStyles>
+            ))}
+          </GapList>
+        </PageWithNavigation>
+      </>
+    );
+  }
 
-  return (
-    <PageWithNavigation>
-      <PageHeading>Clients</PageHeading>
-      <SecondaryNavigation onTabChange={setActiveTab} activeTab={activeTab} />
-      <SearchBar value={searchFilter} callback={setSearchFilter} />
-      {isLoading && <Throbber />}
-      <GapList>
-        {filteredData?.map((client: Client) => (
-          <CardButtonWithNoStyles
-            key={client.id}
-            onClick={() => viewClient(client)}
-          >
-            <h1 className="text-xl">{client.name}</h1>
-            <div className="flex justify-between w-full text-left">
-              <div>
-                <h2>Num of tasks : {client.tasks.length}</h2>
-                <h2>Completed : {client.tasks.length}</h2>
-                <h2>Ongoing : {client.tasks.length}</h2>
-              </div>
-              <div>
-                <h2>
-                  Contact :{" "}
-                  {client.contactPerson == null
-                    ? "Anders Petterson"
-                    : client.contactPerson}
-                </h2>
-                <h2>
-                  Email :{" "}
-                  {client.contactEmail == null
-                    ? "12/06/2024"
-                    : client.contactEmail}
-                </h2>
-                <h2>
-                  Phone :{" "}
-                  {client.contactPhoneNumber == null
-                    ? "0763262839"
-                    : client.contactPhoneNumber}
-                </h2>
-              </div>
-            </div>
-          </CardButtonWithNoStyles>
-        ))}
-      </GapList>
-    </PageWithNavigation>
-  );
+  if (!isMobile && data !== undefined) {
+    const dataInfo = data.map((e) => {
+      return {
+        id: e.id,
+        contactPerson: e.contactPerson,
+        contactEmail: e.contactEmail,
+        contactPhoneNumber: e.contactPhoneNumber,
+        name: e.name,
+      };
+    }) as ClientInfoDto[];
+
+    return (
+      <PageWithNavigation>
+        <PageHeading>Clients</PageHeading>
+        <Table data={dataInfo} />
+      </PageWithNavigation>
+    );
+  }
 }
