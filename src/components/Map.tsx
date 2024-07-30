@@ -3,15 +3,21 @@ import CustomMarker from "./CustomMarker";
 import useApi from "../hooks/useApi";
 import Throbber from "./Throbber";
 import { AssignmentInfoDto } from "../types/ApiResponses";
+import { PropsWithClassName } from "../types/ComponentTypes";
 
-export default function Map() {
+export default function Map({ className }: PropsWithClassName) {
   const { data, isLoading } = useApi("assignments");
   return (
     <>
       {isLoading ? (
         <Throbber />
       ) : (
-        <MapContainer center={[61.26, 18.193]} zoom={5} scrollWheelZoom={false}>
+        <MapContainer
+          className={`h-full min-h-96 mt-4 ${className && className}`}
+          center={[61.26, 18.193]}
+          zoom={5}
+          scrollWheelZoom={false}
+        >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
