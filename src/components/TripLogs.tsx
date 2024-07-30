@@ -51,54 +51,52 @@ export default function TripLogs() {
 
   return (
     <div className={`${!isMobile && "grid grid-cols-2 gap-5"}`}>
-      <table className={isMobile ? "text-xs" : ""}>
-        <thead>
-          <tr className="grid w-full grid-cols-4 gap-3 px-3">
-            <th>Task</th>
-            <th>Duration</th>
-            <th>Location</th>
-            <th>Trip details</th>
-          </tr>
-        </thead>
-        <tbody className="grid gap-2 h-[75svh] overflow-y-scroll">
-          {trips.data
-            .filter((t) =>
-              t.product.toLowerCase().includes(searchFilter.toLowerCase())
-            )
-            .map((trip, index) => (
-              <CardTr
-                key={index}
-                className={`grid-cols-4 items-center hover:cursor-pointer ${currentlyViewedTask?.id == trip.id && "bg-button"} ${!isMobile && "p-3"}`}
-                onClick={() => setCurrentlyViewedTask(trip)}
-              >
-                <td>
-                  {isMobile
-                    ? trip.payload + " " + trip.product
-                    : `Transportation of ${trip.payload} ${trip.product}`}
-                </td>
-                <td>
-                  {formatDate(trip.startDate)}
-                  <br />
-                  {formatDate(trip.dateFinished)}
-                </td>
-                <td className="flex">
-                  {!isMobile && <DestinationsMarker className="px-2" />}
-                  <div className="h-full grid gap-1 text-left">
-                    <p>{trip.startAddress.city}</p>
-                    <p className="mt-auto">{trip.endAddress.city}</p>
-                  </div>
-                </td>
-                <td>{Math.floor(trip.expectedDistance)} km</td>
-              </CardTr>
-            ))}
-        </tbody>
-      </table>
-      {!isMobile && (
-        <div className="grid grid-rows-[auto_1fr_auto]">
-          <SearchBar callback={setSearchFilter} />
-          <TaskView task={currentlyViewedTask} />
-        </div>
-      )}
+      <div>
+        <SearchBar callback={setSearchFilter} />
+        <table className={isMobile ? "text-xs" : ""}>
+          <thead>
+            <tr className="grid w-full grid-cols-4 gap-3 px-3">
+              <th>Task</th>
+              <th>Duration</th>
+              <th>Location</th>
+              <th>Trip details</th>
+            </tr>
+          </thead>
+          <tbody className="grid gap-2 h-[75svh] overflow-y-scroll">
+            {trips.data
+              .filter((t) =>
+                t.product.toLowerCase().includes(searchFilter.toLowerCase())
+              )
+              .map((trip, index) => (
+                <CardTr
+                  key={index}
+                  className={`grid-cols-4 items-center hover:cursor-pointer ${currentlyViewedTask?.id == trip.id && "bg-button"} ${!isMobile && "p-3"}`}
+                  onClick={() => setCurrentlyViewedTask(trip)}
+                >
+                  <td>
+                    {isMobile
+                      ? trip.payload + " " + trip.product
+                      : `Transportation of ${trip.payload} ${trip.product}`}
+                  </td>
+                  <td>
+                    {formatDate(trip.startDate)}
+                    <br />
+                    {formatDate(trip.dateFinished)}
+                  </td>
+                  <td className="flex">
+                    {!isMobile && <DestinationsMarker className="px-2" />}
+                    <div className="h-full grid gap-1 text-left">
+                      <p>{trip.startAddress.city}</p>
+                      <p className="mt-auto">{trip.endAddress.city}</p>
+                    </div>
+                  </td>
+                  <td>{Math.floor(trip.expectedDistance)} km</td>
+                </CardTr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+      {!isMobile && <TaskView task={currentlyViewedTask} />}
     </div>
   );
 }
