@@ -62,7 +62,7 @@ export default function TripLogs() {
           {trips.data.map((trip, index) => (
             <CardTr
               key={index}
-              className={`grid-cols-4 items-center ${currentlyViewedTask?.id == trip.id && "bg-button"} ${!isMobile && "p-3"}`}
+              className={`grid-cols-4 items-center hover:cursor-pointer ${currentlyViewedTask?.id == trip.id && "bg-button"} ${!isMobile && "p-3"}`}
               onClick={() => setCurrentlyViewedTask(trip)}
             >
               <td>
