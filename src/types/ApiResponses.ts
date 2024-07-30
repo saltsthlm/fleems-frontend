@@ -50,6 +50,7 @@ export type Task = {
   client: ClientResponseDto;
   startAddress: Address;
   endAddress: Address;
+  state: string;
 };
 
 export type ClientResponseDto = {
