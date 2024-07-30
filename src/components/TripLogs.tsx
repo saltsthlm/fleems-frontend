@@ -53,7 +53,7 @@ export default function TripLogs() {
     <div className={`${!isMobile && "grid grid-cols-2 gap-5"}`}>
       <table className={isMobile ? "text-xs" : ""}>
         <thead>
-          <tr className="grid w-full grid-cols-4">
+          <tr className="grid w-full grid-cols-4 gap-3 px-3">
             <th>Task</th>
             <th>Duration</th>
             <th>Location</th>
@@ -88,7 +88,7 @@ export default function TripLogs() {
                     <p className="mt-auto">{trip.endDestination}</p>
                   </div>
                 </td>
-                <td>{trip.expectedDistance} km</td>
+                <td>{Math.floor(trip.expectedDistance)} km</td>
               </CardTr>
             ))}
         </tbody>
