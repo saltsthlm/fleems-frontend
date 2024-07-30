@@ -128,7 +128,7 @@ export default function DriversList() {
         parentRoute="/drivers"
       />
       <SearchBar value={searchFilter} callback={setSearchFilter} />
-      <GapList className="grid-cols-3">
+      <GapList className="grid-cols-4">
         {isLoading && <Throbber />}
         {error && <h1>An error occurred: {error.message}</h1>}
         {!isLoading &&
@@ -136,7 +136,7 @@ export default function DriversList() {
           filteredData?.map((driver) => (
             <CardButton
               key={driver.id}
-              className={`${isMobile && "flex flex-row text-left"}`}
+              className={`${isMobile ? "flex flex-row text-left" : "flex flex-col items-center"}`}
               isCentered={false}
               onClick={() => viewDriver(driver)}
             >
