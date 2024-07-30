@@ -12,8 +12,6 @@ import EditDriverForm from "./components/EditDriverForm";
 import PageWithNavigation from "../../components/PageWithNavigation";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
 import SearchBar from "../../components/SearchBar";
-import useScreenType from "../../hooks/useScreenType";
-import DriverCardDesktop from "./components/DriverCardDesktop";
 
 export default function DriversList() {
   const [isViewingDriver, setIsViewingDriver] = useState<boolean>(false);
@@ -24,7 +22,6 @@ export default function DriversList() {
   const [searchFilter, setSearchFilter] = useState<string>("");
 
   const { data, isLoading, error } = useApi("drivers");
-  const { isMobile } = useScreenType();
 
   const filteredData = useMemo(() => {
     if (!searchFilter) return data;
