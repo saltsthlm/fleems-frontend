@@ -3,7 +3,10 @@ import Route from "./Route";
 import { LegInfoDto } from "../types/ApiResponses";
 import CustomMarkerRoute from "./CustomMarkerRoute.tsx";
 
-export default function RouteMap(legs: LegInfoDto[]) {
+type RouteMapProps = {
+  legs: LegInfoDto[];
+};
+export default function RouteMap({ legs }: RouteMapProps) {
   return (
     <MapContainer center={[61.26, 18.193]} zoom={5} scrollWheelZoom={true}>
       <TileLayer
