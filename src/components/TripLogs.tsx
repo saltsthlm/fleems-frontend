@@ -62,7 +62,7 @@ export default function TripLogs() {
               <th>Trip details</th>
             </tr>
           </thead>
-          <tbody className="grid gap-2 h-[75svh] overflow-y-scroll">
+          <tbody className="grid gap-2 h-[70svh] overflow-y-scroll">
             {trips.data
               .filter((t) =>
                 t.product.toLowerCase().includes(searchFilter.toLowerCase())
