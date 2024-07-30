@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 
 type SecondaryNavigationProps = {
   onTabChange: (arg0: string) => unknown;
-  activeTab: string;
+  activeTab?: string;
 };
 export default function SecondaryNavigation({
   onTabChange,
