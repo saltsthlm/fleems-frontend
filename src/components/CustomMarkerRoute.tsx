@@ -6,7 +6,7 @@ import { Marker } from "react-leaflet";
 
 interface CustomMarkerProps {
   position: L.LatLngExpression;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export default function CustomMarkerRoute({ position }: CustomMarkerProps) {
