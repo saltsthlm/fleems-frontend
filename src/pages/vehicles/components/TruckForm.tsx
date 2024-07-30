@@ -1,6 +1,5 @@
 import { SyntheticEvent, useState } from "react";
 import FormWithButton from "../../../components/FormWithButton";
-import PageWithNavigation from "../../../components/PageWithNavigation";
 
 type TruckFormProps = {
   onSubmit: (e: SyntheticEvent) => unknown;
