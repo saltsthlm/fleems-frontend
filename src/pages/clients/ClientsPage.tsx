@@ -23,11 +23,16 @@ export default function ClientsList({ callback }: ClientsListProps) {
 
   const filteredData = useMemo(() => {
     if (!searchFilter) return data;
-    return data?.filter(client =>
-      client.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      client.contactPerson?.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      client.contactEmail?.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      client.contactPhoneNumber?.includes(searchFilter)
+    return data?.filter(
+      (client) =>
+        client.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        client.contactPerson
+          ?.toLowerCase()
+          .includes(searchFilter.toLowerCase()) ||
+        client.contactEmail
+          ?.toLowerCase()
+          .includes(searchFilter.toLowerCase()) ||
+        client.contactPhoneNumber?.includes(searchFilter)
     );
   }, [data, searchFilter]);
 
@@ -65,7 +70,7 @@ export default function ClientsList({ callback }: ClientsListProps) {
     return (
       <PageWithNavigation>
         <PageHeading>
-          <button onClick={callback}>&lt; Client information</button>
+          <button onClick={callback}>Clients</button>
         </PageHeading>
         <GapList>
           {isLoading && <Throbber />}
