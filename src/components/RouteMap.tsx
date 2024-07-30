@@ -27,9 +27,19 @@ export default function RouteMap({ legs, className }: RouteMapProps) {
             source={leg.startLocation}
             destination={leg.endLocation ?? leg.startLocation}
           />
-          <CustomMarkerRoute position={leg.startLocation.split(",")} />
+          <CustomMarkerRoute
+            position={[
+              Number(leg.startLocation.split(",")[0]),
+              Number(leg.startLocation.split(",")[1]),
+            ]}
+          />
           {leg.endLocation && (
-            <CustomMarkerRoute position={leg.endLocation.split(",")} />
+            <CustomMarkerRoute
+              position={[
+                Number(leg.endLocation.split(",")[0]),
+                Number(leg.endLocation.split(",")[1]),
+              ]}
+            />
           )}
         </React.Fragment>
       ))}
