@@ -15,7 +15,7 @@ type TripLogsProps = {
   parentRoute: string;
 };
 export default function TripLogs({ parentRoute }: TripLogsProps) {
-  const navigate = useNavigate({ from: parentRoute + "/logs" });
+  const navigate = useNavigate({ from: "/logs" + parentRoute });
   const [currentlyViewedTask, setCurrentlyViewedTask] = useState<Task>();
   const [searchFilter, setSearchFilter] = useState<string>("");
   const { isMobile } = useScreenType();
@@ -60,7 +60,10 @@ export default function TripLogs({ parentRoute }: TripLogsProps) {
 
   return (
     <>
-      <SecondaryNavigation onTabChange={() => navigate({ to: parentRoute })} />
+      <SecondaryNavigation
+        onTabChange={() => navigate({ to: parentRoute })}
+        parentRoute={parentRoute}
+      />
       <div className={`${!isMobile && "grid grid-cols-2 gap-5"}`}>
         <div>
           <SearchBar callback={setSearchFilter} />
