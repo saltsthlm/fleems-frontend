@@ -76,7 +76,7 @@ export default function TripLogs() {
                 {formatDate(trip.dateFinished)}
               </td>
               <td className="flex">
-                <DestinationsMarker className="px-2" />
+                {!isMobile && <DestinationsMarker className="px-2" />}
                 <div className="h-full grid gap-1 text-left">
                   <p>{trip.startDestination}</p>
                   <p className="mt-auto">{trip.endDestination}</p>
