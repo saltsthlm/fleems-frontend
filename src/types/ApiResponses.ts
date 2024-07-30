@@ -127,3 +127,10 @@ export type Address = {
   postcode: string;
   road: string;
 };
+
+export type Waypoint = {
+  distance: number;
+  location: number[];
+  hint: string;
+  name: string;
+};

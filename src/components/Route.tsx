@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useMap } from "react-leaflet";
 import L from "leaflet";
+import { Waypoint } from "../types/ApiResponses";
 
 const Route = ({
   source,
@@ -17,7 +18,7 @@ const Route = ({
         `https://router.project-osrm.org/route/v1/driving/${source.split(",")[1]},${source.split(",")[0]};${destination.split(",")[1]},${destination.split(",")[0]}?overview=full`
       );
       const data = await response.json();
-      const coordinates = data.waypoints.map((waypoint) => [
+      const coordinates = data.waypoints.map((waypoint: Waypoint) => [
         waypoint.location[1],
         waypoint.location[0],
       ]);
