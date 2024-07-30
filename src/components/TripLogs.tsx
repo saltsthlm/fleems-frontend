@@ -84,8 +84,8 @@ export default function TripLogs() {
                 <td className="flex">
                   {!isMobile && <DestinationsMarker className="px-2" />}
                   <div className="h-full grid gap-1 text-left">
-                    <p>{trip.startDestination}</p>
-                    <p className="mt-auto">{trip.endDestination}</p>
+                    <p>{trip.startAddress.city}</p>
+                    <p className="mt-auto">{trip.endAddress.city}</p>
                   </div>
                 </td>
                 <td>{Math.floor(trip.expectedDistance)} km</td>
