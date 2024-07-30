@@ -12,6 +12,7 @@ import EditDriverForm from "./components/EditDriverForm";
 import PageWithNavigation from "../../components/PageWithNavigation";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
 import SearchBar from "../../components/SearchBar";
+import useScreenType from "../../hooks/useScreenType";
 
 export default function DriversList() {
   const [isViewingDriver, setIsViewingDriver] = useState<boolean>(false);
@@ -21,6 +22,7 @@ export default function DriversList() {
   const [activeTab, setActiveTab] = useState<string>("information");
   const [searchFilter, setSearchFilter] = useState<string>("");
 
+  const { isMobile } = useScreenType();
   const { data, isLoading, error } = useApi("drivers");
 
   const filteredData = useMemo(() => {
@@ -126,7 +128,7 @@ export default function DriversList() {
         parentRoute="/drivers"
       />
       <SearchBar value={searchFilter} callback={setSearchFilter} />
-      <GapList className="grid-cols-4">
+      <GapList className="grid-cols-3">
         {isLoading && <Throbber />}
         {error && <h1>An error occurred: {error.message}</h1>}
         {!isLoading &&
@@ -134,7 +136,7 @@ export default function DriversList() {
           filteredData?.map((driver) => (
             <CardButton
               key={driver.id}
-              className="flex flex-row text-left"
+              className={`${isMobile && "flex flex-row text-left"}`}
               isCentered={false}
               onClick={() => viewDriver(driver)}
             >
