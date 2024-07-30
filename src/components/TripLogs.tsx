@@ -7,9 +7,11 @@ import useScreenType from "../hooks/useScreenType";
 import TaskView from "./TaskView";
 import FormButton from "./FormButton";
 import DestinationsMarker from "./DestinationsMarker";
+import SearchBar from "./SearchBar";
 
 export default function TripLogs() {
   const [currentlyViewedTask, setCurrentlyViewedTask] = useState<Task>();
+  const [searchFilter, setSearchFilter] = useState<string>("");
   const { isMobile } = useScreenType();
   const trips = useApi("tasks");
 
@@ -59,35 +61,44 @@ export default function TripLogs() {
           </tr>
         </thead>
         <tbody className="grid gap-2 h-[75svh] overflow-y-scroll">
-          {trips.data.map((trip, index) => (
-            <CardTr
-              key={index}
-              className={`grid-cols-4 items-center hover:cursor-pointer ${currentlyViewedTask?.id == trip.id && "bg-button"} ${!isMobile && "p-3"}`}
-              onClick={() => setCurrentlyViewedTask(trip)}
-            >
-              <td>
-                {isMobile
-                  ? trip.payload + " " + trip.product
-                  : `Transportation of ${trip.payload} ${trip.product}`}
-              </td>
-              <td>
-                {formatDate(trip.startDate)}
-                <br />
-                {formatDate(trip.dateFinished)}
-              </td>
-              <td className="flex">
-                {!isMobile && <DestinationsMarker className="px-2" />}
-                <div className="h-full grid gap-1 text-left">
-                  <p>{trip.startDestination}</p>
-                  <p className="mt-auto">{trip.endDestination}</p>
-                </div>
-              </td>
-              <td>{trip.expectedDistance} km</td>
-            </CardTr>
-          ))}
+          {trips.data
+            .filter((t) =>
+              t.product.toLowerCase().includes(searchFilter.toLowerCase())
+            )
+            .map((trip, index) => (
+              <CardTr
+                key={index}
+                className={`grid-cols-4 items-center hover:cursor-pointer ${currentlyViewedTask?.id == trip.id && "bg-button"} ${!isMobile && "p-3"}`}
+                onClick={() => setCurrentlyViewedTask(trip)}
+              >
+                <td>
+                  {isMobile
+                    ? trip.payload + " " + trip.product
+                    : `Transportation of ${trip.payload} ${trip.product}`}
+                </td>
+                <td>
+                  {formatDate(trip.startDate)}
+                  <br />
+                  {formatDate(trip.dateFinished)}
+                </td>
+                <td className="flex">
+                  {!isMobile && <DestinationsMarker className="px-2" />}
+                  <div className="h-full grid gap-1 text-left">
+                    <p>{trip.startDestination}</p>
+                    <p className="mt-auto">{trip.endDestination}</p>
+                  </div>
+                </td>
+                <td>{trip.expectedDistance} km</td>
+              </CardTr>
+            ))}
         </tbody>
       </table>
-      {!isMobile && <TaskView task={currentlyViewedTask} />}
+      {!isMobile && (
+        <div className="grid grid-rows-[auto_1fr_auto]">
+          <SearchBar callback={setSearchFilter} />
+          <TaskView task={currentlyViewedTask} />
+        </div>
+      )}
     </div>
   );
 }
