@@ -12,7 +12,7 @@ export default function CardTr({
   return (
     <tr
       onClick={callback}
-      className={`bg-background text-black p-5 drop-shadow-strong gap-3 grid text-center ${className}`}
+      className={`bg-background text-black drop-shadow-strong gap-3 grid text-center ${className}`}
     >
       {children}
     </tr>
