@@ -150,6 +150,7 @@ export default function ClientsList({ callback }: ClientsListProps) {
     return (
       <PageWithNavigation>
         <PageHeading>Clients</PageHeading>
+        <SecondaryNavigation onTabChange={setActiveTab} activeTab={activeTab} />
         <Table data={dataInfo} />
       </PageWithNavigation>
     );

@@ -30,10 +30,13 @@ export default function TrucksList() {
 
   const filteredData = useMemo(() => {
     if (!searchFilter) return data;
-    return data?.filter(truck =>
-      truck.licenseNumber.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      truck.model.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      truck.payload.toString().includes(searchFilter.toLowerCase())
+    return data?.filter(
+      (truck) =>
+        truck.licenseNumber
+          .toLowerCase()
+          .includes(searchFilter.toLowerCase()) ||
+        truck.model.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        truck.payload.toString().includes(searchFilter.toLowerCase())
     );
   }, [data, searchFilter]);
 
@@ -142,12 +145,9 @@ export default function TrucksList() {
     <>
       <PageWithNavigation>
         <PageHeading>Vehicles</PageHeading>
+        <SecondaryNavigation onTabChange={setActiveTab} activeTab={activeTab} />
         {isMobile && (
           <>
-            <SecondaryNavigation
-              onTabChange={setActiveTab}
-              activeTab={activeTab}
-            />
             <SearchBar value={searchFilter} callback={setSearchFilter} />
             <GapList>
               {filteredData?.map((truck) => (
