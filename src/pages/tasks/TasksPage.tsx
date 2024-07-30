@@ -10,10 +10,25 @@ import Card from "../../components/Card";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
 import SearchBar from "../../components/SearchBar";
 
-// Utility function to capitalize the first letter and lowercase the rest
+
 const capitalizeFirstLetter = (str: string): string => {
   if (!str) return "";
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+};
+
+const getStateColorClass = (state: string | undefined): string => {
+  switch (state?.toLowerCase()) {
+    case "ongoing":
+      return "text-[#2DA641]";
+    case "completed":
+      return "text-[#2196F3]";
+    case "unassigned":
+      return "text-[#F44336]";
+    case "assigned":
+      return "text-[#FF9800]";
+    default:
+      return "";
+  }
 };
 
 export default function TasksPage() {
@@ -45,6 +60,8 @@ export default function TasksPage() {
   };
 
   if (isViewingTask && !!selectedTask) {
+    const taskStateClass = getStateColorClass(selectedTask.state);
+
     return (
       <PageWithNavigation>
         <PageHeading>
@@ -53,12 +70,14 @@ export default function TasksPage() {
         
         <Card className="text-center">
           <h1 className="text-xl">{selectedTask.client.name}</h1>
-          <h2>Route: {selectedTask.startDestination} - {selectedTask.endDestination}</h2>
-          <h2>Task: {selectedTask.payload}</h2>
-          <h2>Status: {capitalizeFirstLetter(selectedTask.state ?? '')}</h2>
-          <h2>No. of legs: {selectedTask.legs?.length}</h2>
-          <h2>Start date: {selectedTask.startDate?.toString() ?? 'N/A'}</h2>
-          <h2>End date: {selectedTask.dateFinished?.toString() ?? 'N/A'}</h2>
+          <h2>Route : {selectedTask.startDestination} - {selectedTask.endDestination}</h2>
+          <h2>Task : {selectedTask.payload}</h2>
+          <h2>
+            Status : <span className={taskStateClass}>{capitalizeFirstLetter(selectedTask.state ?? '')}</span>
+          </h2>
+          <h2>No. of legs : {selectedTask.legs?.length}</h2>
+          <h2>Start date : {selectedTask.startDate?.toString() ?? 'N/A'}</h2>
+          <h2>End date : {selectedTask.dateFinished?.toString() ?? 'N/A'}</h2>
         </Card>
       </PageWithNavigation>
     );
@@ -86,24 +105,30 @@ export default function TasksPage() {
       />
       {isLoading && <Throbber />}
       <GapList>
-        {filteredData?.map((task: Task) => (
-          <CardButtonWithNoStyles
-            key={task.id}
-            onClick={() => viewTask(task)}
-          >
-            <h1 className="text-xl">{task.client.name}</h1>
-            <div className="flex justify-between w-full text-left">
-              <div> 
-                <h2>Route: {task.startDestination} - {task.endDestination}</h2>
-                <h2>Task: {task.payload}</h2>
-                <h2>Status: {capitalizeFirstLetter(task.state ?? '')}</h2>
-                <h2>No. of legs: {task.legs.length}</h2>
-                <h2>Start date: {task.startDate?.toString() ?? 'N/A'}</h2>
-                <h2>End date: {task.dateFinished?.toString() ?? 'N/A'}</h2>
+        {filteredData?.map((task: Task) => {
+          const taskStateClass = getStateColorClass(task.state);
+          
+          return (
+            <CardButtonWithNoStyles
+              key={task.id}
+              onClick={() => viewTask(task)}
+            >
+              <h1 className="text-xl">{task.client.name}</h1>
+              <div className="flex justify-between w-full text-left">
+                <div> 
+                  <h2>Route : {task.startDestination} - {task.endDestination}</h2>
+                  <h2>Task : {task.payload}</h2>
+                  <h2>
+                    Status : <span className={taskStateClass}>{capitalizeFirstLetter(task.state ?? '')}</span>
+                  </h2>
+                  <h2>No. of legs : {task.legs.length}</h2>
+                  <h2>Start date : {task.startDate?.toString() ?? 'N/A'}</h2>
+                  <h2>End date : {task.dateFinished?.toString() ?? 'N/A'}</h2>
+                </div>
               </div>
-            </div>
-          </CardButtonWithNoStyles>
-        ))}
+            </CardButtonWithNoStyles>
+          );
+        })}
       </GapList>
     </PageWithNavigation>
   );
