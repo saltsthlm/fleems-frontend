@@ -1,4 +1,4 @@
-import { useState , useMemo } from "react";
+import { useState, useMemo } from "react";
 import GapList from "../../components/GapList";
 import PageHeading from "../../components/PageHeading";
 import PageWithNavigation from "../../components/PageWithNavigation";
@@ -9,6 +9,12 @@ import CardButtonWithNoStyles from "../../components/CardButtonWithNoStyles";
 import Card from "../../components/Card";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
 import SearchBar from "../../components/SearchBar";
+
+// Utility function to capitalize the first letter and lowercase the rest
+const capitalizeFirstLetter = (str: string): string => {
+  if (!str) return "";
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+};
 
 export default function TasksPage() {
   const [searchFilter, setSearchFilter] = useState<string>("");
@@ -49,9 +55,10 @@ export default function TasksPage() {
           <h1 className="text-xl">{selectedTask.client.name}</h1>
           <h2>Route: {selectedTask.startDestination} - {selectedTask.endDestination}</h2>
           <h2>Task: {selectedTask.payload}</h2>
+          <h2>Status: {capitalizeFirstLetter(selectedTask.state ?? '')}</h2>
           <h2>No. of legs: {selectedTask.legs?.length}</h2>
-          <h2>Start date: {selectedTask.startDate?.toString()}</h2>
-          <h2>End date: {selectedTask.dateFinished?.toString()}</h2>
+          <h2>Start date: {selectedTask.startDate?.toString() ?? 'N/A'}</h2>
+          <h2>End date: {selectedTask.dateFinished?.toString() ?? 'N/A'}</h2>
         </Card>
       </PageWithNavigation>
     );
@@ -89,9 +96,10 @@ export default function TasksPage() {
               <div> 
                 <h2>Route: {task.startDestination} - {task.endDestination}</h2>
                 <h2>Task: {task.payload}</h2>
+                <h2>Status: {capitalizeFirstLetter(task.state ?? '')}</h2>
                 <h2>No. of legs: {task.legs.length}</h2>
-                <h2>Start date: {task.startDate?.toString()}</h2>
-                <h2>End date: {task.dateFinished?.toString()}</h2>
+                <h2>Start date: {task.startDate?.toString() ?? 'N/A'}</h2>
+                <h2>End date: {task.dateFinished?.toString() ?? 'N/A'}</h2>
               </div>
             </div>
           </CardButtonWithNoStyles>
