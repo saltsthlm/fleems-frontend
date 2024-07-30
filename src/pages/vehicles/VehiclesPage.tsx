@@ -145,7 +145,11 @@ export default function TrucksList() {
     <>
       <PageWithNavigation>
         <PageHeading>Vehicles</PageHeading>
-        <SecondaryNavigation onTabChange={setActiveTab} activeTab={activeTab} />
+        <SecondaryNavigation
+          onTabChange={setActiveTab}
+          activeTab={activeTab}
+          parentRoute="/vehicles"
+        />
         {isMobile && (
           <>
             <SearchBar value={searchFilter} callback={setSearchFilter} />

@@ -28,10 +28,13 @@ export default function DriversList() {
 
   const filteredData = useMemo(() => {
     if (!searchFilter) return data;
-    return data?.filter(driver =>
-      driver.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      driver.licenseNumber.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      driver.phoneNumber.toLowerCase().includes(searchFilter.toLowerCase())
+    return data?.filter(
+      (driver) =>
+        driver.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        driver.licenseNumber
+          .toLowerCase()
+          .includes(searchFilter.toLowerCase()) ||
+        driver.phoneNumber.toLowerCase().includes(searchFilter.toLowerCase())
     );
   }, [data, searchFilter]);
 
@@ -120,14 +123,18 @@ export default function DriversList() {
   return (
     <PageWithNavigation>
       <PageHeading>Drivers</PageHeading>
-      <SecondaryNavigation onTabChange={setActiveTab} activeTab={activeTab} />
+      <SecondaryNavigation
+        onTabChange={setActiveTab}
+        activeTab={activeTab}
+        parentRoute="/drivers"
+      />
       <SearchBar value={searchFilter} callback={setSearchFilter} />
       <GapList>
         {isLoading && <Throbber />}
         {error && <h1>An error occurred: {error.message}</h1>}
         {!isLoading &&
           !error &&
-          filteredData?.map(driver => (
+          filteredData?.map((driver) => (
             <CardButton
               key={driver.id}
               className="flex flex-row text-left"

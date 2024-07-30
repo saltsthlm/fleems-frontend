@@ -91,6 +91,7 @@ export default function ClientsList({ callback }: ClientsListProps) {
           <SecondaryNavigation
             onTabChange={setActiveTab}
             activeTab={activeTab}
+            parentRoute="/clients"
           />
           <SearchBar value={searchFilter} callback={setSearchFilter} />
           {isLoading && <Throbber />}
@@ -150,7 +151,11 @@ export default function ClientsList({ callback }: ClientsListProps) {
     return (
       <PageWithNavigation>
         <PageHeading>Clients</PageHeading>
-        <SecondaryNavigation onTabChange={setActiveTab} activeTab={activeTab} />
+        <SecondaryNavigation
+          onTabChange={setActiveTab}
+          activeTab={activeTab}
+          parentRoute="/clients"
+        />
         <Table data={dataInfo} />
       </PageWithNavigation>
     );
