@@ -15,6 +15,7 @@ export type Client = {
   name: string;
   tasks: TaskInfoDto[];
 };
+
 export type TaskInfoDto = {
   id: string;
   startDestination: string;
@@ -29,6 +30,8 @@ export type TaskInfoDto = {
   quantity: number;
   legs: LegInfoDto[];
   state: string;
+  startAddress: Address;
+  endAddress: Address;
 };
 
 export type Task = {
@@ -45,7 +48,8 @@ export type Task = {
   quantity: number;
   legs: LegInfoDto[];
   client: ClientResponseDto;
-  state: string;
+  startAddress: Address;
+  endAddress: Address;
 };
 
 export type ClientResponseDto = {
@@ -55,6 +59,13 @@ export type ClientResponseDto = {
   contactPhoneNumber: string;
   name: string;
   tasks: TaskInfoDto[];
+};
+export type ClientInfoDto = {
+  id: string;
+  contactPerson: string;
+  contactEmail: string;
+  contactPhoneNumber: string;
+  name: string;
 };
 
 export type LegInfoDto = {
@@ -66,6 +77,8 @@ export type LegInfoDto = {
   startLocation: string;
   endLocation: string;
   distanceDriven: number;
+  startAddress: Address;
+  endAddress: Address;
 };
 
 export type Vehicle = {
@@ -107,16 +120,10 @@ export type User = {
 };
 
 export type Address = {
-  "ISO3166-2-lvl4": string;
+  id: string;
   city: string;
-  city_district: string;
   country: string;
-  country_code: string;
-  county: string;
-  house_number: string;
-  municipality: string;
-  neighbourhood: string;
+  houseNumber: string;
   postcode: string;
   road: string;
-  suburb: string;
 };
