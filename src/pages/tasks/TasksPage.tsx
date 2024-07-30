@@ -88,11 +88,13 @@ export default function TasksPage() {
 
     return (
       <PageWithNavigation>
-        <PageHeading>
-          <button onClick={viewList}>&lt; Task information</button>
-        </PageHeading>
+        
 
         {isShowingAssignForm ? (
+          <>
+           <PageHeading>
+          <button onClick={viewList}>&lt; Assign a task</button>
+        </PageHeading>
           <TaskAssignForm
             onSubmit={(formData) => {
               console.log(formData);
@@ -102,12 +104,17 @@ export default function TasksPage() {
             initialTask={selectedTask}
             drivers={["Driver 1", "Driver 2", "Driver 3"]} 
           />
+          </>
+          
         ) : (
           <>
+          <PageHeading>
+          <button onClick={viewList}>&lt; Task information</button>
+        </PageHeading>
           <Card className="text-center">
             <h1 className="text-xl">{selectedTask.client.name}</h1>
             <h2>Route : {selectedTask.startAddress.city} - {selectedTask.endAddress.city}</h2>
-            <h2>Task : {selectedTask.payload}</h2>
+            <h2>Task : Transportation of {selectedTask.payload} {selectedTask.product}</h2>
             <h2>
               Status : <span className={taskStateClass}>{capitalizeFirstLetter(selectedTask.state ?? '')}</span>
             </h2>
@@ -171,7 +178,7 @@ export default function TasksPage() {
                 <div className="flex justify-between w-full text-left">
                   <div> 
                     <h2>Route : {task.startAddress.city} - {task.endAddress.city}</h2>
-                    <h2>Task : {task.payload}</h2>
+                    <h2>Task : Transportation of {task.payload} {task.product}</h2>
                     <h2>
                       Status : <span className={taskStateClass}>{capitalizeFirstLetter(task.state ?? '')}</span>
                     </h2>
