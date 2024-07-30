@@ -10,7 +10,7 @@ import Card from "../../components/Card";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
 import SearchBar from "../../components/SearchBar";
 import FormButton from "../../components/FormButton";
-
+import TaskAssignForm from "./components/TaskAssignForm";
 
 const capitalizeFirstLetter = (str: string): string => {
   if (!str) return "";
@@ -36,6 +36,7 @@ export default function TasksPage() {
   const [searchFilter, setSearchFilter] = useState<string>("");
   const [isViewingTask, setIsViewingTask] = useState<boolean>(false);
   const [selectedTask, setSelectedTask] = useState<Task>();
+  const [isShowingAssignForm, setIsShowingAssignForm] = useState<boolean>(false); // New state for form visibility
   const [activeTab, setActiveTab] = useState<string>("information");
 
   const { data, isLoading, error } = useApi("tasks");
@@ -58,6 +59,11 @@ export default function TasksPage() {
 
   const viewList = () => {
     setIsViewingTask(false);
+    setIsShowingAssignForm(false); // Hide the form when going back to the list
+  };
+
+  const showAssignForm = () => {
+    setIsShowingAssignForm(true);
   };
 
   if (isViewingTask && !!selectedTask) {
@@ -68,29 +74,41 @@ export default function TasksPage() {
         <PageHeading>
           <button onClick={viewList}>&lt; Task information</button>
         </PageHeading>
-        
-        <Card className="text-center">
-          <h1 className="text-xl">{selectedTask.client.name}</h1>
-          <h2>Route : {selectedTask.startDestination} - {selectedTask.endDestination}</h2>
-          <h2>Task : {selectedTask.payload}</h2>
-          <h2>
-            Status : <span className={taskStateClass}>{capitalizeFirstLetter(selectedTask.state ?? '')}</span>
-          </h2>
-          <h2>No. of legs : {selectedTask.legs?.length}</h2>
-          <h2>Start date : {selectedTask.startDate?.toString() ?? 'N/A'}</h2>
-          <h2>End date : {selectedTask.dateFinished?.toString() ?? 'N/A'}</h2>
-        </Card>
-        
-        {selectedTask.state === 'Unassigned' && (
-  <div className="flex flex-col py-7 gap-4 items-center">
-    <FormButton
-      // onClick={() => editTruck(selectedTruck)}
-      className="w-3/5"
-    >
-      ASSIGN
-    </FormButton>
-  </div>
-)}
+
+        {isShowingAssignForm ? (
+          <TaskAssignForm
+            onSubmit={(formData) => {
+              // Handle form submission here
+              console.log(formData);
+              setIsShowingAssignForm(false); // Hide the form after submission
+            }}
+            buttonText="ASSIGN"
+            initialTask={selectedTask}
+            drivers={["Driver 1", "Driver 2", "Driver 3"]} // Example driver list, replace with actual data
+          />
+        ) : (
+          <Card className="text-center">
+            <h1 className="text-xl">{selectedTask.client.name}</h1>
+            <h2>Route : {selectedTask.startDestination} - {selectedTask.endDestination}</h2>
+            <h2>Task : {selectedTask.payload}</h2>
+            <h2>
+              Status : <span className={taskStateClass}>{capitalizeFirstLetter(selectedTask.state ?? '')}</span>
+            </h2>
+            <h2>No. of legs : {selectedTask.legs?.length}</h2>
+            <h2>Start date : {selectedTask.startDate?.toString() ?? 'N/A'}</h2>
+            <h2>End date : {selectedTask.dateFinished?.toString() ?? 'N/A'}</h2>
+          </Card>
+        )}
+    <div className="flex flex-col py-7 gap-4 items-center">
+              {selectedTask.state === 'UNASSIGNED' && (
+                <FormButton
+                  onClick={showAssignForm}
+                  className="w-3/5"
+                >
+                  ASSIGN
+                </FormButton>
+              )}
+            </div>
       </PageWithNavigation>
     );
   }
@@ -116,32 +134,38 @@ export default function TasksPage() {
         callback={setSearchFilter}
       />
       {isLoading && <Throbber />}
-      <GapList>
-        {filteredData?.map((task: Task) => {
-          const taskStateClass = getStateColorClass(task.state);
-          
-          return (
-            <CardButtonWithNoStyles
-              key={task.id}
-              onClick={() => viewTask(task)}
-            >
-              <h1 className="text-xl">{task.client.name}</h1>
-              <div className="flex justify-between w-full text-left">
-                <div> 
-                  <h2>Route : {task.startDestination} - {task.endDestination}</h2>
-                  <h2>Task : {task.payload}</h2>
-                  <h2>
-                    Status : <span className={taskStateClass}>{capitalizeFirstLetter(task.state ?? '')}</span>
-                  </h2>
-                  <h2>No. of legs : {task.legs.length}</h2>
-                  <h2>Start date : {task.startDate?.toString() ?? 'N/A'}</h2>
-                  <h2>End date : {task.dateFinished?.toString() ?? 'N/A'}</h2>
+      {filteredData?.length === 0 ? (
+        <div className="text-center mt-10">
+          <h1>No tasks to show at the moment</h1>
+        </div>
+      ) : (
+        <GapList>
+          {filteredData?.map((task: Task) => {
+            const taskStateClass = getStateColorClass(task.state);
+            
+            return (
+              <CardButtonWithNoStyles
+                key={task.id}
+                onClick={() => viewTask(task)}
+              >
+                <h1 className="text-xl">{task.client.name}</h1>
+                <div className="flex justify-between w-full text-left">
+                  <div> 
+                    <h2>Route : {task.startDestination} - {task.endDestination}</h2>
+                    <h2>Task : {task.payload}</h2>
+                    <h2>
+                      Status : <span className={taskStateClass}>{capitalizeFirstLetter(task.state ?? '')}</span>
+                    </h2>
+                    <h2>No. of legs : {task.legs.length}</h2>
+                    <h2>Start date : {task.startDate?.toString() ?? 'N/A'}</h2>
+                    <h2>End date : {task.dateFinished?.toString() ?? 'N/A'}</h2>
+                  </div>
                 </div>
-              </div>
-            </CardButtonWithNoStyles>
-          );
-        })}
-      </GapList>
+              </CardButtonWithNoStyles>
+            );
+          })}
+        </GapList>
+      )}
     </PageWithNavigation>
   );
 }
