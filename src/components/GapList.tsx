@@ -6,7 +6,7 @@ export default function GapList({ children }: PropsWithChildren) {
 
   return (
     <div
-      className={`flex ${isMobile ? "flex-col" : "flex-row flex-wrap"} gap-5 items-center`}
+      className={`${isMobile ? "flex flex-col gap-5 items-center" : "grid grid-cols-4 gap-5"}`}
     >
       {children}
     </div>
