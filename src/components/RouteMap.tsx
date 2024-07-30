@@ -3,6 +3,7 @@ import Route from "./Route";
 import { LegInfoDto } from "../types/ApiResponses";
 import CustomMarkerRoute from "./CustomMarkerRoute.tsx";
 import { PropsWithClassName } from "../types/ComponentTypes.ts";
+import React from "react";
 
 type RouteMapProps = {
   legs: LegInfoDto[];
@@ -20,18 +21,17 @@ export default function RouteMap({ legs, className }: RouteMapProps) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      {legs.map((leg: LegInfoDto) => (
-        <>
-          <Route source={leg.startLocation} destination={leg.endLocation} />
-          <CustomMarkerRoute
-            position={leg.startLocation.split(",")}
-            children={undefined}
-          ></CustomMarkerRoute>
-          <CustomMarkerRoute
-            position={leg.endLocation.split(",")}
-            children={undefined}
-          ></CustomMarkerRoute>
-        </>
+      {legs.map((leg, index) => (
+        <React.Fragment key={index}>
+          <Route
+            source={leg.startLocation}
+            destination={leg.endLocation ?? leg.startLocation}
+          />
+          <CustomMarkerRoute position={leg.startLocation.split(",")} />
+          {leg.endLocation && (
+            <CustomMarkerRoute position={leg.endLocation.split(",")} />
+          )}
+        </React.Fragment>
       ))}
     </MapContainer>
   );
