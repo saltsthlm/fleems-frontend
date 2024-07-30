@@ -6,6 +6,7 @@ import { Task } from "../types/ApiResponses";
 import useScreenType from "../hooks/useScreenType";
 import TaskView from "./TaskView";
 import FormButton from "./FormButton";
+import DestinationsMarker from "./DestinationsMarker";
 
 export default function TripLogs() {
   const [currentlyViewedTask, setCurrentlyViewedTask] = useState<Task>();
@@ -66,10 +67,12 @@ export default function TripLogs() {
                     new Date(trip.startDate).toLocaleTimeString()
                   : "Present"}
               </td>
-              <td>
-                {trip.startDestination}
-                <br />
-                {trip.endDestination}
+              <td className="flex">
+                <DestinationsMarker className="px-2" />
+                <div className="h-full grid gap-1 text-left">
+                  <p>{trip.startDestination}</p>
+                  <p className="mt-auto">{trip.endDestination}</p>
+                </div>
               </td>
               <td>{trip.expectedDistance} km</td>
             </CardTr>
