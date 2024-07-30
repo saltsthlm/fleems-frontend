@@ -67,23 +67,25 @@ export default function ProfilePage() {
       {isLoggedIn && profile && (
         <GapList>
           <Card className="mb-10 text-center py-10">
-            <img src={profile.picture} alt="user image" className="aspect-square w-[clamp(80px,100%,200px)] mx-auto"/>
+            <img
+              src={profile.picture}
+              alt="user image"
+              className="aspect-square w-[clamp(80px,100%,200px)] mx-auto"
+            />
             <h1 className="text-xl">{profile.name}</h1>
             <h2>{profile.email}</h2>
           </Card>
-          
-          <FormButton onClick={() => logout()} className="w-3/5">
-            LOGOUT
-          </FormButton>
-          <FormButton
-            onClick={() => setIsDeletingAccount(true)}
-            overrideColor
-            className="text-danger w-3/5"
-          >
-            DELETE ACCOUNT
-          </FormButton>
 
-          
+          <div className="flex flex-col mx-auto gap-4">
+            <FormButton onClick={() => logout()}>LOGOUT</FormButton>
+            <FormButton
+              onClick={() => setIsDeletingAccount(true)}
+              overrideColor
+              className="text-danger"
+            >
+              DELETE ACCOUNT
+            </FormButton>
+          </div>
         </GapList>
       )}
       {!isLoggedIn && <LoginFormGoogle />}
