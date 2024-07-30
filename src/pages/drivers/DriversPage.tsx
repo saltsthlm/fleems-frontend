@@ -126,7 +126,7 @@ export default function DriversList() {
         parentRoute="/drivers"
       />
       <SearchBar value={searchFilter} callback={setSearchFilter} />
-      <GapList>
+      <GapList className="grid-cols-4">
         {isLoading && <Throbber />}
         {error && <h1>An error occurred: {error.message}</h1>}
         {!isLoading &&

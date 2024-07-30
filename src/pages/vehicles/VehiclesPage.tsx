@@ -153,7 +153,7 @@ export default function TrucksList() {
         {isMobile && (
           <>
             <SearchBar value={searchFilter} callback={setSearchFilter} />
-            <GapList>
+            <GapList className="grid-cols-2">
               {filteredData?.map((truck) => (
                 <CardButton
                   key={truck.id}

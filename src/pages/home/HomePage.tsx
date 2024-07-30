@@ -10,7 +10,7 @@ export default function HomePage() {
   return (
     <PageWithNavigation>
       <PageHeading>Dashboard</PageHeading>
-      <GapList>
+      <GapList className="grid-cols-4">
         <FleetEventsStats />
         <TopDriversStats />
         <FleetDataStats />
