@@ -17,16 +17,16 @@ export default function TaskView({ task }: TaskViewProps) {
           <CardHarsh
             className={`${isMobile ? "text-md" : "text-2xl"} h-min self-end`}
           >
-            <p>Driver: {task.legs[0]?.driver?.name}</p>
-            <p>Vehicle: {task.legs[0]?.vehicle?.licenseNumber}</p>
-            <p>
-              Task: Transportation of {task.payload} {task.product}
+            <p className="text-lg">Driver : <span className="text-xl">{task.legs[0]?.driver?.name}</span></p>
+            <p className="text-lg">Vehicle : <span className="text-xl">{task.legs[0]?.vehicle?.licenseNumber}</span></p>
+            <p className="text-lg">
+              Task : <span className="text-xl">Transportation of {task.payload} {task.product}</span>
             </p>
-            <p>Duration: {Math.floor(task.expectedTime)} Days</p>
-            <p>
-              Route: {task.startAddress.city} - {task.endAddress.city}
+            <p className="text-lg">Duration : <span className="text-xl">{Math.floor(task.expectedTime)} Days</span></p>
+            <p className="text-lg">
+              Route : <span className="text-xl">{task.startAddress.city} - {task.endAddress.city}</span>
             </p>
-            <p>Total distance: {Math.floor(task.expectedDistance)} km</p>
+            <p className="text-lg">Total distance : <span className="text-xl">{Math.floor(task.expectedDistance)} km</span></p>
           </CardHarsh>
         </>
       ) : (
