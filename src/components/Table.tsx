@@ -16,9 +16,10 @@ type DataType = Vehicle | ClientInfoDto | Task;
 
 interface TableProps {
   data: DataType[];
+  callback?: (arg0: DataType) => void;
 }
 
-export default function Table({ data }: TableProps) {
+export default function Table({ data, callback }: TableProps) {
   const columnHelper = createColumnHelper<DataType>();
   const [columnOrder, setColumnOrder] = useState<string[]>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -117,7 +118,15 @@ export default function Table({ data }: TableProps) {
               {table.getRowModel().rows.map((row) => (
                 <tr key={row.id} className="border-b">
                   {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="px-4 pt-[14px] pb-[18px]">
+                    <td
+                      key={cell.id}
+                      className="px-4 pt-[14px] pb-[18px]"
+                      onClick={
+                        callback != undefined
+                          ? () => callback(row.original)
+                          : () => {}
+                      }
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
