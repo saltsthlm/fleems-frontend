@@ -12,3 +12,7 @@
     overflow: hidden;
   }
 }
+
+* {
+  overscroll-behavior: none;
+}
