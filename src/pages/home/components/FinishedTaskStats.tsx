@@ -2,7 +2,7 @@ import { BarChart } from "@mui/x-charts";
 import Card from "../../../components/Card";
 import useScreenType from "../../../hooks/useScreenType";
 
-export default function FleetDataStats() {
+export default function FinishedTaskStats() {
   const { isMobile } = useScreenType();
 
   return (
