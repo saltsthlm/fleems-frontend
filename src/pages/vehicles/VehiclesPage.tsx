@@ -177,6 +177,11 @@ export default function TrucksList() {
           </div>
           
         )}
+        <FormButton
+          className={`sticky ${isMobile ? "bottom-20" : "bottom-4"} w-full mx-auto drop-shadow-strong flex justify-center`}
+        >
+          + ADD TRUCK
+        </FormButton>
       </PageWithNavigation>
     </>
   );
