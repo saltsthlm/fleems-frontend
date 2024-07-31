@@ -16,15 +16,27 @@ type ApiResponseMapping = {
   tasks: Task[];
   vehicles: Vehicle[];
   assignments: AssignmentInfoDto[];
+  stats: number[];
 };
 type ApiEndpoints = keyof ApiResponseMapping;
 
-export default function useApi<T extends ApiEndpoints>(endpoint: T) {
+type StatsResponseMapping = {
+  completed: number[];
+};
+type ApiExtraParams = {
+  statsEndpoint: keyof StatsResponseMapping;
+};
+export default function useApi<T extends ApiEndpoints>(
+  endpoint: T,
+  options?: ApiExtraParams
+) {
   const { credential } = useAuth();
 
   const fetchData = async () => {
     const { data } = await axios.get<ApiResponseMapping[T]>(
-      BASE_API_URL + endpoint,
+      BASE_API_URL +
+        endpoint +
+        (options?.statsEndpoint ? "/" + options.statsEndpoint : ""),
       {
         headers: {
           "Content-Type": "application/json",
