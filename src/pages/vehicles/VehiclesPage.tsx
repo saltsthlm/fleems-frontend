@@ -84,7 +84,7 @@ export default function TrucksList() {
                 <h1 className="text-center">
                   Are you sure you would like to delete this truck?
                 </h1>
-                <div className="flex gap-4 justify-between [&>button]:grow">
+                <div className="flex gap-4 justify-center [&>button]:grow">
                   <FormButton
                     onClick={() => setIsShowingPopup(false)}
                     className="text-danger"

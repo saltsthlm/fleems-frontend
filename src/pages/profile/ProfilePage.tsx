@@ -30,7 +30,7 @@ export default function ProfilePage() {
         <Popup>
           <Card className="bg-tertiary w-full p-12">
             <h1 className="text-center">Are you sure you want to logout?</h1>
-            <div className="flex gap-4 justify-between [&>button]:grow">
+            <div className="flex gap-4 justify-center [&>button]:grow">
               <FormButton
                 onClick={logout}
                 className="text-danger"

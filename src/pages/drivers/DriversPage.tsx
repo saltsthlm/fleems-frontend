@@ -98,7 +98,7 @@ export default function DriversList() {
                 </h1>
               )}
               {deleteData && <h1>Driver successfully deleted!</h1>}
-              <div className="flex gap-4 justify-between [&>button]:grow">
+              <div className="flex gap-4 justify-center [&>button]:grow">
                 {isDeleteLoading ? (
                   <Throbber />
                 ) : (
