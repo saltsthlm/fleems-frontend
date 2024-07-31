@@ -2,11 +2,12 @@ import { MapContainer, Popup, TileLayer } from "react-leaflet";
 import CustomMarker from "./CustomMarker";
 import useApi from "../hooks/useApi";
 import Throbber from "./Throbber";
-import { AssignmentInfoDto } from "../types/ApiResponses";
+import { Task } from "../types/ApiResponses";
 import { PropsWithClassName } from "../types/ComponentTypes";
+import React from "react";
 
 export default function Map({ className }: PropsWithClassName) {
-  const { data, isLoading } = useApi("assignments");
+  const { data, isLoading } = useApi("tasks");
   return (
     <>
       {isLoading ? (
@@ -23,17 +24,19 @@ export default function Map({ className }: PropsWithClassName) {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {data
-            ?.map((assignment: AssignmentInfoDto) => assignment.task.legs.pop())
-            .filter((e) => e != undefined)
-            .map((e) => (
-              <CustomMarker
-                position={[
-                  Number(e.startLocation.split(",")[0]),
-                  Number(e.startLocation.split(",")[1]),
-                ]}
-              >
-                <Popup>Vehicle ABC123</Popup>
-              </CustomMarker>
+            ?.filter((task: Task) => task.state == "FINISHED")
+            ?.map((task: Task) => task.legs.pop())
+            .map((leg, index) => (
+              <React.Fragment key={index}>
+                <CustomMarker
+                  position={[
+                    Number(leg?.startLocation.split(",")[0]),
+                    Number(leg?.startLocation.split(",")[1]),
+                  ]}
+                >
+                  <Popup>Vehicle</Popup>
+                </CustomMarker>
+              </React.Fragment>
             ))}
         </MapContainer>
       )}
