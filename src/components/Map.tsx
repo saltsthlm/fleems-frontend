@@ -23,8 +23,10 @@ export default function Map({ className }: PropsWithClassName) {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
+
           {data
             ?.filter((task: Task) => task.state == "FINISHED")
+
             ?.map((task: Task) => task.legs.pop())
             .map((leg, index) => (
               <React.Fragment key={index}>

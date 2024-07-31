@@ -15,7 +15,6 @@ export default function HomePage() {
         <FinishedTaskStats />
         <Card>
           <h1 className="text-xl">All active fleets</h1>
-          <Map />
         </Card>
       </GapList>
     </PageWithNavigation>
