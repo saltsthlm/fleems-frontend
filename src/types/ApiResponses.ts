@@ -7,6 +7,14 @@ export type Driver = {
   photo: string;
 };
 
+export type DriverInfoDto = {
+  emailAddress: string;
+  id: string;
+  licenseNumber: string;
+  name: string;
+  phoneNumber: string;
+};
+
 export type Client = {
   id: string;
   contactPerson: string;
@@ -71,7 +79,7 @@ export type ClientInfoDto = {
 
 export type LegInfoDto = {
   id: string;
-  driver: Driver | null;
+  driver: DriverInfoDto | null;
   vehicle: Vehicle | null;
   startTime: Date | null;
   endTime: Date | null;
