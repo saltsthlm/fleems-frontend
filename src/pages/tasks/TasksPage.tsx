@@ -179,7 +179,8 @@ export default function TasksPage() {
           <h1>No tasks to show at the moment</h1>
         </div>
       ) : (
-        <GapList className="grid-cols-2">
+        <div>
+         <GapList className="grid-cols-1">
           {filteredData?.map((task: Task) => {
             const taskStateClass = getStateColorClass(task.state);
 
@@ -220,6 +221,7 @@ export default function TasksPage() {
             );
           })}
         </GapList>
+        </div>
       )}
     </PageWithNavigation>
   );
