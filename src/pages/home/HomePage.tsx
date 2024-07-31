@@ -14,7 +14,7 @@ export default function HomePage() {
         <TaskStatusTasks />
         <FinishedTaskStats />
         <Card>
-          <h1 className="text-xl">All active trucks</h1>
+          <h1 className="text-xl">All active fleets</h1>
           <Map />
         </Card>
       </GapList>
