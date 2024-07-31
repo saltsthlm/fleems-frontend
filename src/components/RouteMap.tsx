@@ -1,10 +1,10 @@
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
-import Route from "./Route";
+import { MapContainer, TileLayer } from "react-leaflet";
 import { LegInfoDto } from "../types/ApiResponses";
 import CustomMarkerRoute from "./CustomMarkerRoute.tsx";
 import { PropsWithClassName } from "../types/ComponentTypes.ts";
-import React, { useEffect, useState } from "react";
-import { Polyline } from "leaflet";
+import React from "react";
+import Routes from "./Routes.tsx";
+
 //const [polylines, setPolylines] = useState<Polyline[]>([]);
 
 type RouteMapProps = {
@@ -22,6 +22,7 @@ export default function RouteMap({ legs, className }: RouteMapProps) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      <Routes legs={legs}></Routes>
       {legs.map((leg, index) => (
         <React.Fragment key={index}>
           <CustomMarkerRoute
@@ -38,10 +39,6 @@ export default function RouteMap({ legs, className }: RouteMapProps) {
               ]}
             />
           )}
-          <Route
-            source={leg.startLocation}
-            destination={leg.endLocation ?? leg.startLocation}
-          />
         </React.Fragment>
       ))}
     </MapContainer>
