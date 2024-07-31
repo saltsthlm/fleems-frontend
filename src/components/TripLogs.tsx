@@ -65,7 +65,7 @@ export default function TripLogs({ parentRoute }: TripLogsProps) {
         parentRoute={parentRoute}
       />
       <div className={`${!isMobile && "grid grid-cols-2 gap-5"}`}>
-        <div>
+        <div className="">
           <SearchBar callback={setSearchFilter} />
           <table className={isMobile ? "text-xs" : ""}>
             <thead>
