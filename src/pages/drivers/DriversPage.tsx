@@ -14,6 +14,7 @@ import SecondaryNavigation from "../../components/SecondaryNavigation";
 import SearchBar from "../../components/SearchBar";
 import useScreenType from "../../hooks/useScreenType";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import useDeleteApi from "../../hooks/useDeleteApi";
 
 export default function DriversList() {
   const [isViewingDriver, setIsViewingDriver] = useState<boolean>(false);
@@ -25,6 +26,12 @@ export default function DriversList() {
 
   const { isMobile } = useScreenType();
   const { data, isLoading, error } = useApi("drivers");
+  const {
+    doDelete,
+    data: deleteData,
+    isLoading: isDeleteLoading,
+    error: deleteError,
+  } = useDeleteApi("drivers");
 
   const filteredData = useMemo(() => {
     if (!searchFilter) return data;
@@ -44,6 +51,10 @@ export default function DriversList() {
     console.log(driver);
   };
 
+  const deleteDriver = (driver: Driver) => {
+    doDelete(driver.id);
+  };
+
   const viewDriver = (driver: Driver) => {
     setSelectedDriver(driver);
     setIsViewingDriver(true);
@@ -52,7 +63,6 @@ export default function DriversList() {
   const viewList = () => {
     setIsViewingDriver(false);
   };
-
 
   if (isEditingDriver) {
     return (
@@ -79,34 +89,49 @@ export default function DriversList() {
               <h1 className="text-center">
                 Are you sure you would like to delete this driver?
               </h1>
+              {deleteError && (
+                <h1>
+                  An error ocurred when attempting to delete driver:{" "}
+                  {deleteError.message}
+                </h1>
+              )}
+              {deleteData && <h1>Driver successfully deleted!</h1>}
               <div className="flex gap-4 justify-center [&>button]:grow">
-                <FormButton
-                  onClick={() => setIsShowingPopup(false)}
-                  className="text-danger"
-                  overrideColor
-                >
-                  YES
-                </FormButton>
-                <FormButton onClick={() => setIsShowingPopup(false)}>
-                  NO
-                </FormButton>
+                {isDeleteLoading ? (
+                  <Throbber />
+                ) : (
+                  <>
+                    <FormButton
+                      onClick={() => deleteDriver(selectedDriver)}
+                      className="text-danger"
+                      overrideColor
+                    >
+                      YES
+                    </FormButton>
+                    <FormButton onClick={() => setIsShowingPopup(false)}>
+                      NO
+                    </FormButton>
+                  </>
+                )}
               </div>
             </Card>
           </Popup>
         )}
-        <Card className={`text-center flex flex-col items-center justify-center  ${isMobile ? "" : "w-2/5 mx-auto"}`}>
-        {selectedDriver.photo ? (
-    <img
-      src={selectedDriver.photo}
-      alt="Driver"
-      className={`rounded-lg ${isMobile ? "w-36 h-36 aspect-square object-cover" : "w-44 h-44 aspect-square object-cover"}`}
-    />
-  ) : (
-    <Icon
-      icon="iconamoon:profile-circle-thin" 
-      className={`${isMobile ? "w-20 h-20" : "w-32 h-32"}`}
-    />
-  )}
+        <Card
+          className={`text-center flex flex-col items-center justify-center  ${isMobile ? "" : "w-2/5 mx-auto"}`}
+        >
+          {selectedDriver.photo ? (
+            <img
+              src={selectedDriver.photo}
+              alt="Driver"
+              className={`rounded-lg ${isMobile ? "w-36 h-36 aspect-square object-cover" : "w-44 h-44 aspect-square object-cover"}`}
+            />
+          ) : (
+            <Icon
+              icon="iconamoon:profile-circle-thin"
+              className={`${isMobile ? "w-20 h-20" : "w-32 h-32"}`}
+            />
+          )}
           <h1 className="text-xl">{selectedDriver.name}</h1>
           <h2>License: {selectedDriver.licenseNumber}</h2>
           <h2>Mobile: {selectedDriver.phoneNumber}</h2>
@@ -146,8 +171,8 @@ export default function DriversList() {
           {isLoading && <Throbber />}
           {error && <h1>An error occurred: {error.message}</h1>}
           {!isLoading && !error && filteredData?.length === 0 && (
-          <h1 className="text-center">You have not added any drivers yet.</h1>
-        )}
+            <h1 className="text-center">You have not added any drivers yet.</h1>
+          )}
           {!isLoading &&
             !error &&
             filteredData?.map((driver) => (
