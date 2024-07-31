@@ -56,7 +56,7 @@ export default function ClientsList({ callback }: ClientsListProps) {
           <button onClick={viewList}>&lt; Client information</button>
         </PageHeading>
 
-        <Card className="text-center">
+        <Card className={`text-center ${isMobile ? "" : "w-2/5 mx-auto"}`}> 
           <h1 className="text-xl">{selectedClient.name}</h1>
           <h2>Num of tasks : {selectedClient.tasks.length}</h2>
           <h2>Completed : {selectedClient.tasks.length}</h2>
