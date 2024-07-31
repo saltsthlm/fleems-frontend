@@ -13,6 +13,7 @@ import PageWithNavigation from "../../components/PageWithNavigation";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
 import SearchBar from "../../components/SearchBar";
 import useScreenType from "../../hooks/useScreenType";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 export default function DriversList() {
   const [isViewingDriver, setIsViewingDriver] = useState<boolean>(false);
@@ -92,8 +93,19 @@ export default function DriversList() {
             </Card>
           </Popup>
         )}
-        <Card className="text-center">
-          <img src={selectedDriver.photo} className="rounded-lg" />
+        <Card className="text-center flex flex-col items-center justify-center">
+        {selectedDriver.photo ? (
+    <img
+      src={selectedDriver.photo}
+      alt="Driver"
+      className={`rounded-lg ${isMobile ? "w-36 h-36 aspect-square object-cover" : "w-44 h-44 aspect-square object-cover"}`}
+    />
+  ) : (
+    <Icon
+      icon="iconamoon:profile-circle-thin" 
+      className={`${isMobile ? "w-20 h-20" : "w-32 h-32"}`}
+    />
+  )}
           <h1 className="text-xl">{selectedDriver.name}</h1>
           <h2>License: {selectedDriver.licenseNumber}</h2>
           <h2>Mobile: {selectedDriver.phoneNumber}</h2>
@@ -141,7 +153,18 @@ export default function DriversList() {
                 isCentered={false}
                 onClick={() => viewDriver(driver)}
               >
-                <img src={driver.photo} className={`rounded-lg ${isMobile ? "w-20 h-20 aspect-square object-cover" : "w-32 h-32 aspect-square object-cover"}`} />
+                {driver.photo ? (
+                  <img
+                    src={driver.photo}
+                    alt="Driver"
+                    className={`rounded-lg ${isMobile ? "w-20 h-20 aspect-square object-cover" : "w-32 h-32 aspect-square object-cover"}`}
+                  />
+                ) : (
+                  <Icon
+                    icon="iconamoon:profile-circle-thin"
+                    className={`${isMobile ? "w-20 h-20" : "w-32 h-32"}`}
+                  />
+                )}
                 <div>
                   <h1 className="text-xl">{driver.name}</h1>
                   <p>License: {driver.licenseNumber}</p>
@@ -153,7 +176,7 @@ export default function DriversList() {
         <FormButton
           className={`sticky ${isMobile ? "bottom-20" : "bottom-0"} w-full mx-auto drop-shadow-strong`}
         >
-         + ADD DRIVER
+          + ADD DRIVER
         </FormButton>
       </div>
     </PageWithNavigation>
