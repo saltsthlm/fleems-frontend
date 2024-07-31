@@ -49,7 +49,7 @@ export default function TripLogs({ parentRoute }: TripLogsProps) {
 
   const formatDate = (date: string | Date): string => {
     if (!date) {
-      return "Present";
+      return "Ongoing";
     }
     const newDate = date instanceof Date ? date : new Date(date);
     if (isMobile) {
