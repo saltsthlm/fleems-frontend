@@ -166,7 +166,7 @@ export default function Table({ data, callback }: TableProps) {
                   {row.getVisibleCells().map((cell) => (
                     <td
                       key={cell.id}
-                      className={`px-4 pt-[14px] pb-[18px] ${callback && "hover:cursor-pointer"}`}
+                      className={`border px-4 pt-[14px] pb-[18px] ${callback && "hover:cursor-pointer"}`}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
