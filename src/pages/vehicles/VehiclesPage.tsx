@@ -172,7 +172,10 @@ export default function TrucksList() {
           </>
         )}
         {!isMobile && data !== undefined && (
-          <Table callback={(a) => viewTruck(a)} data={data} />
+          <div className="mt-6">
+            <Table callback={(a) => viewTruck(a)} data={data} />
+          </div>
+          
         )}
       </PageWithNavigation>
     </>
