@@ -156,7 +156,10 @@ export default function ClientsList({ callback }: ClientsListProps) {
           activeTab={activeTab}
           parentRoute="/clients"
         />
-        <Table data={dataInfo} />
+         <div className="mt-6">
+         <Table data={dataInfo} />
+         </div>
+        
       </PageWithNavigation>
     );
   }
