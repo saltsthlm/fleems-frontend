@@ -29,12 +29,50 @@ export default function Table({ data }: TableProps) {
 
   const [sorting, setSorting] = useState<SortingState>([]);
 
+  const replacements: { [key: string]: string } = {
+    licenseNumber: "License Number",
+    payload: "Payload (kg)",
+    height: "Height (m)",
+    weight: "Weight (kg)",
+    length: "Length (m)",
+    distanceDriven: "Distance Driven (km)",
+    model: "Model",
+    id: "ID",
+    contactPerson: "Contact Person",
+    contactEmail: "Contact Email",
+    contactPhoneNumber: "Contact Number",
+    name: "Name",
+    startDestination: "Start Destination",
+    endDestination: "End Destination",
+    dateCreated: "Date Created",
+    dateFinished: "Date Finished",
+    expectedDistance: "Expected Distance (km)",
+    expectedTime: "Expected Time (hours)",
+    startDate: "Start Date",
+    product: "Product",
+    quantity: "Quantity",
+    legs: "Legs",
+    client: "Client",
+    startAddress: "Start Address",
+    endAddress: "End Address",
+    state: "State",
+  };
+
   const columns = Object.keys(data[0])
     .filter((k) => k != "id")
     .map((key) =>
       columnHelper.accessor(key as keyof DataType, {
-        cell: (info) => info.getValue(),
-        header: () => <span>{key.replace(/([A-Z])/g, " $1").trim()}</span>,
+        cell: (info) => {
+          const value = info.getValue();
+          if (typeof value === "number") {
+            return new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 })
+              .format(value)
+              .replace(/,/g, " ");
+          }
+          return value;
+        },
+
+        header: () => <span>{replacements[key]}</span>,
         enableColumnFilter: true,
       })
     );
