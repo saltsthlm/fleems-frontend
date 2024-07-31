@@ -16,9 +16,10 @@ type DataType = Vehicle | ClientInfoDto | Task;
 
 interface TableProps {
   data: DataType[];
+  callback?: (arg0: DataType) => void;
 }
 
-export default function Table({ data }: TableProps) {
+export default function Table({ data, callback }: TableProps) {
   const columnHelper = createColumnHelper<DataType>();
   const [columnOrder, setColumnOrder] = useState<string[]>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -153,9 +154,20 @@ export default function Table({ data }: TableProps) {
             </thead>
             <tbody>
               {table.getRowModel().rows.map((row) => (
-                <tr key={row.id} className="border-b">
+                <tr
+                  key={row.id}
+                  className="border-b"
+                  onClick={
+                    callback != undefined
+                      ? () => callback(row.original)
+                      : () => {}
+                  }
+                >
                   {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="px-4 pt-[14px] pb-[18px]">
+                    <td
+                      key={cell.id}
+                      className={`px-4 pt-[14px] pb-[18px] ${callback && "hover:cursor-pointer"}`}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -168,37 +180,36 @@ export default function Table({ data }: TableProps) {
           </table>
         </div>
         <div className="flex justify-center mt-2">
-      <div className="flex items-center gap-1 mr-2">
-          Go to page:
-          <input
-            type="number"
-            defaultValue={table.getState().pagination.pageIndex + 1}
-            onChange={(e) => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0;
-              table.setPageIndex(page);
-            }}
-            className="border p-1 rounded w-8 h-6"
-          />
+          <div className="flex items-center gap-1 mr-2">
+            Go to page:
+            <input
+              type="number"
+              defaultValue={table.getState().pagination.pageIndex + 1}
+              onChange={(e) => {
+                const page = e.target.value ? Number(e.target.value) - 1 : 0;
+                table.setPageIndex(page);
+              }}
+              className="border p-1 rounded w-8 h-6"
+            />
+          </div>
+          <div>
+            <select
+              className=""
+              value={table.getState().pagination.pageSize}
+              onChange={(e) => {
+                table.setPageSize(Number(e.target.value));
+              }}
+            >
+              {[10, 20, 30, 40, 50].map((pageSize) => (
+                <option key={pageSize} value={pageSize}>
+                  Show {pageSize}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-        <div>
-        <select
-        className=""
-          value={table.getState().pagination.pageSize}
-          onChange={(e) => {
-            table.setPageSize(Number(e.target.value));
-          }}
-        >
-          {[10, 20, 30, 40, 50].map((pageSize) => (
-            <option key={pageSize} value={pageSize} >
-              Show {pageSize}
-            </option>
-          ))}
-        </select>
-        </div>
-        </div>  
-
       </div>
-      
+
       <div className="flex justify-center my-4">
         <button
           className="border rounded p-1"
@@ -236,7 +247,6 @@ export default function Table({ data }: TableProps) {
           {">>"}
         </button>
       </div>
-    
     </div>
   );
 }
