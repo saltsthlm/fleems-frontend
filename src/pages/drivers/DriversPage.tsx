@@ -128,27 +128,34 @@ export default function DriversList() {
         parentRoute="/drivers"
       />
       <SearchBar value={searchFilter} callback={setSearchFilter} />
-      <GapList className="grid-cols-4">
-        {isLoading && <Throbber />}
-        {error && <h1>An error occurred: {error.message}</h1>}
-        {!isLoading &&
-          !error &&
-          filteredData?.map((driver) => (
-            <CardButton
-              key={driver.id}
-              className={`${isMobile ? "flex flex-row text-left" : "flex flex-col items-center"}`}
-              isCentered={false}
-              onClick={() => viewDriver(driver)}
-            >
-              <img src={driver.photo} className="w-24 rounded-lg" />
-              <div>
-                <h1 className="text-xl">{driver.name}</h1>
-                <p>License: {driver.licenseNumber}</p>
-                <p>Mobile: {driver.phoneNumber}</p>
-              </div>
-            </CardButton>
-          ))}
-      </GapList>
+      <div className="relative flex flex-col gap-4">
+        <GapList className="grid-cols-4">
+          {isLoading && <Throbber />}
+          {error && <h1>An error occurred: {error.message}</h1>}
+          {!isLoading &&
+            !error &&
+            filteredData?.map((driver) => (
+              <CardButton
+                key={driver.id}
+                className={`${isMobile ? "flex flex-row text-left" : "flex flex-col items-center"}`}
+                isCentered={false}
+                onClick={() => viewDriver(driver)}
+              >
+                <img src={driver.photo} className="w-24 rounded-lg" />
+                <div>
+                  <h1 className="text-xl">{driver.name}</h1>
+                  <p>License: {driver.licenseNumber}</p>
+                  <p>Mobile: {driver.phoneNumber}</p>
+                </div>
+              </CardButton>
+            ))}
+        </GapList>
+        <FormButton
+          className={`sticky ${isMobile ? "bottom-20" : "bottom-0"} w-full mx-auto drop-shadow-strong`}
+        >
+          Helooooo
+        </FormButton>
+      </div>
     </PageWithNavigation>
   );
 }
