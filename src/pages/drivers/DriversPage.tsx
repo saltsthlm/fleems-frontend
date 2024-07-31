@@ -15,7 +15,6 @@ import SearchBar from "../../components/SearchBar";
 import useScreenType from "../../hooks/useScreenType";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import useDeleteApi from "../../hooks/useDeleteApi";
-import { useNavigate } from "@tanstack/react-router";
 
 export default function DriversList() {
   const [isViewingDriver, setIsViewingDriver] = useState<boolean>(false);
@@ -25,7 +24,6 @@ export default function DriversList() {
   const [activeTab, setActiveTab] = useState<string>("information");
   const [searchFilter, setSearchFilter] = useState<string>("");
 
-  const navigate = useNavigate({ from: "/drivers" });
   const { isMobile } = useScreenType();
   const { data, isLoading, error } = useApi("drivers");
   const {
