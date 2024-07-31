@@ -94,7 +94,7 @@ export default function DriversList() {
             </Card>
           </Popup>
         )}
-        <Card className="text-center flex flex-col items-center justify-center">
+        <Card className={`text-center flex flex-col items-center justify-center  ${isMobile ? "" : "w-2/5 mx-auto"}`}>
         {selectedDriver.photo ? (
     <img
       src={selectedDriver.photo}
