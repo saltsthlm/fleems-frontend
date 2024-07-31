@@ -1,7 +1,10 @@
 import { PieChart } from "@mui/x-charts";
 import Card from "../../../components/Card";
+import useScreenType from "../../../hooks/useScreenType";
 
 export default function AssignmentStats() {
+  const { isMobile } = useScreenType();
+
   return (
     <Card>
       <h1 className="text-xl">Task assignment data</h1>
@@ -14,7 +17,7 @@ export default function AssignmentStats() {
             ],
           },
         ]}
-        height={200}
+        height={isMobile ? 100 : 200}
       />
     </Card>
   );
