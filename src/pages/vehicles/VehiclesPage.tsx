@@ -171,7 +171,9 @@ export default function TrucksList() {
             </GapList>
           </>
         )}
-        {!isMobile && data !== undefined && <Table data={data} />}
+        {!isMobile && data !== undefined && (
+          <Table callback={(a) => viewTruck(a)} data={data} />
+        )}
       </PageWithNavigation>
     </>
   );
