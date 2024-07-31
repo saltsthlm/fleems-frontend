@@ -14,6 +14,7 @@ export default function HomePage() {
         <AssignmentStats />
         <FleetDataStats />
         <Card>
+          <h1 className="text-xl">All active trucks</h1>
           <Map />
         </Card>
       </GapList>
