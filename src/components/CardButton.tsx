@@ -14,7 +14,7 @@ export default function CardButton({
   return (
     <button
       onClick={callback}
-      className={`card bg-background text-black p-5 w-full drop-shadow-lg gap-3 ${className} ${isCentered && "items-center justify-center py-10"}`}
+      className={`card bg-background text-black c p-5 w-full drop-shadow-lg gap-3 hover:bg-button ${className} ${isCentered && "items-center justify-center py-10"}`}
     >
       {children}
     </button>
