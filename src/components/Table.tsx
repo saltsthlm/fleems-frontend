@@ -116,7 +116,10 @@ export default function Table({ data, callback }: TableProps) {
             </thead>
             <tbody>
               {table.getRowModel().rows.map((row) => (
-                <tr key={row.id} className="border-b">
+                <tr
+                  key={row.id}
+                  className={`border-b ${callback && "hover:cursor-pointer"}`}
+                >
                   {row.getVisibleCells().map((cell) => (
                     <td
                       key={cell.id}
