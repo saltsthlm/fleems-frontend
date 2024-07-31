@@ -1,18 +1,39 @@
-import { LineChart } from "@mui/x-charts";
+import { BarChart } from "@mui/x-charts";
 import Card from "../../../components/Card";
+import useScreenType from "../../../hooks/useScreenType";
 
 export default function FleetDataStats() {
+  const { isMobile } = useScreenType();
+
   return (
     <Card>
-      <h1 className="text-xl">Super awesome data</h1>
-      <LineChart
-        xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
-        series={[
+      <h1 className="text-xl">Finished tasks per month</h1>
+      <BarChart
+        xAxis={[
           {
-            data: [2, 5.5, 2, 8.5, 1.5, 5],
+            scaleType: "band",
+            data: [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec",
+            ],
           },
         ]}
-        height={300}
+        series={[
+          {
+            data: [5, 4, 12, 8, 5, 6, 7, 8, 0, 20, 11, 12],
+          },
+        ]}
+        height={isMobile ? 200 : 200}
       />
     </Card>
   );
