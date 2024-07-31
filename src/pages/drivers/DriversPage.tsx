@@ -153,7 +153,7 @@ export default function DriversList() {
         <FormButton
           className={`sticky ${isMobile ? "bottom-20" : "bottom-0"} w-full mx-auto drop-shadow-strong`}
         >
-          ADD DRIVER
+         + ADD DRIVER
         </FormButton>
       </div>
     </PageWithNavigation>
