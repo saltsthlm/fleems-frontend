@@ -141,7 +141,7 @@ export default function DriversList() {
         parentRoute="/drivers"
       />
       <SearchBar value={searchFilter} callback={setSearchFilter} />
-      <div className="relative flex flex-col gap-4">
+      <div className="flex flex-col gap-4">
         <GapList className="grid-cols-4">
           {isLoading && <Throbber />}
           {error && <h1>An error occurred: {error.message}</h1>}
