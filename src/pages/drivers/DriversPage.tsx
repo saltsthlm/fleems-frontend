@@ -53,6 +53,7 @@ export default function DriversList() {
     setIsViewingDriver(false);
   };
 
+
   if (isEditingDriver) {
     return (
       <PageWithNavigation>
@@ -144,6 +145,9 @@ export default function DriversList() {
         <GapList className="grid-cols-4">
           {isLoading && <Throbber />}
           {error && <h1>An error occurred: {error.message}</h1>}
+          {!isLoading && !error && filteredData?.length === 0 && (
+          <h1 className="text-center">You have not added any drivers yet.</h1>
+        )}
           {!isLoading &&
             !error &&
             filteredData?.map((driver) => (
@@ -174,7 +178,7 @@ export default function DriversList() {
             ))}
         </GapList>
         <FormButton
-          className={`sticky ${isMobile ? "bottom-20" : "bottom-0"} w-full mx-auto drop-shadow-strong`}
+          className={`sticky ${isMobile ? "bottom-20" : "bottom-4"} w-full mx-auto drop-shadow-strong`}
         >
           + ADD DRIVER
         </FormButton>
