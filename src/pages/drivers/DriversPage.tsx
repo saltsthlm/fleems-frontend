@@ -141,7 +141,7 @@ export default function DriversList() {
                 isCentered={false}
                 onClick={() => viewDriver(driver)}
               >
-                <img src={driver.photo} className="w-24 rounded-lg" />
+                <img src={driver.photo} className={`rounded-lg ${isMobile ? "w-20 h-20 aspect-square object-cover" : "w-32 h-32 aspect-square object-cover"}`} />
                 <div>
                   <h1 className="text-xl">{driver.name}</h1>
                   <p>License: {driver.licenseNumber}</p>
