@@ -99,7 +99,7 @@ export default function TrucksList() {
               </Card>
             </Popup>
           )}
-          <Card className="text-center">
+          <Card className={`text-center ${isMobile ? "" : "w-2/5 mx-auto"}`}>
             <h1 className="text-xl">{selectedTruck.licenseNumber}</h1>
             <h2>Model: {selectedTruck.model}</h2>
             <h2>Payload: {selectedTruck.payload}</h2>
