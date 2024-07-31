@@ -2,7 +2,7 @@ import { PieChart } from "@mui/x-charts";
 import Card from "../../../components/Card";
 import useScreenType from "../../../hooks/useScreenType";
 
-export default function AssignmentStats() {
+export default function TaskStatusTasks() {
   const { isMobile } = useScreenType();
 
   return (
