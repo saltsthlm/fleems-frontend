@@ -129,7 +129,38 @@ export default function Table({ data }: TableProps) {
             </tbody>
           </table>
         </div>
+        <div className="flex justify-center mt-2">
+      <div className="flex items-center gap-1 mr-2">
+          Go to page:
+          <input
+            type="number"
+            defaultValue={table.getState().pagination.pageIndex + 1}
+            onChange={(e) => {
+              const page = e.target.value ? Number(e.target.value) - 1 : 0;
+              table.setPageIndex(page);
+            }}
+            className="border p-1 rounded w-8 h-6"
+          />
+        </div>
+        <div>
+        <select
+        className=""
+          value={table.getState().pagination.pageSize}
+          onChange={(e) => {
+            table.setPageSize(Number(e.target.value));
+          }}
+        >
+          {[10, 20, 30, 40, 50].map((pageSize) => (
+            <option key={pageSize} value={pageSize} >
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+        </div>
+        </div>  
+
       </div>
+      
       <div className="flex justify-center my-4">
         <button
           className="border rounded p-1"
@@ -139,14 +170,21 @@ export default function Table({ data }: TableProps) {
           {"<<"}
         </button>
         <button
-          className="border rounded p-1"
+          className="border rounded p-1 ml-2"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
           {"<"}
         </button>
+        <span className="flex items-center gap-1 mx-2">
+          <div>Page</div>
+          <strong>
+            {table.getState().pagination.pageIndex + 1} of{" "}
+            {table.getPageCount().toLocaleString()}
+          </strong>
+        </span>
         <button
-          className="border rounded p-1"
+          className="border rounded p-1 mr-2"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
@@ -159,38 +197,8 @@ export default function Table({ data }: TableProps) {
         >
           {">>"}
         </button>
-        <span className="flex items-center gap-1">
-          <div>Page</div>
-          <strong>
-            {table.getState().pagination.pageIndex + 1} of{" "}
-            {table.getPageCount().toLocaleString()}
-          </strong>
-        </span>
-        <span className="flex items-center gap-1">
-          | Go to page:
-          <input
-            type="number"
-            defaultValue={table.getState().pagination.pageIndex + 1}
-            onChange={(e) => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0;
-              table.setPageIndex(page);
-            }}
-            className="border p-1 rounded w-16"
-          />
-        </span>
-        <select
-          value={table.getState().pagination.pageSize}
-          onChange={(e) => {
-            table.setPageSize(Number(e.target.value));
-          }}
-        >
-          {[10, 20, 30, 40, 50].map((pageSize) => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))}
-        </select>
       </div>
+    
     </div>
   );
 }
