@@ -4,6 +4,7 @@ import PageWithNavigation from "../../components/PageWithNavigation";
 import Map from "../../components/Map";
 import AssignmentStats from "./components/AssignmentStats";
 import FleetDataStats from "./components/FleetDataStats";
+import Card from "../../components/Card";
 
 export default function HomePage() {
   return (
@@ -12,8 +13,10 @@ export default function HomePage() {
       <GapList className="grid-cols-3">
         <AssignmentStats />
         <FleetDataStats />
+        <Card>
+          <Map />
+        </Card>
       </GapList>
-      <Map />
     </PageWithNavigation>
   );
 }
