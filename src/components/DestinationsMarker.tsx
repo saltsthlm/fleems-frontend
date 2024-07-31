@@ -4,9 +4,7 @@ import { PropsWithClassName } from "../types/ComponentTypes";
 export default function DestinationsMarker({ className }: PropsWithClassName) {
   return (
     <div className={className ?? ""}>
-      <Icon icon="carbon:circle-outline" />
-      <Icon icon="ant-design:dash-outlined" className="rotate-90" />
-      <Icon icon="vaadin:dot-circle" />
+      <Icon icon="fluent-mdl2:switcher-start-end" className="h-10 w-6"/>
     </div>
   );
 }
