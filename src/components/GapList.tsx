@@ -10,7 +10,7 @@ export default function GapList({
 
   return (
     <div
-      className={`${isMobile ? "flex flex-col gap-5 items-center" : `grid gap-5`} ${className && className}`}
+      className={`${isMobile ? "flex flex-col gap-5 items-center mb-2" : `grid gap-5`} ${className && className}`}
     >
       {children}
     </div>

@@ -69,7 +69,7 @@ export default function TripLogs({ parentRoute }: TripLogsProps) {
           <SearchBar callback={setSearchFilter} />
           <table className={isMobile ? "text-xs" : ""}>
             <thead>
-              <tr className="grid w-full grid-cols-4 gap-3 px-3">
+              <tr className="grid w-full grid-cols-4 gap-3 px-3 mb-2">
                 <th>Task</th>
                 <th>Duration</th>
                 <th>Location</th>
