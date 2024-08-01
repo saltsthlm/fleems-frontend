@@ -52,7 +52,7 @@ const formatDate = (dateInput: Date | string): string => {
 export default function TasksPage() {
   const [searchFilter, setSearchFilter] = useState<string>("");
   const [isViewingTask, setIsViewingTask] = useState<boolean>(false);
-  const [selectedTask, setSelectedTask] = useState<Task>();
+  const [selectedTask, setSelectedTask] = useState<TableTask>();
   const [isShowingAssignForm, setIsShowingAssignForm] =
     useState<boolean>(false); // New state for form visibility
   const [activeTab, setActiveTab] = useState<string>("information");
@@ -75,41 +75,52 @@ export default function TasksPage() {
   useEffect(() => {
     if (filteredData != undefined) {
       setTableData(
-        filteredData.map((task) => {
-          const {
-            client,
-            legs,
-            startDestination,
-            endDestination,
-            startAddress,
-            endAddress,
-            dateCreated,
-            dateFinished,
-            startDate,
-            ...tablesD
-          } = task;
-          console.log(task);
-          return {
-            client: client.name,
-            startAddress: startAddress.city,
-            endAddress: endAddress.city,
-            dateCreated: dateCreated
-              ? new Date(dateCreated).toLocaleDateString()
-              : "-",
-            dateFinished: dateFinished
-              ? new Date(dateFinished).toLocaleDateString()
-              : "-",
-            startDate: startDate
-              ? new Date(startDate).toLocaleDateString()
-              : "-",
-            ...tablesD,
-          };
-        })
+        filteredData
+          .map((task) => {
+            const {
+              client,
+              legs,
+              startDestination,
+              endDestination,
+              startAddress,
+              endAddress,
+              dateCreated,
+              dateFinished,
+              startDate,
+              ...tablesD
+            } = task;
+            console.log(task);
+            return {
+              client: client.name,
+              startAddress: startAddress.city,
+              endAddress: endAddress.city,
+              dateCreated: dateCreated
+                ? new Date(dateCreated).toLocaleDateString()
+                : "-",
+              dateFinished: dateFinished
+                ? new Date(dateFinished).toLocaleDateString()
+                : "-",
+              startDate: startDate
+                ? new Date(startDate).toLocaleDateString()
+                : "-",
+              legsLength: legs.length,
+              ...tablesD,
+            };
+          })
+          .sort((t1, t2) => {
+            if (t1.state.toUpperCase() == "UNASSIGNED") {
+              return -1;
+            } else if (t2.state.toUpperCase() == "UNASSIGNED") {
+              return 1;
+            } else {
+              return 0;
+            }
+          })
       );
     }
   }, [filteredData]);
 
-  const viewTask = (task: Task) => {
+  const viewTask = (task: TableTask) => {
     setSelectedTask(task);
     setIsViewingTask(true);
   };
@@ -149,10 +160,9 @@ export default function TasksPage() {
               <button onClick={viewList}>&lt; Task information</button>
             </PageHeading>
             <Card className="text-center">
-              <h1 className="text-xl">{selectedTask.client.name}</h1>
+              <h1 className="text-xl">{selectedTask.client}</h1>
               <h2>
-                Route : {selectedTask.startAddress.city} -{" "}
-                {selectedTask.endAddress.city}
+                Route : {selectedTask.startAddress} - {selectedTask.endAddress}
               </h2>
               <h2>
                 Task : Transportation of {selectedTask.payload}{" "}
@@ -164,7 +174,7 @@ export default function TasksPage() {
                   {capitalizeFirstLetter(selectedTask.state ?? "")}
                 </span>
               </h2>
-              <h2>No. of legs : {selectedTask.legs?.length}</h2>
+              <h2>No. of legs : {selectedTask.legsLength}</h2>
               <h2>
                 Start date :{" "}
                 {selectedTask.startDate

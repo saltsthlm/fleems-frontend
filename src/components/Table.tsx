@@ -57,6 +57,7 @@ export default function Table({ data, callback }: TableProps) {
     startAddress: "Start Address",
     endAddress: "End Address",
     state: "State",
+    legsLength: "No. of legs",
   };
 
   const columns = Object.keys(data[0] || {})
@@ -65,7 +66,7 @@ export default function Table({ data, callback }: TableProps) {
       columnHelper.accessor(key as keyof DataType, {
         cell: (info) => {
           const value = info.getValue();
-          if (typeof value === "number") {
+          if (typeof value === "number" && value > 100) {
             return new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 })
               .format(value)
               .replace(/,/g, " ");

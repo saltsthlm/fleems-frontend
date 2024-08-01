@@ -75,6 +75,7 @@ export type TableTask = {
   client: string;
   startAddress: string;
   endAddress: string;
+  legsLength: number;
 };
 
 export type ClientResponseDto = {
