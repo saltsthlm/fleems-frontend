@@ -18,8 +18,8 @@ export default function Vehiclestatus() {
           series={[
             {
               data: [
-                { id: 0, value: data[0], label: "Assigned" },
-                { id: 1, value: data[1], label: "Unassigned" },
+                { id: 0, value: data?.[0] ?? 1, label: "Assigned" },
+                { id: 1, value: data?.[1] ?? 1, label: "Unassigned" },
               ],
             },
           ]}

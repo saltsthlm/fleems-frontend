@@ -24,6 +24,7 @@ type StatsResponseMapping = {
   completed: number[];
   vehicles: number[];
   drivers: number[];
+  tasks: number[];
 };
 type ApiExtraParams = {
   statsEndpoint: keyof StatsResponseMapping;
