@@ -89,7 +89,6 @@ export default function TasksPage() {
               startDate,
               ...tablesD
             } = task;
-            console.log(task);
             return {
               client: client.name,
               startAddress: startAddress.city,
@@ -152,7 +151,6 @@ export default function TasksPage() {
             </PageHeading>
             <TaskAssignForm
               onSubmit={(formData) => {
-                console.log(formData);
                 setIsShowingAssignForm(false);
               }}
               buttonText="ASSIGN"
@@ -236,7 +234,7 @@ export default function TasksPage() {
         <div>
           {tableData !== undefined && !isMobile && (
             <div className="mt-6">
-              <Table callback={resetPage} data={tableData} />
+              <Table callback={(a) => viewTask(a)} data={tableData} />
             </div>
           )}
           {isMobile && (
