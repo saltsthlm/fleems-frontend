@@ -51,57 +51,53 @@ export default function TaskAssignForm({
           : initialTask?.client.name}
       </h1>
       <FormWithButton buttonText={buttonText} onSubmit={handleSubmit}>
+        <label htmlFor="driver">Driver</label>
         {isDriverLoading ? (
           <Throbber />
         ) : (
-          <>
-            <label htmlFor="driver">Driver</label>
-            <select
-              name="driver"
-              value={driver?.id ?? ""}
-              required
-              onChange={(e) =>
-                setDriver(
-                  driverData?.find((driver) => driver.id == e.target.value)
-                )
-              }
-              className="bg-white text-black p-2 w-full gap-3 rounded-xl"
-            >
-              <option value="">-- Select driver --</option>
-              {driverData?.map((driver) => (
-                <option key={driver.id} value={driver.id}>
-                  {driver.name}
-                </option>
-              ))}
-            </select>
-          </>
+          <select
+            name="driver"
+            value={driver?.id ?? ""}
+            required
+            onChange={(e) =>
+              setDriver(
+                driverData?.find((driver) => driver.id == e.target.value)
+              )
+            }
+            className="bg-white text-black p-2 w-full gap-3 rounded-xl"
+          >
+            <option value="">-- Select driver --</option>
+            {driverData?.map((driver) => (
+              <option key={driver.id} value={driver.id}>
+                {driver.name}
+              </option>
+            ))}
+          </select>
         )}
+        <label htmlFor="truck">Truck</label>
         {isTruckLoading ? (
           <Throbber />
         ) : (
-          <>
-            <label htmlFor="truck">Truck</label>
-            <select
-              name="truck"
-              value={truck?.licenseNumber ?? ""}
-              required
-              onChange={(e) =>
-                setTruck(
-                  truckData?.find(
-                    (truck) => truck.licenseNumber == e.target.value
-                  )
+          <select
+            name="truck"
+            value={truck?.licenseNumber ?? ""}
+            required
+            onChange={(e) =>
+              setTruck(
+                truckData?.find(
+                  (truck) => truck.licenseNumber == e.target.value
                 )
-              }
-              className="bg-white text-black p-2 w-full gap-3 rounded-xl"
-            >
-              <option value="">-- Select truck --</option>
-              {truckData?.map((truck) => (
-                <option key={truck.id} value={truck.licenseNumber}>
-                  {truck.licenseNumber}
-                </option>
-              ))}
-            </select>
-          </>
+              )
+            }
+            className="bg-white text-black p-2 w-full gap-3 rounded-xl"
+          >
+            <option value="">-- Select truck --</option>
+            {truckData?.map((truck) => (
+              <option key={truck.id} value={truck.licenseNumber}>
+                {truck.licenseNumber}
+              </option>
+            ))}
+          </select>
         )}
       </FormWithButton>
     </div>
