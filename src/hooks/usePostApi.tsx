@@ -19,7 +19,7 @@ export default function usePostApi<T extends ApiEndpoints>(endpoint: T) {
   const { credential } = useAuth();
 
   const {
-    data,
+    isSuccess,
     isPending: isLoading,
     error,
     mutate: doPost,
@@ -35,5 +35,5 @@ export default function usePostApi<T extends ApiEndpoints>(endpoint: T) {
     },
   });
 
-  return { data, isLoading, error, doPost };
+  return { isSuccess, isLoading, error, doPost };
 }

@@ -10,7 +10,7 @@ type CreateDriverFormProps = {
 export default function CreateDriverForm({
   afterSubmit,
 }: CreateDriverFormProps) {
-  const { doPost, isLoading, error, data } = usePostApi("drivers");
+  const { doPost, isLoading, error, isSuccess } = usePostApi("drivers");
 
   const createDriver = (driver: CreateDriver) => {
     if (!driver) {
@@ -21,8 +21,6 @@ export default function CreateDriverForm({
     doPost(driver);
   };
 
-  console.log(data);
-
   if (error) {
     toast.error("An error ocurred: " + error.message, { duration: 6000 });
   }
@@ -31,7 +29,7 @@ export default function CreateDriverForm({
     return <Throbber />;
   }
 
-  if (data) {
+  if (isSuccess) {
     toast.success("Driver successfully created!", { duration: 6000 });
     if (afterSubmit) {
       afterSubmit();
