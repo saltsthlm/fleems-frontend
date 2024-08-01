@@ -1,15 +1,14 @@
-import { SyntheticEvent, useState, useEffect } from "react";
+import { SyntheticEvent, useState } from "react";
 import FormWithButton from "../../../components/FormWithButton";
-import { Task } from "../../../types/ApiResponses";
+import { Driver, Task, Vehicle } from "../../../types/ApiResponses";
+import useApi from "../../../hooks/useApi";
+import Throbber from "../../../components/Throbber";
+import toast from "react-hot-toast";
 
 type FormData = {
-  task: string; 
-  driver: string;
-  licensePlate: string;
-  startDate?: Date;
-  endDate?: Date;
-  route: string;
-  client: string;
+  taskId: string;
+  driverId: string;
+  truckId: string;
 };
 
 type TaskAssignFormProps = {
@@ -23,76 +22,86 @@ export default function TaskAssignForm({
   onSubmit: callback,
   buttonText,
   initialTask,
-  drivers,
 }: TaskAssignFormProps) {
-  const [task, setTask] = useState<string>(initialTask ? `Transportation of ${initialTask.payload} ${initialTask.product}` : ''); 
-  const [driver, setDriver] = useState<string>(initialTask?.driver ?? '');
-  const [licensePlate, setLicensePlate] = useState<string>(initialTask?.licensePlate ?? '');
-  const [route, setRoute] = useState<string>(initialTask ? `${initialTask.startAddress.city} - ${initialTask.endAddress.city}` : '');
-  const [client , setClient] = useState<string>(initialTask?.client.name ?? '');
+  const [driver, setDriver] = useState<Driver>();
+  const [truck, setTruck] = useState<Vehicle>();
 
-  useEffect(() => {
-    if (initialTask) {
-      setRoute(`${initialTask.startAddress.city} - ${initialTask.endAddress.city}`);
-    }
-  }, [initialTask]);
+  const { data: driverData, isLoading: isDriverLoading } = useApi("drivers");
+
+  const { data: truckData, isLoading: isTruckLoading } = useApi("vehicles");
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-
+    if (!truck || !driver || !initialTask) {
+      return;
+    }
     const formData: FormData = {
-      task,
-      driver,
-      licensePlate,
-      route,
-      client
+      taskId: initialTask?.id,
+      driverId: driver.id,
+      truckId: truck.id,
     };
-
+    toast.success("Task assigned!");
     callback(formData);
   };
 
   return (
-    <FormWithButton buttonText={buttonText} onSubmit={handleSubmit}>
-      <label htmlFor="client">Client</label>
-      <input
-        name="client"
-        type="text"
-        value={client}
-        onChange={(e) => setClient(e.target.value)}
-      />
-      <label htmlFor="task">Task</label>
-      <input
-        name="task"
-        type="text"
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
-      />
-      <label htmlFor="driver">Driver</label>
-      <select
-        name="driver"
-        value={driver}
-        onChange={(e) => setDriver(e.target.value)}
-        className="bg-white text-black p-2 w-full gap-3 rounded-xl"
-      >
-        <option value="">Select driver</option>
-        {drivers.map((driverName) => (
-          <option key={driverName} value={driverName}>{driverName}</option>
-        ))}
-      </select>
-      <label htmlFor="license-plate">License plate</label>
-      <input
-        name="license-plate"
-        type="text"
-        value={licensePlate}
-        onChange={(e) => setLicensePlate(e.target.value)}
-      />
-      <label htmlFor="route">Route</label>
-      <input
-        name="route"
-        type="text"
-        value={route}
-        onChange={(e) => setRoute(e.target.value)}
-      />
-    </FormWithButton>
+    <div className="text-center">
+      <h1 className="text-2xl p-4">
+        Assign transportation of {initialTask?.product} for{" "}
+        {typeof initialTask?.client == "string"
+          ? initialTask?.client
+          : initialTask?.client.name}
+      </h1>
+      <FormWithButton buttonText={buttonText} onSubmit={handleSubmit}>
+        <label htmlFor="driver">Driver</label>
+        {isDriverLoading ? (
+          <Throbber />
+        ) : (
+          <select
+            name="driver"
+            value={driver?.id ?? ""}
+            required
+            onChange={(e) =>
+              setDriver(
+                driverData?.find((driver) => driver.id == e.target.value)
+              )
+            }
+            className="bg-white text-black p-2 w-full gap-3 rounded-xl"
+          >
+            <option value="">-- Select driver --</option>
+            {driverData?.map((driver) => (
+              <option key={driver.id} value={driver.id}>
+                {driver.name}
+              </option>
+            ))}
+          </select>
+        )}
+        <label htmlFor="truck">Truck</label>
+        {isTruckLoading ? (
+          <Throbber />
+        ) : (
+          <select
+            name="truck"
+            value={truck?.licenseNumber ?? ""}
+            required
+            onChange={(e) =>
+              setTruck(
+                truckData?.find(
+                  (truck) => truck.licenseNumber == e.target.value
+                )
+              )
+            }
+            className="bg-white text-black p-2 w-full gap-3 rounded-xl"
+          >
+            <option value="">-- Select truck --</option>
+            {truckData?.map((truck) => (
+              <option key={truck.id} value={truck.licenseNumber}>
+                {truck.licenseNumber}
+              </option>
+            ))}
+          </select>
+        )}
+      </FormWithButton>
+    </div>
   );
 }
