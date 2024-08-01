@@ -27,7 +27,7 @@ export default function LoginFormGoogle() {
         <Throbber />
       ) : (
         <>
-        <Card>
+        <Card className="w-2/3 mx-auto">
           <h1 className="text-center m-4 text-lg">Login with Google <br />to access your Fleems account</h1>
           
           <FormButton
