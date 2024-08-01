@@ -6,7 +6,7 @@ import useApi from "../../../hooks/useApi";
 
 export default function DriverStatus() {
   const { isMobile } = useScreenType();
-  const { data, isLoading } = useApi("stats", { statsEndpoint: "drivers" });
+  const { data, isLoading } = useApi("stats", { statsEndpoint: "driver" });
 
   return (
     <Card className="w-full">
@@ -31,9 +31,9 @@ export default function DriverStatus() {
                 paddingRight: 5,
               },
               itemMarkWidth: 12,
-      itemMarkHeight: 12,
-      markGap: 5,
-      itemGap: 10,
+              itemMarkHeight: 12,
+              markGap: 5,
+              itemGap: 10,
             },
           }}
         />

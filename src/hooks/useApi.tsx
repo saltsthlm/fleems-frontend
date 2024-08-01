@@ -24,8 +24,8 @@ type ApiEndpoints = keyof ApiResponseMapping;
 
 type StatsResponseMapping = {
   completed: number[];
-  vehicles: number[];
-  drivers: number[];
+  vehicle: number[];
+  driver: number[];
   tasks: number[];
   speed: SpeedViolation[];
   rest: RestViolation[];

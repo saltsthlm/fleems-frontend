@@ -6,7 +6,7 @@ import useApi from "../../../hooks/useApi";
 
 export default function Vehiclestatus() {
   const { isMobile } = useScreenType();
-  const { data, isLoading } = useApi("stats", { statsEndpoint: "vehicles" });
+  const { data, isLoading } = useApi("stats", { statsEndpoint: "vehicle" });
 
   return (
     <Card className="w-full">
