@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "../../components/Card";
 import FormButton from "../../components/FormButton";
 import GapList from "../../components/GapList";
@@ -11,17 +11,19 @@ import LoginFormGoogle from "../login/components/LoginFormGoogle";
 export default function ProfilePage() {
   const [isLoggingOut, setIsLoggingOut] = useState<boolean>(false);
   const [isDeletingAccount, setIsDeletingAccount] = useState<boolean>(false);
-  const { isLoggedIn, profile } = useAuth();
+  const { isLoggedIn, profile, logout } = useAuth();
 
-  const logout = () => {
-    console.log("Logging out...");
+  const logoutAccount = () => {
     setIsLoggingOut(false);
+    logout();
   };
 
   const deleteAccount = () => {
     console.log("Deleting account...");
     setIsDeletingAccount(false);
   };
+
+  useEffect(() => {});
 
   return (
     <PageWithNavigation>
@@ -32,7 +34,7 @@ export default function ProfilePage() {
             <h1 className="text-center">Are you sure you want to logout?</h1>
             <div className="flex gap-4 justify-center [&>button]:grow">
               <FormButton
-                onClick={logout}
+                onClick={logoutAccount}
                 className="text-danger"
                 overrideColor
               >
@@ -77,7 +79,9 @@ export default function ProfilePage() {
           </Card>
 
           <div className="flex flex-col mx-auto gap-4">
-            <FormButton onClick={() => logout()}>LOGOUT</FormButton>
+            <FormButton onClick={() => setIsLoggingOut(true)}>
+              LOGOUT
+            </FormButton>
             <FormButton
               onClick={() => setIsDeletingAccount(true)}
               overrideColor

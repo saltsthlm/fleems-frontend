@@ -1,6 +1,6 @@
 import FormButton from "../../../components/FormButton";
 import { useState } from "react";
-import { useGoogleLogin } from "@react-oauth/google";
+import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "@tanstack/react-router";
 import Throbber from "../../../components/Throbber";
 import { useAuth } from "../../../AuthProvider";
@@ -27,20 +27,21 @@ export default function LoginFormGoogle() {
         <Throbber />
       ) : (
         <>
-        <Card className="w-2/3 mx-auto">
-          <h1 className="text-center m-4 text-lg">Login with Google <br />to access your Fleems account</h1>
-          
-          <FormButton
-            className="w-1/3 mx-auto flex"
-            onClick={() => {
-              setLoading(true);
-              login();
-            }}
-          >
-            <strong>LOGIN</strong>
-          </FormButton>
-       
-          
+          <Card className="w-2/3 mx-auto">
+            <h1 className="text-center m-4 text-lg">
+              Login with Google <br />
+              to access your Fleems account
+            </h1>
+
+            <FormButton
+              className="w-1/3 mx-auto flex"
+              onClick={() => {
+                setLoading(true);
+                login();
+              }}
+            >
+              <strong>LOGIN</strong>
+            </FormButton>
           </Card>
         </>
       )}
