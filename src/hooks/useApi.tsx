@@ -4,6 +4,8 @@ import {
   AssignmentInfoDto,
   Client,
   Driver,
+  RestViolation,
+  SpeedViolation,
   Task,
   Vehicle,
 } from "../types/ApiResponses";
@@ -25,6 +27,8 @@ type StatsResponseMapping = {
   vehicles: number[];
   drivers: number[];
   tasks: number[];
+  speed: SpeedViolation;
+  rest: RestViolation;
 };
 type ApiExtraParams = {
   statsEndpoint: keyof StatsResponseMapping;
