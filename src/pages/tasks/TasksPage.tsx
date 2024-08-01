@@ -1,9 +1,9 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import GapList from "../../components/GapList";
 import PageHeading from "../../components/PageHeading";
 import PageWithNavigation from "../../components/PageWithNavigation";
 import useApi from "../../hooks/useApi";
-import { Task } from "../../types/ApiResponses";
+import { TableTask, Task } from "../../types/ApiResponses";
 import Throbber from "../../components/Throbber";
 import CardButtonWithNoStyles from "../../components/CardButtonWithNoStyles";
 import Card from "../../components/Card";
@@ -11,6 +11,7 @@ import SecondaryNavigation from "../../components/SecondaryNavigation";
 import SearchBar from "../../components/SearchBar";
 import FormButton from "../../components/FormButton";
 import TaskAssignForm from "./components/TaskAssignForm";
+import Table from "../../components/Table";
 
 const capitalizeFirstLetter = (str: string): string => {
   if (!str) return "";
@@ -69,6 +70,44 @@ export default function TasksPage() {
         task.payload.toString().toLowerCase().includes(lowerCaseFilter)
     );
   }, [data, searchFilter]);
+
+  const [tableData, setTableData] = useState<TableTask[]>([]);
+  useEffect(() => {
+    if (filteredData != undefined) {
+      setTableData(
+        filteredData.map((task) => {
+          const {
+            client,
+            legs,
+            startDestination,
+            endDestination,
+            startAddress,
+            endAddress,
+            dateCreated,
+            dateFinished,
+            startDate,
+            ...tablesD
+          } = task;
+          console.log(task);
+          return {
+            client: client.name,
+            startAddress: startAddress.city,
+            endAddress: endAddress.city,
+            dateCreated: dateCreated
+              ? new Date(dateCreated).toLocaleDateString()
+              : "-",
+            dateFinished: dateFinished
+              ? new Date(dateFinished).toLocaleDateString()
+              : "-",
+            startDate: startDate
+              ? new Date(startDate).toLocaleDateString()
+              : "-",
+            ...tablesD,
+          };
+        })
+      );
+    }
+  }, [filteredData]);
 
   const viewTask = (task: Task) => {
     setSelectedTask(task);
@@ -180,47 +219,53 @@ export default function TasksPage() {
         </div>
       ) : (
         <div>
-         <GapList className="grid-cols-1">
-          {filteredData?.map((task: Task) => {
-            const taskStateClass = getStateColorClass(task.state);
+          {tableData !== undefined && (
+            <div className="mt-6">
+              <Table callback={(a) => viewTask(a)} data={tableData} />
+            </div>
+          )}
+          <GapList className="grid-cols-1">
+            {filteredData?.map((task: Task) => {
+              const taskStateClass = getStateColorClass(task.state);
 
-            return (
-              <CardButtonWithNoStyles
-                key={task.id}
-                onClick={() => viewTask(task)}
-              >
-                <h1 className="text-xl">{task.client.name}</h1>
-                <div className="flex justify-between w-full text-left">
-                  <div>
-                    <h2>
-                      Route : {task.startAddress.city} - {task.endAddress.city}
-                    </h2>
-                    <h2>
-                      Task : Transportation of {task.payload} {task.product}
-                    </h2>
-                    <h2>
-                      Status :{" "}
-                      <span className={taskStateClass}>
-                        {capitalizeFirstLetter(task.state ?? "")}
-                      </span>
-                    </h2>
-                    <h2>No. of legs : {task.legs.length}</h2>
-                    <h2>
-                      Start date :{" "}
-                      {task.startDate ? formatDate(task.startDate) : "N/A"}
-                    </h2>
-                    <h2>
-                      End date :{" "}
-                      {task.dateFinished
-                        ? formatDate(task.dateFinished)
-                        : "N/A"}
-                    </h2>
+              return (
+                <CardButtonWithNoStyles
+                  key={task.id}
+                  onClick={() => viewTask(task)}
+                >
+                  <h1 className="text-xl">{task.client.name}</h1>
+                  <div className="flex justify-between w-full text-left">
+                    <div>
+                      <h2>
+                        Route : {task.startAddress.city} -{" "}
+                        {task.endAddress.city}
+                      </h2>
+                      <h2>
+                        Task : Transportation of {task.payload} {task.product}
+                      </h2>
+                      <h2>
+                        Status :{" "}
+                        <span className={taskStateClass}>
+                          {capitalizeFirstLetter(task.state ?? "")}
+                        </span>
+                      </h2>
+                      <h2>No. of legs : {task.legs.length}</h2>
+                      <h2>
+                        Start date :{" "}
+                        {task.startDate ? formatDate(task.startDate) : "N/A"}
+                      </h2>
+                      <h2>
+                        End date :{" "}
+                        {task.dateFinished
+                          ? formatDate(task.dateFinished)
+                          : "N/A"}
+                      </h2>
+                    </div>
                   </div>
-                </div>
-              </CardButtonWithNoStyles>
-            );
-          })}
-        </GapList>
+                </CardButtonWithNoStyles>
+              );
+            })}
+          </GapList>
         </div>
       )}
     </PageWithNavigation>

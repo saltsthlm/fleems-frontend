@@ -10,9 +10,9 @@ import {
   PaginationState,
   SortingState,
 } from "@tanstack/react-table";
-import { ClientInfoDto, Task, Vehicle } from "../types/ApiResponses";
+import { ClientInfoDto, TableTask, Task, Vehicle } from "../types/ApiResponses";
 
-type DataType = Vehicle | ClientInfoDto | Task;
+type DataType = Vehicle | ClientInfoDto | Task | TableTask;
 
 interface TableProps {
   data: DataType[];
@@ -59,7 +59,7 @@ export default function Table({ data, callback }: TableProps) {
     state: "State",
   };
 
-  const columns = Object.keys(data[0])
+  const columns = Object.keys(data[0] || {})
     .filter((k) => k != "id")
     .map((key) =>
       columnHelper.accessor(key as keyof DataType, {

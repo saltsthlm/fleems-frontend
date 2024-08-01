@@ -56,12 +56,13 @@ export default function ClientsList({ callback }: ClientsListProps) {
           <button onClick={viewList}>&lt; Client information</button>
         </PageHeading>
 
-        <Card className={`text-center ${isMobile ? "" : "w-2/5 mx-auto"}`}> 
+        <Card className={`text-center ${isMobile ? "" : "w-2/5 mx-auto"}`}>
           <h1 className="text-xl">{selectedClient.name}</h1>
-          <h2>Num of tasks : {selectedClient.tasks.length}</h2>
+          {/*<h2>Num of tasks : {selectedClient.tasks.length}</h2>
           <h2>Completed : {selectedClient.tasks.length}</h2>
           <h2>On going : {selectedClient.tasks.length}</h2>
           <h2>Unassigned : {selectedClient.tasks.length}</h2>
+          */}
           <h2>Contact person : {selectedClient.contactPerson}</h2>
           <h2>Email : {selectedClient.contactEmail}</h2>
           <h2>Phone : {selectedClient.contactPhoneNumber}</h2>
@@ -156,10 +157,9 @@ export default function ClientsList({ callback }: ClientsListProps) {
           activeTab={activeTab}
           parentRoute="/clients"
         />
-         <div className="mt-6">
-         <Table data={dataInfo} />
-         </div>
-        
+        <div className="mt-6">
+          <Table callback={(a) => viewClient(a)} data={dataInfo} />
+        </div>
       </PageWithNavigation>
     );
   }

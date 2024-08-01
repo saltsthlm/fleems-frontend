@@ -61,6 +61,22 @@ export type Task = {
   state: string;
 };
 
+export type TableTask = {
+  id: string;
+  dateCreated: string;
+  dateFinished: string;
+  expectedDistance: number;
+  expectedTime: number;
+  startDate: string;
+  product: string;
+  payload: number;
+  quantity: number;
+  state: string;
+  client: string;
+  startAddress: string;
+  endAddress: string;
+};
+
 export type ClientResponseDto = {
   id: string;
   contactPerson: string;
