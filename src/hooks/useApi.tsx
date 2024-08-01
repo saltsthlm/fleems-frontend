@@ -27,8 +27,8 @@ type StatsResponseMapping = {
   vehicles: number[];
   drivers: number[];
   tasks: number[];
-  speed: SpeedViolation;
-  rest: RestViolation;
+  speed: SpeedViolation[];
+  rest: RestViolation[];
 };
 type ApiExtraParams = {
   statsEndpoint: keyof StatsResponseMapping;
