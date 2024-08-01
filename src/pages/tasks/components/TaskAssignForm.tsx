@@ -30,7 +30,7 @@ export default function TaskAssignForm({
 
   const { data: driverData, isLoading: isDriverLoading } = useApi("drivers");
   const { data: truckData, isLoading: isTruckLoading } = useApi("vehicles");
-  const { doPost, isLoading, isSuccess } = usePostApi("assignments");
+  const { doPost, isLoading, isSuccess, error } = usePostApi("assignments");
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -42,7 +42,6 @@ export default function TaskAssignForm({
       driverId: driver.id,
       vehicleId: truck.id,
     };
-    toast.success("Task assigned!");
     doPost(formData);
   };
 
@@ -51,7 +50,12 @@ export default function TaskAssignForm({
   }
 
   if (isSuccess) {
+    toast.success("Task assigned!");
     callback(null);
+  }
+
+  if (error) {
+    toast.error("An error ocurred when creating assignment: " + error.message);
   }
 
   return (
