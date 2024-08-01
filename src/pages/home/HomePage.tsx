@@ -8,6 +8,7 @@ import DriverStatus from "./components/DriverStatus";
 import TaskStatus from "./components/TaskStatus";
 import SpeedViolations from "./components/SpeedViolations";
 import RestViolations from "./components/RestViolations";
+import FleetMap from "../../components/FleetMap";
 export default function HomePage() {
   return (
     <PageWithNavigation>
@@ -17,15 +18,9 @@ export default function HomePage() {
         <DriverStatus />
         <TaskStatus />
         <FinishedTaskStats />
-        <Card>
-          <h1 className="text-xl">Violations</h1>
         <SpeedViolations />
         <RestViolations />
-        </Card>
-       
-        <Card>
-          <h1 className="text-xl">Top 5 drivers</h1>
-        </Card>
+        <FleetMap />
       </GapList>
     </PageWithNavigation>
   );
