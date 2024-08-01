@@ -82,8 +82,6 @@ export default function TasksPage() {
             const {
               client,
               legs,
-              startDestination,
-              endDestination,
               startAddress,
               endAddress,
               dateCreated,
@@ -134,6 +132,12 @@ export default function TasksPage() {
 
   const showAssignForm = () => {
     setIsShowingAssignForm(true);
+  };
+
+  const resetPage = () => {
+    setIsShowingAssignForm(false);
+    setIsViewingTask(false);
+    setSelectedTask(undefined);
   };
 
   if (isViewingTask && !!selectedTask) {
@@ -232,7 +236,7 @@ export default function TasksPage() {
         <div>
           {tableData !== undefined && !isMobile && (
             <div className="mt-6">
-              <Table callback={(a) => viewTask(a)} data={tableData} />
+              <Table callback={resetPage} data={tableData} />
             </div>
           )}
           {isMobile && (
