@@ -18,7 +18,7 @@ export default function PageWithNavigation({
           toastOptions={{
             style: {
               padding: "20px",
-              fontSize: "30px",
+              fontSize: "20px",
             },
           }}
         />
