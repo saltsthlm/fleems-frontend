@@ -3,7 +3,7 @@ import FormWithButton from "../../../components/FormWithButton";
 import { Task } from "../../../types/ApiResponses";
 
 type FormData = {
-  task: string; 
+  task: string;
   driver: string;
   licensePlate: string;
   startDate?: Date;
@@ -25,15 +25,27 @@ export default function TaskAssignForm({
   initialTask,
   drivers,
 }: TaskAssignFormProps) {
-  const [task, setTask] = useState<string>(initialTask ? `Transportation of ${initialTask.payload} ${initialTask.product}` : ''); 
-  const [driver, setDriver] = useState<string>(initialTask?.driver ?? '');
-  const [licensePlate, setLicensePlate] = useState<string>(initialTask?.licensePlate ?? '');
-  const [route, setRoute] = useState<string>(initialTask ? `${initialTask.startAddress.city} - ${initialTask.endAddress.city}` : '');
-  const [client , setClient] = useState<string>(initialTask?.client.name ?? '');
+  const [task, setTask] = useState<string>(
+    initialTask
+      ? `Transportation of ${initialTask.payload} ${initialTask.product}`
+      : ""
+  );
+  const [driver, setDriver] = useState<string>(initialTask?.driver ?? "");
+  const [licensePlate, setLicensePlate] = useState<string>(
+    initialTask?.licensePlate ?? ""
+  );
+  const [route, setRoute] = useState<string>(
+    initialTask
+      ? `${initialTask.startAddress.city} - ${initialTask.endAddress.city}`
+      : ""
+  );
+  const [client, setClient] = useState<string>(initialTask?.client.name ?? "");
 
   useEffect(() => {
     if (initialTask) {
-      setRoute(`${initialTask.startAddress.city} - ${initialTask.endAddress.city}`);
+      setRoute(
+        `${initialTask.startAddress.city} - ${initialTask.endAddress.city}`
+      );
     }
   }, [initialTask]);
 
@@ -45,7 +57,7 @@ export default function TaskAssignForm({
       driver,
       licensePlate,
       route,
-      client
+      client,
     };
 
     callback(formData);
@@ -76,7 +88,9 @@ export default function TaskAssignForm({
       >
         <option value="">Select driver</option>
         {drivers.map((driverName) => (
-          <option key={driverName} value={driverName}>{driverName}</option>
+          <option key={driverName} value={driverName}>
+            {driverName}
+          </option>
         ))}
       </select>
       <label htmlFor="license-plate">License plate</label>
