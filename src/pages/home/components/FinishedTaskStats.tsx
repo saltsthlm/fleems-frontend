@@ -35,7 +35,8 @@ export default function FinishedTaskStats() {
             },
           ]}
           series={[{ data }]}
-          height={isMobile ? 200 : 200}
+          height={isMobile ? 200 : 400}
+         
         />
       )}
     </Card>
