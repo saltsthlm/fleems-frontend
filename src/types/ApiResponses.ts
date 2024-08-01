@@ -159,3 +159,13 @@ export type Waypoint = {
   hint: string;
   name: string;
 };
+export type SpeedViolation = {
+  driver: string;
+  speed: number;
+  date: Date;
+};
+export type RestViolation = {
+  driver: string;
+  time: number;
+  date: Date;
+};

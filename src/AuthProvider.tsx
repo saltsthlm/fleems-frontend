@@ -79,8 +79,10 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   const logout = () => {
     googleLogout();
     localStorage.removeItem("user");
+    setProfile(null);
     setUser(null);
     setIsLoggedIn(false);
+    setCredential(null);
   };
 
   return (

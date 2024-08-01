@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { BASE_API_URL } from "../util/config";
 import { useAuth } from "../AuthProvider";
@@ -15,36 +15,25 @@ type ApiResponseMapping = {
 };
 type ApiEndpoints = keyof ApiResponseMapping;
 
-export default function usePostApi<T extends ApiEndpoints>(
-  endpoint: T,
-  body: ApiResponseMapping[T]
-) {
+export default function usePostApi<T extends ApiEndpoints>(endpoint: T) {
   const { credential } = useAuth();
 
-  const fetchData = async () => {
-    const { data } = await axios.post<ApiResponseMapping[T]>(
-      BASE_API_URL + endpoint,
-      body,
-      {
+  const {
+    isSuccess,
+    isPending: isLoading,
+    error,
+    mutate: doPost,
+  } = useMutation({
+    mutationKey: [`api-${endpoint}`],
+    mutationFn: async (body: ApiResponseMapping[T]) => {
+      await axios.post<ApiResponseMapping[T]>(BASE_API_URL + endpoint, body, {
         headers: {
           "Content-Type": "application/json",
           authorization: `Bearer ${credential}`,
         },
-      }
-    );
-    return data;
-  };
-
-  const {
-    data,
-    isPending: isLoading,
-    error,
-  } = useQuery({
-    queryKey: [`api-${endpoint}`],
-    queryFn: async () => {
-      return fetchData();
+      });
     },
   });
 
-  return { data, isLoading, error };
+  return { isSuccess, isLoading, error, doPost };
 }
