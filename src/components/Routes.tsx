@@ -3,16 +3,8 @@ import Route from "./Route";
 import { LegInfoDto } from "../types/ApiResponses";
 import React, { useEffect } from "react";
 
-//const [polylines, setPolylines] = useState<Polyline[]>([]);
 const Routes = ({ legs }: { legs: LegInfoDto[] }) => {
   const map = useMap();
-  map.eachLayer((layer) => {
-    const hasEmptyContrib = !(layer.getAttribution && layer.getAttribution());
-    const hasNoContrib = !layer.getAttribution;
-    if (hasEmptyContrib || hasNoContrib) {
-      map.removeLayer(layer);
-    }
-  });
   useEffect(() => {
     map.eachLayer((layer) => {
       const hasEmptyContrib = !(layer.getAttribution && layer.getAttribution());
