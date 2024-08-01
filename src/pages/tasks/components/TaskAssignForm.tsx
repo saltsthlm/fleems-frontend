@@ -4,6 +4,8 @@ import { Driver, Task, Vehicle } from "../../../types/ApiResponses";
 import useApi from "../../../hooks/useApi";
 import Throbber from "../../../components/Throbber";
 import toast from "react-hot-toast";
+import usePostApi from "../../../hooks/usePostApi";
+import { CreateAssignment } from "../../../types/createTypes";
 
 type FormData = {
   taskId: string;
@@ -12,7 +14,7 @@ type FormData = {
 };
 
 type TaskAssignFormProps = {
-  onSubmit: (data: FormData) => void;
+  onSubmit: (data: FormData | null) => void;
   buttonText: string;
   initialTask?: Task;
   drivers: string[];
@@ -27,22 +29,30 @@ export default function TaskAssignForm({
   const [truck, setTruck] = useState<Vehicle>();
 
   const { data: driverData, isLoading: isDriverLoading } = useApi("drivers");
-
   const { data: truckData, isLoading: isTruckLoading } = useApi("vehicles");
+  const { doPost, isLoading, isSuccess } = usePostApi("assignments");
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     if (!truck || !driver || !initialTask) {
       return;
     }
-    const formData: FormData = {
+    const formData: CreateAssignment = {
       taskId: initialTask?.id,
       driverId: driver.id,
-      truckId: truck.id,
+      vehicleId: truck.id,
     };
     toast.success("Task assigned!");
-    callback(formData);
+    doPost(formData);
   };
+
+  if (isLoading) {
+    return <Throbber />;
+  }
+
+  if (isSuccess) {
+    callback(null);
+  }
 
   return (
     <div className="text-center">
