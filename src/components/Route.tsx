@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useMap } from "react-leaflet";
 import L from "leaflet";
 import { Waypoint } from "../types/ApiResponses";
+import MakerUrl from "../assets/routemarker.svg";
 
 const Route = ({
   source,
@@ -24,6 +25,24 @@ const Route = ({
       ]);
       console.log("coordinates", coordinates);
       L.polyline(coordinates, { color: "black" }).addTo(map);
+      const customIcon = L.icon({
+        iconUrl: MakerUrl,
+        iconSize: [20, 20],
+        iconAnchor: [10, 10],
+      });
+      L.marker([Number(source.split(",")[0]), Number(source.split(",")[1])], {
+        icon: customIcon,
+      }).addTo(map);
+      destination &&
+        L.marker(
+          [
+            Number(destination.split(",")[0]),
+            Number(destination.split(",")[1]),
+          ],
+          {
+            icon: customIcon,
+          }
+        ).addTo(map);
     };
 
     fetchRoute();
