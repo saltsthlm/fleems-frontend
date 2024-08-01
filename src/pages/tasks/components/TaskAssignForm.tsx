@@ -3,6 +3,7 @@ import FormWithButton from "../../../components/FormWithButton";
 import { Driver, Task, Vehicle } from "../../../types/ApiResponses";
 import useApi from "../../../hooks/useApi";
 import Throbber from "../../../components/Throbber";
+import toast from "react-hot-toast";
 
 type FormData = {
   taskId: string;
@@ -39,6 +40,7 @@ export default function TaskAssignForm({
       driverId: driver.id,
       truckId: truck.id,
     };
+    toast.success("Task assigned!");
     callback(formData);
   };
 
