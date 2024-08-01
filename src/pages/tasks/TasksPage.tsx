@@ -82,6 +82,8 @@ export default function TasksPage() {
             const {
               client,
               legs,
+              startDestination,
+              endDestination,
               startAddress,
               endAddress,
               dateCreated,
