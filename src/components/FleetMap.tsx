@@ -19,7 +19,7 @@ export default function FleetMap({ className }: PropsWithClassName) {
             rel="stylesheet"
             href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css"
           />
-          <Card>
+          <Card className="w-full">
             <h1 className="text-xl">Assigned vehicles</h1>
             <MapContainer
               className={`h-full min-h-96 mt-4 ${className && className}`}
