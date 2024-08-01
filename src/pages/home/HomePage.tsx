@@ -17,10 +17,14 @@ export default function HomePage() {
         <DriverStatus />
         <TaskStatus />
         <FinishedTaskStats />
+        <Card>
+          <h1 className="text-xl">Violations</h1>
         <SpeedViolations />
         <RestViolations />
+        </Card>
+       
         <Card>
-          <h1 className="text-xl">All active fleets</h1>
+          <h1 className="text-xl">Top 5 drivers</h1>
         </Card>
       </GapList>
     </PageWithNavigation>
