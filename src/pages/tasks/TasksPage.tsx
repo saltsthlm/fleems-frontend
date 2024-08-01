@@ -12,6 +12,7 @@ import SearchBar from "../../components/SearchBar";
 import FormButton from "../../components/FormButton";
 import TaskAssignForm from "./components/TaskAssignForm";
 import Table from "../../components/Table";
+import useScreenType from "../../hooks/useScreenType";
 
 const capitalizeFirstLetter = (str: string): string => {
   if (!str) return "";
@@ -57,6 +58,7 @@ export default function TasksPage() {
     useState<boolean>(false); // New state for form visibility
   const [activeTab, setActiveTab] = useState<string>("information");
 
+  const { isMobile } = useScreenType();
   const { data, isLoading, error } = useApi("tasks");
 
   const filteredData = useMemo(() => {
@@ -228,53 +230,55 @@ export default function TasksPage() {
         </div>
       ) : (
         <div>
-          {tableData !== undefined && (
+          {tableData !== undefined && !isMobile && (
             <div className="mt-6">
               <Table callback={(a) => viewTask(a)} data={tableData} />
             </div>
           )}
-          <GapList className="grid-cols-1">
-            {filteredData?.map((task: Task) => {
-              const taskStateClass = getStateColorClass(task.state);
+          {isMobile && (
+            <GapList className="grid-cols-1">
+              {filteredData?.map((task: Task) => {
+                const taskStateClass = getStateColorClass(task.state);
 
-              return (
-                <CardButtonWithNoStyles
-                  key={task.id}
-                  onClick={() => viewTask(task)}
-                >
-                  <h1 className="text-xl">{task.client.name}</h1>
-                  <div className="flex justify-between w-full text-left">
-                    <div>
-                      <h2>
-                        Route : {task.startAddress.city} -{" "}
-                        {task.endAddress.city}
-                      </h2>
-                      <h2>
-                        Task : Transportation of {task.payload} {task.product}
-                      </h2>
-                      <h2>
-                        Status :{" "}
-                        <span className={taskStateClass}>
-                          {capitalizeFirstLetter(task.state ?? "")}
-                        </span>
-                      </h2>
-                      <h2>No. of legs : {task.legs.length}</h2>
-                      <h2>
-                        Start date :{" "}
-                        {task.startDate ? formatDate(task.startDate) : "N/A"}
-                      </h2>
-                      <h2>
-                        End date :{" "}
-                        {task.dateFinished
-                          ? formatDate(task.dateFinished)
-                          : "N/A"}
-                      </h2>
+                return (
+                  <CardButtonWithNoStyles
+                    key={task.id}
+                    onClick={() => viewTask(task)}
+                  >
+                    <h1 className="text-xl">{task.client.name}</h1>
+                    <div className="flex justify-between w-full text-left">
+                      <div>
+                        <h2>
+                          Route : {task.startAddress.city} -{" "}
+                          {task.endAddress.city}
+                        </h2>
+                        <h2>
+                          Task : Transportation of {task.payload} {task.product}
+                        </h2>
+                        <h2>
+                          Status :{" "}
+                          <span className={taskStateClass}>
+                            {capitalizeFirstLetter(task.state ?? "")}
+                          </span>
+                        </h2>
+                        <h2>No. of legs : {task.legs.length}</h2>
+                        <h2>
+                          Start date :{" "}
+                          {task.startDate ? formatDate(task.startDate) : "N/A"}
+                        </h2>
+                        <h2>
+                          End date :{" "}
+                          {task.dateFinished
+                            ? formatDate(task.dateFinished)
+                            : "N/A"}
+                        </h2>
+                      </div>
                     </div>
-                  </div>
-                </CardButtonWithNoStyles>
-              );
-            })}
-          </GapList>
+                  </CardButtonWithNoStyles>
+                );
+              })}
+            </GapList>
+          )}
         </div>
       )}
     </PageWithNavigation>
