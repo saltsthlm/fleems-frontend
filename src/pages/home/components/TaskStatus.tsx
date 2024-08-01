@@ -9,7 +9,7 @@ export default function TaskStatus() {
   const { data, isLoading } = useApi("stats", { statsEndpoint: "tasks" });
 
   return (
-    <Card>
+    <Card className="w-full">
       <h1 className="text-xl">Task status data</h1>
       {isLoading ? (
         <Throbber />
@@ -25,7 +25,19 @@ export default function TaskStatus() {
               ],
             },
           ]}
-          height={isMobile ? 100 : 200}
+          height={isMobile ? 150 : 200}
+          slotProps={{
+            legend: {
+              labelStyle: {
+                fontSize: 14,
+                paddingRight: 5,
+              },
+              itemMarkWidth: 12,
+              itemMarkHeight: 12,
+              markGap: 5,
+              itemGap: 10,
+            },
+          }}
         />
       )}
     </Card>
