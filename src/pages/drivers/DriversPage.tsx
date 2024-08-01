@@ -15,12 +15,15 @@ import SearchBar from "../../components/SearchBar";
 import useScreenType from "../../hooks/useScreenType";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import useDeleteApi from "../../hooks/useDeleteApi";
+import toast from "react-hot-toast";
+import CreateDriverForm from "./components/CreateDriverForm";
 
 export default function DriversList() {
   const [isViewingDriver, setIsViewingDriver] = useState<boolean>(false);
   const [selectedDriver, setSelectedDriver] = useState<Driver>();
   const [isShowingPopup, setIsShowingPopup] = useState<boolean>(false);
   const [isEditingDriver, setIsEditingDriver] = useState<boolean>(false);
+  const [isAddingDriver, setIsAddingDriver] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string>("information");
   const [searchFilter, setSearchFilter] = useState<string>("");
 
@@ -53,6 +56,11 @@ export default function DriversList() {
 
   const deleteDriver = (driver: Driver) => {
     doDelete(driver.id);
+    toast.success("Driver successfully deleted!", { duration: 6000 });
+  };
+
+  const resetPage = () => {
+    setIsAddingDriver(false);
   };
 
   const viewDriver = (driver: Driver) => {
@@ -63,6 +71,19 @@ export default function DriversList() {
   const viewList = () => {
     setIsViewingDriver(false);
   };
+
+  if (isAddingDriver) {
+    return (
+      <PageWithNavigation>
+        <PageHeading>
+          <button onClick={() => setIsAddingDriver(false)}>
+            &lt; Creating driver
+          </button>
+        </PageHeading>
+        <CreateDriverForm afterSubmit={resetPage} />
+      </PageWithNavigation>
+    );
+  }
 
   if (isEditingDriver) {
     return (
@@ -204,6 +225,7 @@ export default function DriversList() {
         </GapList>
         <FormButton
           className={`sticky ${isMobile ? "bottom-20" : "bottom-4"} w-full mx-auto drop-shadow-strong`}
+          onClick={() => setIsAddingDriver(true)}
         >
           + ADD DRIVER
         </FormButton>
