@@ -9,7 +9,7 @@ export default function FinishedTaskStats() {
   const { data, isLoading } = useApi("stats", { statsEndpoint: "completed" });
 
   return (
-    <Card>
+    <Card className="w-full">
       <h1 className="text-xl">Finished tasks per month</h1>
       {isLoading ? (
         <Throbber />
