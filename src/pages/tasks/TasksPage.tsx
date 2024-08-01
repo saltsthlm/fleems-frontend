@@ -151,7 +151,6 @@ export default function TasksPage() {
               }}
               buttonText="ASSIGN"
               initialTask={selectedTask}
-              drivers={["Driver 1", "Driver 2", "Driver 3"]}
             />
           </>
         ) : (
