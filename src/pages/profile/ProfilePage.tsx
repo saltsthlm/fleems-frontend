@@ -49,7 +49,7 @@ export default function ProfilePage() {
             <h1 className="text-center">
               Are you sure you want to delete this account?
             </h1>
-            <div className="flex gap-4 justify-between [&>button]:grow">
+            <div className="flex gap-4 justify-center [&>button]:grow">
               <FormButton
                 onClick={deleteAccount}
                 className="text-danger"
@@ -66,7 +66,7 @@ export default function ProfilePage() {
       )}
       {isLoggedIn && profile && (
         <GapList>
-          <Card className="mb-10 text-center py-10">
+          <Card className="mb-10 text-center py-10 w-2/5 mx-auto">
             <img
               src={profile.picture}
               alt="user image"
