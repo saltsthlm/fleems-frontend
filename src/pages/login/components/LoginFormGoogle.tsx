@@ -1,6 +1,6 @@
 import FormButton from "../../../components/FormButton";
 import { useState } from "react";
-import { googleLogout, useGoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "@tanstack/react-router";
 import Throbber from "../../../components/Throbber";
 import { useAuth } from "../../../AuthProvider";
