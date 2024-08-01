@@ -9,7 +9,7 @@ export default function Vehiclestatus() {
   const { data, isLoading } = useApi("stats", { statsEndpoint: "vehicles" });
 
   return (
-    <Card>
+    <Card className="w-full">
       <h1 className="text-xl">Vehicle status data</h1>
       {isLoading ? (
         <Throbber />
@@ -23,7 +23,20 @@ export default function Vehiclestatus() {
               ],
             },
           ]}
-          height={isMobile ? 100 : 200}
+          height={isMobile ? 150 : 200}
+          // margin={{left: 0}}
+          slotProps={{
+            legend: {
+              labelStyle: {
+                fontSize: 14,
+                paddingRight: 5,
+              },
+              itemMarkWidth: 12,
+              itemMarkHeight: 12,
+              markGap: 5,
+              itemGap: 10,
+            },
+          }}
         />
       )}
     </Card>
