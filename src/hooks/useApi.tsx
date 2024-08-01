@@ -22,6 +22,8 @@ type ApiEndpoints = keyof ApiResponseMapping;
 
 type StatsResponseMapping = {
   completed: number[];
+  vehicles: number[];
+  drivers: number[];
 };
 type ApiExtraParams = {
   statsEndpoint: keyof StatsResponseMapping;
@@ -52,7 +54,7 @@ export default function useApi<T extends ApiEndpoints>(
     isPending: isLoading,
     error,
   } = useQuery({
-    queryKey: [`api-${endpoint}`],
+    queryKey: [`api-${endpoint}-${options?.statsEndpoint}`],
     queryFn: async () => {
       return fetchData();
     },
