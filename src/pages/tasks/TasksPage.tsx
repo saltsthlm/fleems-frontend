@@ -159,7 +159,7 @@ export default function TasksPage() {
             <PageHeading>
               <button onClick={viewList}>&lt; Task information</button>
             </PageHeading>
-            <Card className="text-center">
+            <Card className="text-center w-2/5 mx-auto">
               <h1 className="text-xl">{selectedTask.client}</h1>
               <h2>
                 Route : {selectedTask.startAddress} - {selectedTask.endAddress}
