@@ -1,22 +1,42 @@
-import { SyntheticEvent } from "react";
 import DriverForm from "./DriverForm";
-/*
+import toast from "react-hot-toast";
 import usePostApi from "../../../hooks/usePostApi";
+import Throbber from "../../../components/Throbber";
 import { CreateDriver } from "../../../types/createTypes";
 
-const nelsonTest: CreateDriver = {
-  emailAddress: "hejnälson@gmail.com",
-  licenseNumber: "123455-1234",
-  name: "NelsonTest5",
-  phoneNumber: "+46708342069",
-  photo: "testpfp",
+type CreateDriverFormProps = {
+  afterSubmit?: () => void;
 };
-*/
-export default function CreateDriverForm() {
-  //usePostApi("drivers", nelsonTest);
-  const createDriver = (e: SyntheticEvent) => {
-    e.preventDefault();
+export default function CreateDriverForm({
+  afterSubmit,
+}: CreateDriverFormProps) {
+  const { doPost, isLoading, error, data } = usePostApi("drivers");
+
+  const createDriver = (driver: CreateDriver) => {
+    if (!driver) {
+      toast.error("Couldn't create driver.", { duration: 6000 });
+      return;
+    }
+
+    doPost(driver);
   };
+
+  console.log(data);
+
+  if (error) {
+    toast.error("An error ocurred: " + error.message, { duration: 6000 });
+  }
+
+  if (isLoading) {
+    return <Throbber />;
+  }
+
+  if (data) {
+    toast.success("Driver successfully created!", { duration: 6000 });
+    if (afterSubmit) {
+      afterSubmit();
+    }
+  }
 
   return <DriverForm buttonText="REGISTER" onSubmit={createDriver} />;
 }
