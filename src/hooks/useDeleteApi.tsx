@@ -12,29 +12,24 @@ type ApiEndpoints = keyof ApiResponseMapping;
 export default function useDeleteApi<T extends ApiEndpoints>(endpoint: T) {
   const { credential } = useAuth();
 
-  const doDelete = async (entry: string) => {
-    const { data } = await axios.delete<ApiResponseMapping[T]>(
-      BASE_API_URL + endpoint + "/" + entry,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${credential}`,
-        },
-      }
-    );
-    return data;
-  };
-
   const mutation = useMutation({
-    // mutationKey: [`api-${endpoint}-delete`],
+    mutationKey: [`api-${endpoint}-delete`],
     mutationFn: async (entry: string) => {
-      return doDelete(entry);
+      await axios.delete<ApiResponseMapping[T]>(
+        BASE_API_URL + endpoint + "/" + entry,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${credential}`,
+          },
+        }
+      );
     },
   });
 
   return {
     doDelete: mutation.mutate,
-    data: mutation.data,
+    isSuccess: mutation.isSuccess,
     isLoading: mutation.isPending,
     error: mutation.error,
   };
