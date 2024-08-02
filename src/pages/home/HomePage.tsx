@@ -19,13 +19,13 @@ export default function HomePage() {
         <DriverStatus />
         <TaskStatus />
         <div className="w-full">
-        <FinishedTaskStats />
-        <Card className="mt-4">
-          <h1 className="text-xl">Up coming maintainence</h1>
-          <h2 className="text-base">2024/10/22 - Vehicle GHI 789</h2>
-        </Card>
+          <FinishedTaskStats />
+          <Card className="mt-4">
+            <h1 className="text-xl">Upcoming maintainence</h1>
+            <h2 className="text-base">2024/10/22 - Vehicle GHI 789</h2>
+          </Card>
         </div>
-        
+
         <div className="w-full">
           <Card className="mb-4 w-full">
             <h1 className="text-xl">Violations</h1>
@@ -34,7 +34,7 @@ export default function HomePage() {
           </Card>
           <TopDrivers />
         </div>
-        
+
         <FleetMap />
       </GapList>
     </PageWithNavigation>
