@@ -7,7 +7,7 @@ export default function TopDrivers() {
 
   return (
     <Card className="w-full">
-      <h1 className="text-xl">Top Performers of the month</h1>
+      <h1 className="text-xl">Top performers of the month</h1>
       <div className="flex">
         <Icon icon="lucide:move-up" className="text-green-600" />
         <span className="text-base ml-2">Sara Larsson - 198103089012</span>
