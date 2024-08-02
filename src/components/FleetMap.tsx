@@ -38,7 +38,9 @@ export default function FleetMap({ className }: PropsWithClassName) {
                 ?.map((task: Task) => task.legs.slice(-1)[0])
                 .map((leg, index) => (
                   <React.Fragment key={index}>
-                    <FleetMarker location={leg?.startLocation ?? "0,0"} />
+                    <FleetMarker
+                      location={leg?.startLocation ?? "59.334591,18.063240"}
+                    />
                   </React.Fragment>
                 ))}
             </MapContainer>
